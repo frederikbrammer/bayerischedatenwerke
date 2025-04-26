@@ -110,6 +110,31 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
         );
     }
 
+    // MOCK: Add mock media articles about quality defects if not present
+    const mockMediaArticles = [
+        {
+            title: 'Major Recall: BMW Recalls Thousands of Vehicles Over Brake Defect',
+            publisher: 'Automotive Safety News',
+            sentiment: 'negative',
+            date: '2025-04-25',
+        },
+        {
+            title: 'BMW Addresses Customer Concerns After Quality Issues Surface',
+            publisher: 'Car Industry Today',
+            sentiment: 'neutral',
+            date: '2025-04-22',
+        },
+        {
+            title: 'BMW Implements New Quality Control Measures Following Defect Reports',
+            publisher: 'Global Auto Journal',
+            sentiment: 'positive',
+            date: '2025-04-20',
+        },
+    ];
+    if (!caseData.mediaArticles) {
+        caseData.mediaArticles = mockMediaArticles;
+    }
+
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', {
@@ -143,8 +168,8 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             {caseData.caseWinLikelihood && (
                                 <Badge
                                     className={
-                                        caseData.caseWinLikelihood.likelihood ===
-                                        'High'
+                                        caseData.caseWinLikelihood
+                                            .likelihood === 'High'
                                             ? 'bg-red-500 hover:bg-red-600'
                                             : caseData.caseWinLikelihood
                                                   .likelihood === 'Medium'
@@ -152,7 +177,8 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                             : 'bg-green-500 hover:bg-green-600'
                                     }
                                 >
-                                    Risk: {caseData.caseWinLikelihood.likelihood}
+                                    Risk:{' '}
+                                    {caseData.caseWinLikelihood.likelihood}
                                 </Badge>
                             )}
                             {caseData.brandImpactEstimate && (
@@ -180,9 +206,27 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                     caseData.status.slice(1)}
                             </Badge>
                         </div>
-                        <Button variant='default' size='sm' className='bg-black hover:bg-black text-white'>
+                        <Button
+                            variant='default'
+                            size='sm'
+                            className='bg-black hover:bg-black text-white'
+                        >
                             <span className='flex items-center gap-1'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m7-7H5"/></svg>
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='16'
+                                    height='16'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                >
+                                    <path
+                                        stroke='currentColor'
+                                        strokeWidth='2'
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                        d='M12 5v14m7-7H5'
+                                    />
+                                </svg>
                                 Upload document
                             </span>
                         </Button>
@@ -576,6 +620,59 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             </div>
                         </CardContent>
                     </Card>
+
+                    {/* Media Coverage Section */}
+                    {caseData.mediaArticles &&
+                        Array.isArray(caseData.mediaArticles) &&
+                        caseData.mediaArticles.length > 0 && (
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Media coverage</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
+                                        {caseData.mediaArticles.map(
+                                            (article: any, idx: number) => (
+                                                <li
+                                                    key={idx}
+                                                    className='py-3 flex items-center justify-between'
+                                                >
+                                                    <div>
+                                                        <div className='font-medium text-base'>
+                                                            {article.title}
+                                                        </div>
+                                                        <div className='text-xs text-muted-foreground'>
+                                                            {article.date}
+                                                        </div>
+                                                        <div className='text-xs text-muted-foreground'>
+                                                            {article.publisher}
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                        className={
+                                                            article.sentiment ===
+                                                            'positive'
+                                                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded text-xs'
+                                                                : article.sentiment ===
+                                                                  'negative'
+                                                                ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 px-2 py-1 rounded text-xs'
+                                                                : 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 px-2 py-1 rounded text-xs'
+                                                        }
+                                                    >
+                                                        {article.sentiment
+                                                            .charAt(0)
+                                                            .toUpperCase() +
+                                                            article.sentiment.slice(
+                                                                1
+                                                            )}
+                                                    </span>
+                                                </li>
+                                            )
+                                        )}
+                                    </ul>
+                                </CardContent>
+                            </Card>
+                        )}
 
                     {/* Argumentation Section */}
                     <Card>
