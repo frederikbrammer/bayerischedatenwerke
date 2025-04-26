@@ -2,11 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    CartesianGrid,
+    PieChart,
+    Pie,
+    Cell,
     Tooltip,
     Legend,
     ResponsiveContainer,
@@ -43,25 +41,47 @@ export function PartChart() {
         );
     }
 
+    // Colors for the pie chart slices
+    const COLORS = [
+        '#8b5cf6',
+        '#6366f1',
+        '#a855f7',
+        '#ec4899',
+        '#f43f5e',
+        '#f97316',
+        '#facc15',
+    ];
+
     return (
         <ResponsiveContainer width='100%' height='100%'>
-            <BarChart
-                data={partData}
-                layout='vertical'
-                margin={{
-                    top: 20,
-                    right: 30,
-                    left: 120,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis type='number' />
-                <YAxis dataKey='part' type='category' width={100} />
-                <Tooltip />
+            <PieChart>
+                <Pie
+                    data={partData}
+                    dataKey='count'
+                    nameKey='part'
+                    cx='50%'
+                    cy='50%'
+                    outerRadius={120}
+                    label={({ name, percent }) =>
+                        `${name}: ${(percent * 100).toFixed(0)}%`
+                    }
+                    labelLine={true}
+                >
+                    {partData.map((entry, index) => (
+                        <Cell
+                            key={`cell-${index}`}
+                            fill={COLORS[index % COLORS.length]}
+                        />
+                    ))}
+                </Pie>
+                <Tooltip
+                    formatter={(value, name, props) => [
+                        `${value} cases`,
+                        props.payload.part,
+                    ]}
+                />
                 <Legend />
-                <Bar dataKey='count' fill='#8b5cf6' name='Cases' />
-            </BarChart>
+            </PieChart>
         </ResponsiveContainer>
     );
 }
