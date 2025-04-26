@@ -119,17 +119,13 @@ async def create_case(files: List[UploadFile] = File(None)):
 
     print(extracted_text)
 
-    
     extract_case_type_response = extract_case_type(extracted_text)
     extract_other_types_response = extract_other_types(extracted_text)
-
 
     print(extract_case_type_response)
     print(extract_other_types_response)
 
-
     print("Extracted Case Type Response:")
-
 
     # Parse the data from extract_case_type_response
     case_type = extract_case_type_response.primary_analysis.case_type
@@ -138,10 +134,8 @@ async def create_case(files: List[UploadFile] = File(None)):
     description = extract_case_type_response.primary_analysis.description
     secondary_types = extract_case_type_response.primary_analysis.secondary_types or []
 
-
     # Parse possible alternatives from extract_case_type_response
     possible_alternatives = extract_case_type_response.possible_alternatives or []
-
 
     # Parse the data from extract_other_types_response
     case_id = extract_other_types_response.Case_ID
@@ -172,7 +166,6 @@ async def create_case(files: List[UploadFile] = File(None)):
     print(f"Secondary Types: {secondary_types}")
     print(f"Possible Alternatives: {possible_alternatives}")
 
-
     print("\nParsed Other Types Response:")
     print(f"Case ID: {case_id}")
     print(f"Filing Date: {filing_date}")
@@ -194,7 +187,6 @@ async def create_case(files: List[UploadFile] = File(None)):
     print(f"Case Win Likelihood: {case_win_likelihood}")
     print(f"Plaintiff Argumentation: {plaintiff_argumentation}")
 
-
     # Generate case metadata from extracted text
     today = datetime.now().strftime("%Y-%m-%d")
 
@@ -213,7 +205,7 @@ async def create_case(files: List[UploadFile] = File(None)):
     # Create a new case object
     new_case = {
         "id": case_id,
-        "title": case_id,
+        "title": title,
         "status": "in progress",
         "jurisdiction": jurisdiction,
         "caseType": case_type,

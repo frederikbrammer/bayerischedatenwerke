@@ -331,6 +331,31 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                     </dd>
                                                 </>
                                             )}
+                                        {caseData.affectedCar &&
+                                            caseData.affectedCar !==
+                                                'Not specified' && (
+                                                <>
+                                                    <dt className='font-medium'>
+                                                        Affected Car:
+                                                    </dt>
+                                                    <dd>
+                                                        {caseData.affectedCar}
+                                                    </dd>
+                                                </>
+                                            )}
+
+                                        {caseData.affectedPart &&
+                                            caseData.affectedPart !==
+                                                'Not specified' && (
+                                                <>
+                                                    <dt className='font-medium'>
+                                                        Affected Part:
+                                                    </dt>
+                                                    <dd>
+                                                        {caseData.affectedPart}
+                                                    </dd>
+                                                </>
+                                            )}
                                     </dl>
                                 </div>
 
@@ -431,6 +456,102 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                 </div>
                                             </div>
                                         )}
+                                    {caseData.brandImpactEstimate &&
+                                        typeof caseData.brandImpactEstimate ===
+                                            'object' && (
+                                            <div className='mt-4'>
+                                                <h3 className='font-medium mb-2'>
+                                                    Brand Impact Estimate
+                                                </h3>
+                                                <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
+                                                    <div className='flex items-center gap-2 mb-2'>
+                                                        <span className='font-medium'>
+                                                            Impact:
+                                                        </span>
+                                                        <Badge
+                                                            variant={
+                                                                caseData
+                                                                    .brandImpactEstimate
+                                                                    .impact ===
+                                                                'High'
+                                                                    ? 'destructive'
+                                                                    : caseData
+                                                                          .brandImpactEstimate
+                                                                          .impact ===
+                                                                      'Medium'
+                                                                    ? 'warning'
+                                                                    : 'outline'
+                                                            }
+                                                        >
+                                                            {
+                                                                caseData
+                                                                    .brandImpactEstimate
+                                                                    .impact
+                                                            }
+                                                        </Badge>
+                                                    </div>
+                                                    {caseData
+                                                        .brandImpactEstimate
+                                                        .explanation && (
+                                                        <p className='text-sm text-muted-foreground'>
+                                                            {
+                                                                caseData
+                                                                    .brandImpactEstimate
+                                                                    .explanation
+                                                            }
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                    {caseData.caseWinLikelihood &&
+                                        typeof caseData.caseWinLikelihood ===
+                                            'object' && (
+                                            <div className='mt-4'>
+                                                <h3 className='font-medium mb-2'>
+                                                    Case Win Likelihood
+                                                </h3>
+                                                <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
+                                                    <div className='flex items-center gap-2 mb-2'>
+                                                        <span className='font-medium'>
+                                                            Likelihood:
+                                                        </span>
+                                                        <Badge
+                                                            variant={
+                                                                caseData
+                                                                    .caseWinLikelihood
+                                                                    .likelihood ===
+                                                                'High'
+                                                                    ? 'default'
+                                                                    : caseData
+                                                                          .caseWinLikelihood
+                                                                          .likelihood ===
+                                                                      'Medium'
+                                                                    ? 'secondary'
+                                                                    : 'outline'
+                                                            }
+                                                        >
+                                                            {
+                                                                caseData
+                                                                    .caseWinLikelihood
+                                                                    .likelihood
+                                                            }
+                                                        </Badge>
+                                                    </div>
+                                                    {caseData.caseWinLikelihood
+                                                        .explanation && (
+                                                        <p className='text-sm text-muted-foreground'>
+                                                            {
+                                                                caseData
+                                                                    .caseWinLikelihood
+                                                                    .explanation
+                                                            }
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
                                 </div>
                             </div>
                         </CardContent>
@@ -453,6 +574,30 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             />
                         </CardContent>
                     </Card>
+
+                    {/* Plaintiff Argumentation Section */}
+                    {caseData.plaintiffArgumentation &&
+                        Array.isArray(caseData.plaintiffArgumentation) &&
+                        caseData.plaintiffArgumentation.length > 0 &&
+                        caseData.plaintiffArgumentation[0] !==
+                            'Not specified' && (
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>
+                                        Plaintiff Argumentation
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <ul className='list-disc pl-5 space-y-3'>
+                                        {caseData.plaintiffArgumentation.map(
+                                            (argument, index) => (
+                                                <li key={index}>{argument}</li>
+                                            )
+                                        )}
+                                    </ul>
+                                </CardContent>
+                            </Card>
+                        )}
 
                     {/* Outcome Prediction Section */}
                     <Card>

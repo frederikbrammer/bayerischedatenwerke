@@ -233,53 +233,5 @@
       "reputationalLoss": "Low",
       "winProbability": "80%"
     }
-  },
-  "23-1568": {
-    "id": "23-1568",
-    "title": "23-1568",
-    "status": "in progress",
-    "jurisdiction": "United States Court of Appeals for the Fourth Circuit",
-    "caseType": "Employment Disputes",
-    "harmType": "Employment harm",
-    "cause": "Workplace Misconduct",
-    "description": "The case of Carmen Wannamaker-Amos v. Purem Novi, Inc. presents a claim of employment discrimination under Title VII of the Civil Rights Act of 1964. The plaintiff alleges that she was subjected to disparate treatment based on her race, as evidenced by the differential treatment she received from her supervisor, Javad Hosseini, who is alleged to have harbored discriminatory animus against her. To establish a prima facie case of discrimination, the plaintiff must demonstrate that she is a member of a protected class, was qualified for her position, suffered an adverse employment action, and that similarly situated employees outside her protected class were treated more favorably. The burden of proof initially lies with the plaintiff to establish these elements, after which the burden shifts to the employer to articulate a legitimate, non-discriminatory reason for the adverse action. The plaintiff may then demonstrate that the employer's stated reason is a pretext for discrimination. Relevant precedents include McDonnell Douglas Corp. v. Green, 411 U.S. 792 (1973), which outlines the burden-shifting framework applicable in employment discrimination cases.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "date": "01/13/2025",
-    "relevantLaws": [],
-    "timeline": [
-      {
-        "date": "2025-04-26",
-        "event": "Case created",
-        "description": "Initial case documents uploaded"
-      }
-    ],
-    "offenseArgumentation": "Termination was based on race and sex discrimination., The defendant's reasons for termination were pretextual., Hosseini's pattern of discrimination against Wannamaker-Amos, including racist comments and attempts to undermine her position., Consistent praise from other supervisors and colleagues regarding her job performance., Termination was racially motivated., Claims of poor performance were unfounded., The plaintiff was not counseled or given an opportunity to improve performance before termination., The employer did not provide evidence for the alleged performance issues., The termination was based on a new issue raised after the fact, which was not part of the original performance concerns., The plaintiff is a member of a protected class (Black woman)., The employer took an adverse action (termination) against her., The plaintiff was fulfilling her employer's legitimate expectations at the time of termination., The adverse action occurred under circumstances that raise a reasonable inference of unlawful discrimination., The employer's justification for termination is based solely on statements from the alleged discriminator., Evidence suggests that the employer's reasons for termination may be pretextual., The plaintiff has provided ample evidence disputing the employer's claims., The reasons for termination provided by Purem have changed over time, suggesting pretext., Purem did not provide evidence to support the alleged performance deficiencies., Hosseini's initial claims of significant financial damage caused by the plaintiff were not substantiated., Hosseini treated Wannamaker-Amos poorly compared to white male employees., Hosseini held her to a higher standard and unfairly blamed her for others' performance failings., Discriminatory comments made by Hosseini indicate racial animus., The employer's discriminatory comments and failure to follow its own disciplinary policies suggest pretext for termination., The decision-maker's history of treating the plaintiff less favorably than other employees indicates potential discrimination., Hosseini treated her differently than other employees., Hosseini held a negative view of her job performance because of her race., Hosseini instructed supervisors to monitor her performance due to her race.",
-    "defenseArgumentation": null,
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "1",
-    "mediaCoverageLevel": {
-      "level": "Low",
-      "explanation": "The case appears to involve internal employment disputes rather than public safety or product liability issues, which typically garner more media attention."
-    },
-    "outcome": "Vacated and remanded",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Medium",
-      "explanation": "Given the nature of the allegations involving race discrimination, there is potential for reputational damage to Purem, especially if the case garners public attention. Companies facing discrimination claims often experience scrutiny that can affect their brand image."
-    },
-    "affectedCar": "Hyundai",
-    "affectedPart": "Catalytic converter",
-    "brandImpactEstimate": {
-      "impact": "Medium",
-      "explanation": "The case's focus on discrimination could lead to public scrutiny and potential backlash against Purem, especially if the allegations are substantiated. This could affect customer perception and loyalty."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Medium",
-      "explanation": "The plaintiff has presented evidence that raises material issues of fact regarding her performance and the reasons for her termination. However, the employer has also provided arguments that could potentially undermine the plaintiff's claims, making the outcome uncertain."
-    }
   }
 }
