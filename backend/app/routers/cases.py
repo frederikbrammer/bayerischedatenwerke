@@ -142,7 +142,7 @@ async def create_case(files: List[UploadFile] = File(None)):
     filing_date = extract_other_types_response.Filing_Date
     jurisdiction = extract_other_types_response.Jurisdiction
     defect_type = extract_other_types_response.Defect_Type or []
-    number_of_claimants = extract_other_types_response.Number_of_Claimants
+    number_of_claimants = str(extract_other_types_response.Number_of_Claimants)
     media_coverage_level = extract_other_types_response.Media_Coverage_Level
     outcome = extract_other_types_response.Outcome
     time_to_resolution_months = extract_other_types_response.Time_to_Resolution_Months
@@ -155,7 +155,7 @@ async def create_case(files: List[UploadFile] = File(None)):
     affected_part = extract_other_types_response.Affected_Part
     brand_impact_estimate = extract_other_types_response.Brand_Impact_Estimate
     case_win_likelihood = extract_other_types_response.Case_Win_Likelihood
-    plaintiff_argumentation = extract_other_types_response.Plaintiff_Argumentation or []
+    plaintiff_argumentation = ", ".join(extract_other_types_response.Plaintiff_Argumentation or [])
 
     # Print parsed variables for debugging (optional)
     print("Parsed Case Type Response:")
@@ -223,11 +223,10 @@ async def create_case(files: List[UploadFile] = File(None)):
                 "description": "Initial case documents uploaded",
             }
         ],
-        "offenseArgumentation": extracted_text,
+        "offenseArgumentation": plaintiff_argumentation,
         "defenseArgumentation": None,
         "suggestions": [],
         "outcomePrediction": None,
-        "defectType": defect_type,
         "numberOfClaimants": number_of_claimants,
         "mediaCoverageLevel": media_coverage_level,
         "outcome": outcome,
@@ -239,7 +238,6 @@ async def create_case(files: List[UploadFile] = File(None)):
         "affectedPart": affected_part,
         "brandImpactEstimate": brand_impact_estimate,
         "caseWinLikelihood": case_win_likelihood,
-        "plaintiffArgumentation": plaintiff_argumentation,
     }
 
     # Add the case to the database
