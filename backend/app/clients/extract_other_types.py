@@ -16,6 +16,8 @@ class CaseInformation(BaseModel):
     Number_of_Claimants: Optional[Union[int, str]] = None
     Media_Coverage_Level: Optional[Dict[str, str]] = None
     Outcome: Optional[str] = None
+    Status: Optional[str] = None  # Added status field (won/lost/settled/in progress)
+    Case_Summary: Optional[str] = None  # Added case summary field
     Time_to_Resolution_Months: Optional[str] = None
     Settlement_Amount: Optional[str] = None
     Defense_Cost_Estimate: Optional[str] = None
@@ -64,6 +66,8 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
         "  'Number_of_Claimants': 'The total number of plaintiffs or parties bringing the case against the company',\n"
         "  'Media_Coverage_Level': {'level': 'None/Low/Medium/High', 'explanation': 'Detailed explanation of why this level was assigned based on the text'},\n"
         "  'Outcome': 'The final resolution of the case, such as Dismissed, Settled, Plaintiff Win, or Defense Win',\n"
+        "  'Status': 'The current status of the case: Won, Lost, Settled, or In Progress',\n"
+        "  'Case_Summary': 'A concise summary of what the case is about, including key allegations and context',\n"
         "  'Time_to_Resolution_Months': 'The total duration, measured in months, from the case's filing date to its conclusion',\n"
         "  'Settlement_Amount': 'The amount of money paid by the defendant to the plaintiff(s) if the case was resolved through a settlement agreement',\n"
         "  'Defense_Cost_Estimate': 'The estimated total cost incurred by the defense, including legal fees, expert witness fees, and other litigation expenses',\n"
@@ -216,7 +220,7 @@ def merge_case_information(info_list):
     # Fields that should take the first non-empty value
     single_value_fields = [
         'Case_ID', 'Filing_Date', 'Jurisdiction',
-        'Number_of_Claimants', 'Outcome',
+        'Number_of_Claimants', 'Outcome', 'Status', 'Case_Summary',  # Added Status and Case_Summary
         'Time_to_Resolution_Months', 'Settlement_Amount',
         'Defense_Cost_Estimate', 'Affected_Car', 'Affected_Part'
     ]
@@ -304,6 +308,7 @@ def merge_case_information(info_list):
             }
 
     return merged_info
+
 def clean_response(response_dict):
     """
     Cleans the response dictionary to ensure consistent formatting.
@@ -350,6 +355,49 @@ def clean_response(response_dict):
                     response_dict[field] = [response_dict[field]]
             elif len(response_dict[field]) == 0:
                 response_dict[field] = ["Not specified"]
+    
+    # Ensure Status field has a valid value
+    if "Status" in response_dict:
+        valid_statuses = ["Won", "Lost", "Settled", "In Progress"]
+        if response_dict["Status"] not in valid_statuses and response_dict["Status"] != "Not specified":
+            # Try to infer status from Outcome if possible
+            if "Outcome" in response_dict:
+                if response_dict["Outcome"] == "Plaintiff Win":
+                    response_dict["Status"] = "Lost"
+                elif response_dict["Outcome"] == "Defense Win":
+                    response_dict["Status"] = "Won"
+                elif response_dict["Outcome"] == "Settled":
+                    response_dict["Status"] = "Settled"
+                else:
+                    response_dict["Status"] = "In Progress"
+    elif "Outcome" in response_dict and response_dict["Outcome"] != "Not specified":
+        # If Status is missing but Outcome is present, infer Status
+        if response_dict["Outcome"] == "Plaintiff Win":
+            response_dict["Status"] = "Lost"
+        elif response_dict["Outcome"] == "Defense Win":
+            response_dict["Status"] = "Won"
+        elif response_dict["Outcome"] == "Settled":
+            response_dict["Status"] = "Settled"
+        else:
+            response_dict["Status"] = "In Progress"
+    else:
+        response_dict["Status"] = "Not specified"
+
+    # Ensure Case_Summary is present
+    if "Case_Summary" not in response_dict or not response_dict["Case_Summary"]:
+        # Try to create a summary from other fields if possible
+        if "Defect_Type" in response_dict and response_dict["Defect_Type"] != ["Not specified"]:
+            defect_types = ", ".join(response_dict["Defect_Type"])
+            affected_car = response_dict.get("Affected_Car", "unspecified vehicle")
+            if affected_car == "Not specified":
+                affected_car = "unspecified vehicle"
+            affected_part = response_dict.get("Affected_Part", "unspecified part")
+            if affected_part == "Not specified":
+                affected_part = "unspecified part"
+            
+            response_dict["Case_Summary"] = f"This case involves allegations of {defect_types} related to {affected_part} in {affected_car}."
+        else:
+            response_dict["Case_Summary"] = "Not specified"
 
     return response_dict
 
