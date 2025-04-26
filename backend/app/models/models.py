@@ -37,6 +37,12 @@ class Case(BaseModel):
     settlementAmount: Optional[str] = None
     defenseCostEstimate: Optional[str] = None
     expectedBrandImpact: Optional[Dict] = None
+    # Additional new fields that weren't previously included
+    affectedCar: Optional[str] = None
+    affectedPart: Optional[str] = None
+    brandImpactEstimate: Optional[Dict] = None
+    caseWinLikelihood: Optional[Dict] = None
+    plaintiffArgumentation: Optional[List[str]] = None
 
 
 class CaseSummary(BaseModel):
