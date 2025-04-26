@@ -13,7 +13,7 @@ class CaseInformation(BaseModel):
     Filing_Date: Optional[str] = None
     Jurisdiction: Optional[Dict[str, str]] = None  # Changed to dictionary with state and court jurisdiction
     Defect_Type: Optional[List[str]] = None
-    Number_of_Claimants: Optional[Union[int, str]] = None
+    Number_of_Claimants: Optional[str] = None
     Media_Coverage_Level: Optional[Dict[str, str]] = None
     Outcome: Optional[str] = None
     Status: Optional[str] = None
@@ -391,7 +391,7 @@ def clean_response(response_dict):
     if "Number_of_Claimants" in response_dict and isinstance(response_dict["Number_of_Claimants"], str):
         try:
             if response_dict["Number_of_Claimants"].isdigit():
-                response_dict["Number_of_Claimants"] = int(response_dict["Number_of_Claimants"])
+                response_dict["Number_of_Claimants"] = response_dict["Number_of_Claimants"]
         except:
             pass
 

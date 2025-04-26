@@ -140,7 +140,13 @@ async def create_case(files: List[UploadFile] = File(None)):
 
     # Parse the data from extract_other_types_response
     case_id_from_extract = extract_other_types_response.Case_ID
-    filing_date = extract_other_types_response.Filing_Date
+    filing_date_raw = extract_other_types_response.Filing_Date
+    try:
+        # Try to parse the date assuming the format "YYYY-MM-DD"
+        filing_date_obj = datetime.strptime(filing_date_raw, "%Y-%m-%d")
+        filing_date = filing_date_obj.strftime("%Y-%m-%d")
+    except Exception:
+        filing_date = "Not specified"
 
     # Handle the new jurisdiction format (now a dictionary)
     jurisdiction = extract_other_types_response.Jurisdiction
