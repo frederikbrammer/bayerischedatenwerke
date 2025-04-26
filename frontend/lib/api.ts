@@ -21,7 +21,7 @@ export async function fetchCases(searchQuery = '') {
     }
 }
 
-export async function fetchCaseById(id) {
+export async function fetchCaseById(id: string) {
     try {
         const response = await fetch(`${API_BASE_URL}/cases/${id}`);
 
@@ -96,7 +96,7 @@ export async function fetchStatusStats() {
     }
 }
 
-export async function createCase(formData) {
+export async function createCase(formData: FormData) {
     try {
         const response = await fetch(`${API_BASE_URL}/cases/`, {
             method: 'POST',

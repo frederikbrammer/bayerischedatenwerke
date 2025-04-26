@@ -62,9 +62,8 @@ const getStatusIcon = (status: CaseStatus) => {
 };
 
 export default function CaseDetailPage({ params }: { params: { id: string } }) {
-    // Unwrap params using React.use()
-    const unwrappedParams = React.use(params);
-    const caseId = unwrappedParams.id;
+    // Access params directly
+    const caseId = params.id;
 
     const [caseData, setCaseData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
