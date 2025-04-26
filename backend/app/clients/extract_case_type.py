@@ -3,7 +3,7 @@ import json
 from typing import List, Dict, Optional
 from google import genai
 from pydantic import BaseModel, Field
-from key import api_key
+import os
 
 # Define the data model for case analysis
 
@@ -25,7 +25,7 @@ class CaseAnalysisResponse(BaseModel):
     possible_alternatives: Optional[List[CaseAnalysis]] = None
 
 
-client = genai.Client(api_key=api_key)
+client = genai.Client(api_key=os.getenv("API_KEY"))
 
 
 def call_gemini_analyzer(chunk):

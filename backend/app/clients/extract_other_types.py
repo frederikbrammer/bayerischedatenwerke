@@ -5,7 +5,7 @@ import json
 import concurrent.futures
 import time
 from typing import List, Dict, Optional, Any, Union
-from key import api_key
+import os
 from google import genai
 from pydantic import BaseModel, Field
 
@@ -24,7 +24,7 @@ class CaseInformation(BaseModel):
     Expected_Brand_Impact: Optional[Dict[str, str]] = None
 
 
-client = genai.Client(api_key=api_key)
+client = genai.Client(api_key=os.getenv("API_KEY"))
 
 
 def call_gemini_flashlight(chunk, chunk_number, chunk_size):
