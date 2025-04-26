@@ -40,10 +40,23 @@ def get_stats():
     """Get statistics for trends dashboard"""
     cases = get_all_cases()
 
-    # Count cases by status
-    won_cases = sum(1 for case in cases if case["status"] == "won")
-    lost_cases = sum(1 for case in cases if case["status"] == "lost")
-    in_progress_cases = sum(1 for case in cases if case["status"] == "in progress")
+    # Normalize status for win/loss/in progress/settled
+    won_cases = sum(
+        1
+        for case in cases
+        if str(case.get("status", "")).strip().lower() == "in favour of defendant"
+    )
+    lost_cases = sum(
+        1
+        for case in cases
+        if str(case.get("status", "")).strip().lower() == "in favour of plaintiff"
+    )
+    settled_cases = sum(
+        1 for case in cases if str(case.get("status", "")).strip().lower() == "settled"
+    )
+    in_progress_cases = sum(
+        1 for case in cases if "progress" in str(case.get("status", "")).strip().lower()
+    )
     total_cases = len(cases)
 
     win_rate = (won_cases / total_cases) * 100 if total_cases > 0 else 0
@@ -53,6 +66,7 @@ def get_stats():
         "totalCases": total_cases,
         "wonCases": won_cases,
         "lostCases": lost_cases,
+        "settledCases": settled_cases,
         "inProgressCases": in_progress_cases,
         "winRate": round(win_rate, 1),
         "lossRate": round(loss_rate, 1),
@@ -61,46 +75,50 @@ def get_stats():
 
 def get_car_stats():
     """Get statistics about car models involved in cases"""
-    # This is mock data since we don't have actual car models in the case data
-    return [
-        {"model": "Model S", "count": 35},
-        {"model": "Model X", "count": 42},
-        {"model": "Model Y", "count": 28},
-        {"model": "Model Z", "count": 22},
-    ]
+    cases = get_all_cases()
+    car_counts = {}
+    for case in cases:
+        car = case.get("affectedCar", None)
+        if car and car != "Not specified":
+            car_counts[car] = car_counts.get(car, 0) + 1
+    return [{"model": model, "count": count} for model, count in car_counts.items()]
 
 
 def get_part_stats():
     """Get statistics about car parts involved in cases"""
-    # This is mock data based on the case descriptions
-    return [
-        {"part": "Braking System", "count": 32},
-        {"part": "Engine", "count": 28},
-        {"part": "Suspension", "count": 24},
-        {"part": "Electrical System", "count": 26},
-        {"part": "Transmission", "count": 17},
-    ]
+    cases = get_all_cases()
+    part_counts = {}
+    for case in cases:
+        part = case.get("affectedPart", None)
+        if part and part != "Not specified":
+            part_counts[part] = part_counts.get(part, 0) + 1
+    return [{"part": part, "count": count} for part, count in part_counts.items()]
 
 
 def get_status_stats():
-    """Get statistics about case statuses"""
     cases = get_all_cases()
-
-    # Count cases by status
-    status_counts = {"Won": 0, "Lost": 0, "In Progress": 0}
+    status_counts = {
+        "In favour of defendant": 0,
+        "In favour of plaintiff": 0,
+        "In Progress": 0,
+        "Settled": 0,
+    }
 
     for case in cases:
-        status = case["status"]
-        if status == "won":
-            status_counts["Won"] += 1
-        elif status == "lost":
-            status_counts["Lost"] += 1
-        elif status == "in progress":
+        status = str(case.get("status", "")).strip().lower()
+        if status == "in favour of defendant":
+            status_counts["In favour of defendant"] += 1
+        elif status == "in favour of plaintiff":
+            status_counts["In favour of plaintiff"] += 1
+        elif status == "settled":
+            status_counts["Settled"] += 1
+        elif "progress" in status:
             status_counts["In Progress"] += 1
 
-    # Convert to list format for charts
     return [
-        {"status": status, "count": count} for status, count in status_counts.items()
+        {"status": status, "count": count}
+        for status, count in status_counts.items()
+        if count > 0
     ]
 
 

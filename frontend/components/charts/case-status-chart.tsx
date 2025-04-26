@@ -16,17 +16,12 @@ import {
 } from 'recharts';
 import { fetchStatusStats } from '@/lib/api';
 
-// Mock data for yearly trend (API doesn't provide this yet)
-const yearlyData = [
-    { name: '2020', won: 15, lost: 8, inProgress: 2 },
-    { name: '2021', won: 18, lost: 7, inProgress: 3 },
-    { name: '2022', won: 22, lost: 9, inProgress: 4 },
-    { name: '2023', won: 23, lost: 8, inProgress: 6 },
-    { name: '2024', won: 0, lost: 0, inProgress: 17 },
-];
-
-// Colors for the status pie chart
-const COLORS = ['#22c55e', '#ef4444', '#3b82f6'];
+// Map status to color
+const STATUS_COLORS: Record<string, string> = {
+    'In favour of defendant': '#22c55e', // green
+    'In favour of plaintiff': '#ef4444', // red
+    'In progress': '#2563eb', // standard blue
+};
 
 export function CaseStatusChart() {
     const [statusData, setStatusData] = useState<any[]>([]);
@@ -78,7 +73,7 @@ export function CaseStatusChart() {
                         {statusData.map((entry, index) => (
                             <Cell
                                 key={`cell-${index}`}
-                                fill={COLORS[index % COLORS.length]}
+                                fill={STATUS_COLORS[entry.status] || '#8884d8'}
                             />
                         ))}
                     </Pie>
