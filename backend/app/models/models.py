@@ -18,7 +18,15 @@ class OutcomePrediction(BaseModel):
 class Case(BaseModel):
     id: str
     title: str
-    status: Literal["won", "lost", "in progress"]
+    status: Literal[
+        "In favour of defendant",
+        "In favour of plaintiff",
+        "Settled",
+        "In Progress first instance",
+        "Dismissed",
+        "In Progress appeal",
+        "In Progress Supreme Court"
+    ]
     jurisdiction: str
     caseType: str
     date: str
@@ -48,7 +56,15 @@ class Case(BaseModel):
 class CaseSummary(BaseModel):
     id: str
     title: str
-    status: Literal["won", "lost", "in progress"]
+    status: Literal[
+        "In favour of defendant",
+        "In favour of plaintiff",
+        "Settled",
+        "In Progress first instance",
+        "Dismissed",
+        "In Progress appeal",
+        "In Progress Supreme Court"
+    ]
     jurisdiction: str
     caseType: str
     date: str
@@ -58,6 +74,7 @@ class TrendStats(BaseModel):
     totalCases: int
     wonCases: int
     lostCases: int
+    settledCases: int
     inProgressCases: int
     winRate: float
     lossRate: float
@@ -80,7 +97,15 @@ class StatusStats(BaseModel):
 
 class CreateCaseRequest(BaseModel):
     title: str
-    status: Literal["won", "lost", "in progress"]
+    status: Literal[
+        "In favour of defendant",
+        "In favour of plaintiff",
+        "Settled",
+        "In Progress first instance",
+        "Dismissed",
+        "In Progress appeal",
+        "In Progress Supreme Court"
+    ]
     jurisdiction: str
     caseType: str
     date: str
