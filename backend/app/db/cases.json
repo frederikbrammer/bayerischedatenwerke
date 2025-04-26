@@ -233,5 +233,53 @@
       "reputationalLoss": "Low",
       "winProbability": "80%"
     }
+  },
+  "15-00052": {
+    "id": "15-00052",
+    "title": "15-00052",
+    "status": "in progress",
+    "jurisdiction": "United States Court of International Trade",
+    "caseType": "IP Disputes",
+    "harmType": "Financial harm",
+    "cause": "Contract Breach",
+    "description": "In the case of BMW of North America LLC v. United States, the plaintiff challenges the final determination of the U.S. Department of Commerce regarding the antidumping duty order on ball bearings and parts from the United Kingdom. The legal analysis centers on the implications of antidumping duties, which are designed to protect domestic industries from foreign competition that is deemed unfair due to pricing below market value. The plaintiff must demonstrate that the duties imposed are not justified under the relevant trade statutes, specifically the Tariff Act of 1930, as amended, and the administrative procedures followed by the Department of Commerce. The burden of proof lies with the plaintiff to show that the final results of the administrative review were arbitrary or capricious, violating the Administrative Procedure Act. Precedent cases such as 'Chevron U.S.A. Inc. v. Natural Resources Defense Council, Inc.' may be relevant in assessing the deference given to agency interpretations of statutes.",
+    "secondaryTypes": [],
+    "possibleAlternatives": [],
+    "date": "Not specified",
+    "relevantLaws": [],
+    "timeline": [
+      {
+        "date": "2025-04-26",
+        "event": "Case created",
+        "description": "Initial case documents uploaded"
+      }
+    ],
+    "offenseArgumentation": "Challenging the final determination in the 2010\u20132011 administrative review of the antidumping duty order, Commerce applied the TPEA impermissibly, The AFA rate of 61.14% is unlawfully punitive, unsupported by substantial evidence, and inconsistent with the mandate of the U.S. Court of Appeals for the Federal Circuit, The TPEA does not apply retroactively, BMW argues that Commerce did not consider its level of culpability, claiming the failure to cooperate was due to an attorney's mistake rather than a deliberate decision., BMW asserts that any rate over 54.27% is punitive and that Commerce failed to justify the 61.14% rate.",
+    "defenseArgumentation": null,
+    "suggestions": [],
+    "outcomePrediction": null,
+    "numberOfClaimants": "1",
+    "mediaCoverageLevel": {
+      "level": "Not specified",
+      "explanation": "Insufficient information to determine"
+    },
+    "outcome": "Sustained the Second Remand Results",
+    "timeToResolutionMonths": "Not specified",
+    "settlementAmount": "Not specified",
+    "defenseCostEstimate": "Not specified",
+    "expectedBrandImpact": {
+      "impact": "Medium",
+      "explanation": "The case involves a significant AFA rate reduction from 126.44% to 61.14%, which indicates a serious issue but also a potential for resolution. This could lead to moderate brand impact as it suggests some level of culpability on BMW's part, but the reduction in the rate may mitigate severe reputational damage."
+    },
+    "affectedCar": "BMW",
+    "affectedPart": "Ball bearings and parts thereof",
+    "brandImpactEstimate": {
+      "impact": "Medium",
+      "explanation": "The case's focus on compliance and the potential punitive nature of the AFA rate could affect BMW's reputation. However, the fact that the rate was reduced significantly suggests that the company may not face the worst-case scenario, leading to a moderate impact on brand perception."
+    },
+    "caseWinLikelihood": {
+      "likelihood": "Medium",
+      "explanation": "The court's consideration of the AFA rate and the arguments presented by both sides suggest that there is a reasonable chance for BMW to contest the findings. However, the acknowledgment of their lack of cooperation indicates that the likelihood of a complete win may be tempered."
+    }
   }
 }
