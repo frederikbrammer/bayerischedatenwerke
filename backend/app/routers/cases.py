@@ -19,6 +19,7 @@ import shutil
 import PyPDF2
 from app.clients.extract_case_type import extract_case_type
 from app.clients.extract_other_types import extract_other_types
+from app.clients.prediction import add_win_likelihood_to_case
 
 from app.db.database import (
     get_case_summaries,
@@ -404,6 +405,8 @@ async def create_case(files: List[UploadFile] = File(None)):
         "reputationImpactCase": reputation_impact_case,
         "reputationImpactMedia": reputation_impact_media,
     }
+
+    new_case = add_win_likelihood_to_case(new_case)
 
     # Add the case to the database
     success = add_new_case(case_id, new_case)
