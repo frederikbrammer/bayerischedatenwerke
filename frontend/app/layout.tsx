@@ -2,7 +2,6 @@ import type React from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,18 +16,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang='en'>
+        <html lang='en' className='light' style={{ colorScheme: 'light' }}>
             <body className={inter.className}>
-                <ThemeProvider
-                    attribute='class'
-                    defaultTheme='light'
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    <main className='h-screen overflow-auto pt-16'>
-                        {children}
-                    </main>
-                </ThemeProvider>
+                <main className='h-screen overflow-auto pt-16'>{children}</main>
             </body>
         </html>
     );

@@ -1,10 +1,27 @@
 # Bayerische Datenwerke
 
-A legal case management system with analytics capabilities for vehicle-related legal cases.
+A litigation management system for the automotive industry.
+
+## Problem
+
+Legal professionals in the automotive industry face challenges in efficiently managing large volumes of vehicle-related legal cases, tracking case progress, and identifying trends or recurring issues. Manual processes and fragmented data sources hinder productivity and limit the ability to gain actionable insights from case data.
+
+## Main Features
+
+-   Centralized legal case management for automotive cases
+-   Dashboard for case tracking and status overview
+-   Advanced analytics and trend visualization
+-   Car and part-specific statistics
+-   Easy case creation and detailed case views
+-   Secure, modern web interface
+
+## Business Value
+
+Bayerische Datenwerke streamlines legal case management for automotive organizations, law firms, and in-house legal teams. By providing a unified platform for case tracking and analytics, it reduces administrative overhead, improves decision-making, and uncovers actionable insights to mitigate legal risks and optimize outcomes. The system empowers legal professionals to work more efficiently and deliver greater value to their clients or organizations.
 
 ## Project Overview
 
-Bayerische Datenwerke is a web application designed to manage and analyze legal cases for the automotive industry. It provides a modern interface for case tracking, statistical analysis, and visualization of trends in legal cases. The system helps legal professionals manage their caseload efficiently and identify patterns in automotive-related legal issues.
+Bayerische Datenwerke is a web application designed to manage and analyze legal cases for the automotive industry. It enables legal professionals to efficiently manage and analyze vehicle-related legal cases. Our tool provides an easy-to-use web interface for case tracking, statistical analysis, and visualization of trends in legal cases. The system helps legal professionals manage their caseload efficiently and identify patterns in automotive-related legal issues.
 
 ## AI tools used during development
 
@@ -12,9 +29,14 @@ Bayerische Datenwerke is a web application designed to manage and analyze legal 
 -   GitHub Copilot
 -   ChatGPT
 
-## Project Architecture
+## Experiments Folder
 
-The project follows a modern client-server architecture:
+The `experiments/` directory contains data and notebooks used for downloading and analyzing previous court cases.
+
+-   `bmw_court_cases.json` – Sample dataset of court cases
+-   `case_fetcher.ipynb` – Jupyter notebook for fetching previous court cases from the BMW Group.
+
+## Project Architecture
 
 ### Backend (FastAPI)
 
