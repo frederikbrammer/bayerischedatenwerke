@@ -1,36 +1,72 @@
-"use client"
+'use client';
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts"
+import { useState, useEffect } from 'react';
+import {
+    PieChart,
+    Pie,
+    Cell,
+    Legend,
+    Tooltip,
+    ResponsiveContainer,
+} from 'recharts';
+import { fetchCarStats } from '@/lib/api';
 
-// Mock data for car models affected
-const carData = [
-  { name: "Model S", count: 42, won: 28, lost: 9, inProgress: 5 },
-  { name: "Model X", count: 35, won: 20, lost: 10, inProgress: 5 },
-  { name: "Model Y", count: 28, won: 18, lost: 6, inProgress: 4 },
-  { name: "Model Z", count: 22, won: 12, lost: 7, inProgress: 3 },
-]
+const COLORS = ['#3b82f6', '#8b5cf6', '#ec4899', '#f97316', '#10b981'];
 
 export function CarChart() {
-  return (
-    <ResponsiveContainer width="100%" height="100%">
-      <BarChart
-        data={carData}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="won" stackId="a" fill="#22c55e" name="Won" />
-        <Bar dataKey="lost" stackId="a" fill="#ef4444" name="Lost" />
-        <Bar dataKey="inProgress" stackId="a" fill="#3b82f6" name="In Progress" />
-      </BarChart>
-    </ResponsiveContainer>
-  )
+    const [carData, setCarData] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadCarData() {
+            setLoading(true);
+            try {
+                const data = await fetchCarStats();
+                if (data && data.length > 0) {
+                    setCarData(data);
+                }
+            } catch (error) {
+                console.error('Error loading car stats:', error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadCarData();
+    }, []);
+
+    if (loading) {
+        return (
+            <div className='flex items-center justify-center h-full'>
+                Loading data...
+            </div>
+        );
+    }
+
+    return (
+        <ResponsiveContainer width='100%' height='100%'>
+            <PieChart>
+                <Pie
+                    data={carData}
+                    dataKey='count'
+                    nameKey='model'
+                    cx='50%'
+                    cy='50%'
+                    outerRadius={80}
+                    label={({ model, count, percent }) =>
+                        `${model}: ${count} (${(percent * 100).toFixed(0)}%)`
+                    }
+                >
+                    {carData.map((entry, index) => (
+                        <Cell
+                            key={`cell-${index}`}
+                            fill={COLORS[index % COLORS.length]}
+                        />
+                    ))}
+                </Pie>
+                <Tooltip formatter={(value, name) => [value, name]} />
+                <Legend />
+            </PieChart>
+        </ResponsiveContainer>
+    );
 }

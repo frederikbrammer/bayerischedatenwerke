@@ -1,40 +1,67 @@
-"use client"
+'use client';
 
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts"
-
-// Mock data for parts affected
-const partData = [
-  { name: "Braking System", value: 35 },
-  { name: "Engine", value: 25 },
-  { name: "Transmission", value: 18 },
-  { name: "Suspension", value: 15 },
-  { name: "Electrical System", value: 12 },
-  { name: "Other", value: 22 },
-]
-
-const COLORS = ["#3b82f6", "#22c55e", "#eab308", "#ef4444", "#a855f7", "#94a3b8"]
+import { useState, useEffect } from 'react';
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+} from 'recharts';
+import { fetchPartStats } from '@/lib/api';
 
 export function PartChart() {
-  return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart>
-        <Pie
-          data={partData}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          outerRadius={120}
-          fill="#8884d8"
-          dataKey="value"
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-        >
-          {partData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-      </PieChart>
-    </ResponsiveContainer>
-  )
+    const [partData, setPartData] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadPartData() {
+            setLoading(true);
+            try {
+                const data = await fetchPartStats();
+                if (data && data.length > 0) {
+                    setPartData(data);
+                }
+            } catch (error) {
+                console.error('Error loading part stats:', error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadPartData();
+    }, []);
+
+    if (loading) {
+        return (
+            <div className='flex items-center justify-center h-full'>
+                Loading data...
+            </div>
+        );
+    }
+
+    return (
+        <ResponsiveContainer width='100%' height='100%'>
+            <BarChart
+                data={partData}
+                layout='vertical'
+                margin={{
+                    top: 20,
+                    right: 30,
+                    left: 120,
+                    bottom: 5,
+                }}
+            >
+                <CartesianGrid strokeDasharray='3 3' />
+                <XAxis type='number' />
+                <YAxis dataKey='part' type='category' width={100} />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey='count' fill='#8b5cf6' name='Cases' />
+            </BarChart>
+        </ResponsiveContainer>
+    );
 }
