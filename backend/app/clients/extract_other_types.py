@@ -61,6 +61,7 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
         "For list fields like Defect_Type and Plaintiff_Argumentation, if no information is found, include a single item with value 'Not specified'. "
         "For the Status field, use ONLY one of the following values: 'In favour of defendant', 'In favour of plaintiff', 'Settled', 'In Progress first instance', 'Dismissed', 'In Progress appeal', 'In Progress Supreme Court'. If the status cannot be determined, use 'Not specified'."
         "Return the output as a JSON object with the following structure and descriptions:\n\n"
+        "To determine the brand impact, consider if someone died and if the defendant maybe did something intentionally or knowingly use low and medium often, high if number of claimants is high and or death is mentioned\n"
         "{\n"
         "  'Case_ID': 'A unique identifier assigned to each legal case for tracking and reference purposes',\n"
         "  'Filing_Date': 'The date on which the case was officially filed with the court',\n"
