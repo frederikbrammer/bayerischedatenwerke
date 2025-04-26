@@ -231,7 +231,7 @@ async def create_case(files: List[UploadFile] = File(None)):
                 "description": "Initial case documents uploaded",
             }
         ],
-        "offenseArgumentation": extracted_text,
+        "offenseArgumentation": plaintiff_argumentation,
         "defenseArgumentation": None,
         "suggestions": [],
         "outcomePrediction": None,
