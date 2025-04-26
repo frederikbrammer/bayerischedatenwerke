@@ -59,6 +59,7 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
         "If a piece of information appears multiple times, include all instances in a list. "
         "If information is not found for a field, use the exact string 'Not specified' as the value. "
         "For list fields like Defect_Type and Plaintiff_Argumentation, if no information is found, include a single item with value 'Not specified'. "
+        "For the Status field, use ONLY one of the following values: 'In favour of defendant', 'In favour of plaintiff', 'Settled', 'In Progress first instance', 'Dismissed', 'In Progress appeal', 'In Progress Supreme Court'. If the status cannot be determined, use 'Not specified'."
         "Return the output as a JSON object with the following structure and descriptions:\n\n"
         "{\n"
         "  'Case_ID': 'A unique identifier assigned to each legal case for tracking and reference purposes',\n"
@@ -68,7 +69,7 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
         "  'Number_of_Claimants': 'The total number of plaintiffs or parties bringing the case against the company',\n"
         "  'Media_Coverage_Level': {'level': 'None/Low/Medium/High', 'explanation': 'Detailed explanation of why this level was assigned based on the text'},\n"
         "  'Outcome': 'The final resolution of the case, such as Dismissed, Settled, Plaintiff Win, or Defense Win',\n"
-        "  'Status': 'The current status of the case: Won, Lost, Settled, or In Progress',\n"
+        "  'Status': 'The current status of the case: In favour of defendant, In favour of plaintiff, Settled, In Progress first instance, Dismissed, In Progress appeal, In Progress Supreme Court',\n"
         "  'Case_Summary': 'A concise summary of what the case is about, including key allegations and context',\n"
         "  'Time_to_Resolution_Months': 'The total duration, measured in months, from the case's filing date to its conclusion',\n"
         "  'Settlement_Amount': 'The amount of money paid by the defendant to the plaintiff(s) if the case was resolved through a settlement agreement',\n"
@@ -291,7 +292,6 @@ def merge_case_information(info_list):
                     if (field not in merged_info or
                         isinstance(merged_info[field], str) or
                         merged_info[field].get(level_key) == 'Not specified' or
-                            
                         (len(info[field].get('explanation', '')) > len(merged_info[field].get('explanation', '')))):
                         merged_info[field] = info[field]
 
@@ -449,29 +449,48 @@ def clean_response(response_dict):
             response_dict[field] = ["Not specified"]
     
     # Ensure Status field has a valid value
+    valid_statuses = ["In favour of defendant", "In favour of plaintiff", "Settled", "In Progress first instance", "Dismissed", "In Progress appeal", "In Progress Supreme Court"]
+    
     if "Status" in response_dict:
-        valid_statuses = ["Won", "Lost", "Settled", "In Progress"]
         if response_dict["Status"] not in valid_statuses and response_dict["Status"] != "Not specified":
-            # Try to infer status from Outcome if possible
-            if "Outcome" in response_dict:
-                if response_dict["Outcome"] == "Plaintiff Win":
-                    response_dict["Status"] = "Lost"
-                elif response_dict["Outcome"] == "Defense Win":
-                    response_dict["Status"] = "Won"
-                elif response_dict["Outcome"] == "Settled":
-                    response_dict["Status"] = "Settled"
+            # Map old status values to new valid statuses
+            status_mapping = {
+                "Won": "In favour of defendant",
+                "Lost": "In favour of plaintiff",
+                "Settled": "Settled",
+                "In Progress": "In Progress first instance"
+            }
+            
+            # Try to map the status to a valid one
+            if response_dict["Status"] in status_mapping:
+                response_dict["Status"] = status_mapping[response_dict["Status"]]
+            else:
+                # Try to infer status from Outcome if possible
+                if "Outcome" in response_dict:
+                    if response_dict["Outcome"] == "Plaintiff Win":
+                        response_dict["Status"] = "In favour of plaintiff"
+                    elif response_dict["Outcome"] == "Defense Win":
+                        response_dict["Status"] = "In favour of defendant"
+                    elif response_dict["Outcome"] == "Settled":
+                        response_dict["Status"] = "Settled"
+                    elif response_dict["Outcome"] == "Dismissed":
+                        response_dict["Status"] = "Dismissed"
+                    else:
+                        response_dict["Status"] = "In Progress first instance"
                 else:
-                    response_dict["Status"] = "In Progress"
+                    response_dict["Status"] = "In Progress first instance"
     elif "Outcome" in response_dict and response_dict["Outcome"] != "Not specified":
         # If Status is missing but Outcome is present, infer Status
         if response_dict["Outcome"] == "Plaintiff Win":
-            response_dict["Status"] = "Lost"
+            response_dict["Status"] = "In favour of plaintiff"
         elif response_dict["Outcome"] == "Defense Win":
-            response_dict["Status"] = "Won"
+            response_dict["Status"] = "In favour of defendant"
         elif response_dict["Outcome"] == "Settled":
             response_dict["Status"] = "Settled"
+        elif response_dict["Outcome"] == "Dismissed":
+            response_dict["Status"] = "Dismissed"
         else:
-            response_dict["Status"] = "In Progress"
+            response_dict["Status"] = "In Progress first instance"
     else:
         response_dict["Status"] = "Not specified"
 
@@ -597,15 +616,3 @@ def extract_other_types(extracted_text: str) -> CaseInformation:
     # Convert to CaseInformation model
     case_info = CaseInformation(**cleaned_response)
     return case_info
-
-# Example usage
-if __name__ == "__main__":
-    # Make sure to set these environment variables before running:
-    # export AZURE_OPENAI_API_KEY="your-api-key"
-    # export AZURE_OPENAI_ENDPOINT="https://your-resource-name.openai.azure.com"
-    # export AZURE_OPENAI_DEPLOYMENT_NAME="your-gpt4o-deployment-name"
-    # export AZURE_OPENAI_API_VERSION="2023-12-01-preview"
-    
-    sample_text = "Your legal text here..."
-    result = extract_other_types(sample_text)
-    print(result.model_dump_json(indent=2))

@@ -150,21 +150,18 @@ async def create_case(files: List[UploadFile] = File(None)):
     media_coverage_level = extract_other_types_response.Media_Coverage_Level
     outcome = extract_other_types_response.Outcome
     
-    # Convert status to lowercase to match expected values
+    # Convert status to match the expected values from the new valid statuses
     status_raw = extract_other_types_response.Status
-    if isinstance(status_raw, str):
-        if status_raw.lower() == "in progress":
-            status = "in progress"
-        elif status_raw.lower() == "won":
-            status = "won"
-        elif status_raw.lower() == "lost":
-            status = "lost"
-        elif status_raw.lower() == "settled":
-            status = "settled"
-        else:
-            status = "in progress"  # Default value
+    valid_statuses = ["In favour of defendant", "In favour of plaintiff", "Settled", 
+                     "In Progress first instance", "Dismissed", "In Progress appeal", 
+                     "In Progress Supreme Court"]
+    
+    if isinstance(status_raw, str) and status_raw in valid_statuses:
+        status = status_raw
+    elif isinstance(status_raw, str) and status_raw == "Not specified":
+        status = "In Progress first instance"  # Default value
     else:
-        status = "in progress"  # Default value
+        status = "In Progress first instance"  # Default value
     
     case_summary = extract_other_types_response.Case_Summary
     time_to_resolution_months = extract_other_types_response.Time_to_Resolution_Months
@@ -246,11 +243,84 @@ async def create_case(files: List[UploadFile] = File(None)):
         if match:
             title = match.group(0)
 
+    # Function to extract date from timeline event string
+    def extract_date_from_event(event_str):
+        """
+        Extract date from event string using various patterns.
+        Returns the date in YYYY-MM-DD format if found, otherwise None.
+        """
+        import re
+        from datetime import datetime
+        
+        # Common date patterns
+        patterns = [
+            # YYYY-MM-DD
+            r'(\d{4}-\d{1,2}-\d{1,2})',
+            # MM/DD/YYYY
+            r'(\d{1,2}/\d{1,2}/\d{4})',
+            # Month DD, YYYY
+            r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}',
+            # DD Month YYYY
+            r'(\d{1,2}\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})',
+            # Month YYYY
+            r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}'
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, event_str)
+            if match:
+                date_str = match.group(0)
+                try:
+                    # Try various date formats
+                    for fmt in ('%Y-%m-%d', '%m/%d/%Y', '%B %d, %Y', '%d %B %Y', '%B %Y'):
+                        try:
+                            date_obj = datetime.strptime(date_str, fmt)
+                            # If only month and year, set day to 1
+                            if fmt == '%B %Y':
+                                return date_obj.strftime('%Y-%m-01')
+                            return date_obj.strftime('%Y-%m-%d')
+                        except ValueError:
+                            continue
+                except Exception:
+                    pass
+        
+        # If no date pattern found or parsing failed
+        return None
+
+    # Process timeline events to extract dates
+    processed_timeline = []
+    
+    # Add the case creation event
+    processed_timeline.append({
+        "date": today,
+        "event": "Case created",
+        "description": "Initial case documents uploaded",
+    })
+    
+    # Process the extracted timeline events
+    for event in timeline_of_events:
+        if event != "Not specified":
+            # Try to extract a date from the event text
+            event_date = extract_date_from_event(event)
+            
+            # If filing_date is available and no date found in the event, 
+            # use filing_date for events that seem to be about the filing
+            if not event_date and filing_date and filing_date != "Not specified":
+                if any(filing_term in event.lower() for filing_term in ["filed", "filing", "complaint", "initiated", "commenced"]):
+                    event_date = filing_date
+            
+            # Add the event to the timeline with the extracted date or "Unknown"
+            processed_timeline.append({
+                "date": event_date if event_date else "Unknown",
+                "event": event,
+                "description": ""
+            })
+
     # Create a new case object with updated field names
     new_case = {
         "id": case_id,
         "title": title,
-        "status": status,  # Now properly lowercase
+        "status": status,
         "jurisdiction": f"{state_jurisdiction} - {court_jurisdiction}",  # Keep the jurisdiction field for backward compatibility
         "stateJurisdiction": state_jurisdiction,
         "courtJurisdiction": court_jurisdiction,
@@ -262,13 +332,7 @@ async def create_case(files: List[UploadFile] = File(None)):
         "possibleAlternatives": possible_alternatives,
         "date": filing_date,
         "relevantLaws": relevant_laws if relevant_laws != ["Not specified"] else [],
-        "timeline": [
-            {
-                "date": today,
-                "event": "Case created",
-                "description": "Initial case documents uploaded",
-            }
-        ] + [{"date": "Unknown", "event": event, "description": ""} for event in timeline_of_events if event != "Not specified"],
+        "timeline": processed_timeline,
         "plaintiffArgumentation": plaintiff_argumentation if plaintiff_argumentation != ["Not specified"] else [],
         "defenseArgumentation": "",
         "suggestions": [],
