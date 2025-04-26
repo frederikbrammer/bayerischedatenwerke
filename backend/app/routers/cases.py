@@ -161,7 +161,7 @@ async def create_case(files: List[UploadFile] = File(None)):
     affected_part = extract_other_types_response.Affected_Part
     brand_impact_estimate = extract_other_types_response.Brand_Impact_Estimate
     case_win_likelihood = extract_other_types_response.Case_Win_Likelihood
-    plaintiff_argumentation = extract_other_types_response.Plaintiff_Argumentation or []
+    plaintiff_argumentation = ", ".join(extract_other_types_response.Plaintiff_Argumentation or [])
 
     # Print parsed variables for debugging (optional)
     print("Parsed Case Type Response:")
@@ -247,7 +247,6 @@ async def create_case(files: List[UploadFile] = File(None)):
         "affectedPart": affected_part,
         "brandImpactEstimate": brand_impact_estimate,
         "caseWinLikelihood": case_win_likelihood,
-        "plaintiffArgumentation": plaintiff_argumentation,
     }
 
     # Add the case to the database
