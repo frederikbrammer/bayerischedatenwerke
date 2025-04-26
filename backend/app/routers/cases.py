@@ -66,6 +66,7 @@ async def get_case(case_id: str):
         raise HTTPException(status_code=404, detail="Case not found")
     return case
 
+
 @router.post("/", response_model=CaseResponse)
 async def create_case(files: List[UploadFile] = File(None)):
     """
@@ -140,30 +141,44 @@ async def create_case(files: List[UploadFile] = File(None)):
     # Parse the data from extract_other_types_response
     case_id_from_extract = extract_other_types_response.Case_ID
     filing_date = extract_other_types_response.Filing_Date
-    
+
     # Handle the new jurisdiction format (now a dictionary)
     jurisdiction = extract_other_types_response.Jurisdiction
-    state_jurisdiction = jurisdiction.get('state_jurisdiction', 'Not specified') if isinstance(jurisdiction, dict) else 'Not specified'
-    court_jurisdiction = jurisdiction.get('court_jurisdiction', 'Not specified') if isinstance(jurisdiction, dict) else jurisdiction
-    
+    state_jurisdiction = (
+        jurisdiction.get("state_jurisdiction", "Not specified")
+        if isinstance(jurisdiction, dict)
+        else "Not specified"
+    )
+    court_jurisdiction = (
+        jurisdiction.get("court_jurisdiction", "Not specified")
+        if isinstance(jurisdiction, dict)
+        else jurisdiction
+    )
+
     defect_type = extract_other_types_response.Defect_Type or []
     number_of_claimants = str(extract_other_types_response.Number_of_Claimants)
     media_coverage_level = extract_other_types_response.Media_Coverage_Level
     outcome = extract_other_types_response.Outcome
-    
+
     # Convert status to match the expected values from the new valid statuses
     status_raw = extract_other_types_response.Status
-    valid_statuses = ["In favour of defendant", "In favour of plaintiff", "Settled", 
-                     "In Progress first instance", "Dismissed", "In Progress appeal", 
-                     "In Progress Supreme Court"]
-    
+    valid_statuses = [
+        "In favour of defendant",
+        "In favour of plaintiff",
+        "Settled",
+        "In Progress first instance",
+        "Dismissed",
+        "In Progress appeal",
+        "In Progress Supreme Court",
+    ]
+
     if isinstance(status_raw, str) and status_raw in valid_statuses:
         status = status_raw
     elif isinstance(status_raw, str) and status_raw == "Not specified":
         status = "In Progress first instance"  # Default value
     else:
         status = "In Progress first instance"  # Default value
-    
+
     case_summary = extract_other_types_response.Case_Summary
     time_to_resolution_months = extract_other_types_response.Time_to_Resolution_Months
     settlement_amount = extract_other_types_response.Settlement_Amount
@@ -175,22 +190,28 @@ async def create_case(files: List[UploadFile] = File(None)):
     affected_part = extract_other_types_response.Affected_Part
     brand_impact_estimate = extract_other_types_response.Brand_Impact_Estimate
     case_win_likelihood = extract_other_types_response.Case_Win_Likelihood
-    
+
     # Get plaintiff argumentation as a list of key points
     plaintiff_argumentation = extract_other_types_response.Plaintiff_Argumentation or []
-    
+
     # Get the new fields
     timeline_of_events = extract_other_types_response.Timeline_of_Events or []
     relevant_laws = extract_other_types_response.Relevant_Laws or []
-    
+
     # Get the separated reputation impact
     reputation_impact = extract_other_types_response.Reputation_Impact or {
-        'case_outcome': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'},
-        'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
+        "case_outcome": {
+            "impact": "Not specified",
+            "explanation": "Insufficient information to determine",
+        },
+        "media_coverage": {
+            "impact": "Not specified",
+            "explanation": "Insufficient information to determine",
+        },
     }
-    
-    reputation_impact_case = reputation_impact.get('case_outcome', {})
-    reputation_impact_media = reputation_impact.get('media_coverage', {})
+
+    reputation_impact_case = reputation_impact.get("case_outcome", {})
+    reputation_impact_media = reputation_impact.get("media_coverage", {})
 
     # Print parsed variables for debugging (optional)
     print("Parsed Case Type Response:")
@@ -232,18 +253,6 @@ async def create_case(files: List[UploadFile] = File(None)):
     # Generate case metadata from extracted text
     today = datetime.now().strftime("%Y-%m-%d")
 
-    # Mock extraction of title from text
-    title = "New Case"
-    if "Bayerische vs" in extracted_text:
-        title = "Bayerische vs. Johnson"
-    elif "v." in extracted_text:
-        # Look for patterns like "Smith v. Jones"
-        import re
-
-        match = re.search(r"([A-Za-z\s]+)\s+v\.\s+([A-Za-z\s]+)", extracted_text)
-        if match:
-            title = match.group(0)
-
     # Function to extract date from timeline event string
     def extract_date_from_event(event_str):
         """
@@ -252,75 +261,94 @@ async def create_case(files: List[UploadFile] = File(None)):
         """
         import re
         from datetime import datetime
-        
+
         # Common date patterns
         patterns = [
             # YYYY-MM-DD
-            r'(\d{4}-\d{1,2}-\d{1,2})',
+            r"(\d{4}-\d{1,2}-\d{1,2})",
             # MM/DD/YYYY
-            r'(\d{1,2}/\d{1,2}/\d{4})',
+            r"(\d{1,2}/\d{1,2}/\d{4})",
             # Month DD, YYYY
-            r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}',
+            r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}",
             # DD Month YYYY
-            r'(\d{1,2}\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})',
+            r"(\d{1,2}\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})",
             # Month YYYY
-            r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}'
+            r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}",
         ]
-        
+
         for pattern in patterns:
             match = re.search(pattern, event_str)
             if match:
                 date_str = match.group(0)
                 try:
                     # Try various date formats
-                    for fmt in ('%Y-%m-%d', '%m/%d/%Y', '%B %d, %Y', '%d %B %Y', '%B %Y'):
+                    for fmt in (
+                        "%Y-%m-%d",
+                        "%m/%d/%Y",
+                        "%B %d, %Y",
+                        "%d %B %Y",
+                        "%B %Y",
+                    ):
                         try:
                             date_obj = datetime.strptime(date_str, fmt)
                             # If only month and year, set day to 1
-                            if fmt == '%B %Y':
-                                return date_obj.strftime('%Y-%m-01')
-                            return date_obj.strftime('%Y-%m-%d')
+                            if fmt == "%B %Y":
+                                return date_obj.strftime("%Y-%m-01")
+                            return date_obj.strftime("%Y-%m-%d")
                         except ValueError:
                             continue
                 except Exception:
                     pass
-        
+
         # If no date pattern found or parsing failed
         return None
 
     # Process timeline events to extract dates
     processed_timeline = []
-    
+
     # Add the case creation event
-    processed_timeline.append({
-        "date": today,
-        "event": "Case created",
-        "description": "Initial case documents uploaded",
-    })
-    
+    processed_timeline.append(
+        {
+            "date": today,
+            "event": "Case created",
+            "description": "Initial case documents uploaded",
+        }
+    )
+
     # Process the extracted timeline events
     for event in timeline_of_events:
         if event != "Not specified":
             # Try to extract a date from the event text
             event_date = extract_date_from_event(event)
-            
-            # If filing_date is available and no date found in the event, 
+
+            # If filing_date is available and no date found in the event,
             # use filing_date for events that seem to be about the filing
             if not event_date and filing_date and filing_date != "Not specified":
-                if any(filing_term in event.lower() for filing_term in ["filed", "filing", "complaint", "initiated", "commenced"]):
+                if any(
+                    filing_term in event.lower()
+                    for filing_term in [
+                        "filed",
+                        "filing",
+                        "complaint",
+                        "initiated",
+                        "commenced",
+                    ]
+                ):
                     event_date = filing_date
-            
+
             # Add the event to the timeline with the extracted date or "Unknown"
-            processed_timeline.append({
-                "date": event_date if event_date else "Unknown",
-                "event": event,
-                "description": ""
-            })
+            processed_timeline.append(
+                {
+                    "date": event_date if event_date else "Unknown",
+                    "event": event,
+                    "description": "",
+                }
+            )
 
     # Create a new case object with updated field names
     new_case = {
         "id": case_id,
-        "title": title,
+        "title": case_id,
         "status": status,
         "jurisdiction": f"{state_jurisdiction} - {court_jurisdiction}",  # Keep the jurisdiction field for backward compatibility
         "stateJurisdiction": state_jurisdiction,
@@ -334,7 +362,11 @@ async def create_case(files: List[UploadFile] = File(None)):
         "date": filing_date,
         "relevantLaws": relevant_laws if relevant_laws != ["Not specified"] else [],
         "timeline": processed_timeline,
-        "plaintiffArgumentation": plaintiff_argumentation if plaintiff_argumentation != ["Not specified"] else [],
+        "plaintiffArgumentation": (
+            plaintiff_argumentation
+            if plaintiff_argumentation != ["Not specified"]
+            else []
+        ),
         "defenseArgumentation": "",
         "suggestions": [],
         "outcomePrediction": None,
