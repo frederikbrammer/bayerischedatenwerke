@@ -1,33 +1,30 @@
-
 import json
 import concurrent.futures
 import time
-from typing import List, Dict, Optional, Any, Union
+import requests
 import os
-from google import genai
+from dotenv import load_dotenv
+from typing import List, Dict, Optional, Any, Union
 from pydantic import BaseModel, Field
 
-
+load_dotenv()
 class CaseInformation(BaseModel):
     Case_ID: Optional[str] = None
     Filing_Date: Optional[str] = None
     Jurisdiction: Optional[str] = None
     Defect_Type: Optional[List[str]] = None
-    Number_of_Claimants: Optional[int] = None
+    Number_of_Claimants: Optional[Union[int, str]] = None
     Media_Coverage_Level: Optional[Dict[str, str]] = None
     Outcome: Optional[str] = None
     Time_to_Resolution_Months: Optional[str] = None
     Settlement_Amount: Optional[str] = None
     Defense_Cost_Estimate: Optional[str] = None
     Expected_Brand_Impact: Optional[Dict[str, str]] = None
+    
 
-
-client = genai.Client(api_key=os.getenv("API_KEY"))
-
-
-def call_gemini_flashlight(chunk, chunk_number, chunk_size):
+def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
     """
-    Calls the Google Gemini 2.0 Flashlight API to process the text chunk.
+    Calls the Azure OpenAI API with GPT-4o to process the text chunk.
 
     Args:
         chunk (str): The text chunk to process.
@@ -37,6 +34,15 @@ def call_gemini_flashlight(chunk, chunk_number, chunk_size):
     Returns:
         dict: The extracted case information from this chunk.
     """
+    # Azure OpenAI API configuration
+    api_key = os.environ.get("AZURE_OPENAI_API_KEY")
+    endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
+    deployment_name = os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME", "gpt-4o")
+    api_version = os.environ.get("AZURE_OPENAI_API_VERSION", "2023-12-01-preview")
+    
+    if not api_key or not endpoint:
+        raise ValueError("Azure OpenAI API key and endpoint must be set as environment variables")
+    
     prompt = (
         "Extract the following information from the legal case text provided. "
         "All fields are optional - include information that is explicitly mentioned in the text. "
@@ -66,73 +72,97 @@ def call_gemini_flashlight(chunk, chunk_number, chunk_size):
     )
 
     try:
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=prompt,
-            config={
-                "response_mime_type": "application/json",
-            },
+        # Prepare the API request
+        headers = {
+            "Content-Type": "application/json",
+            "api-key": api_key
+        }
+        
+        # Azure OpenAI API request body
+        request_body = {
+            "messages": [
+                {"role": "system", "content": "You are a legal information extraction assistant that provides structured JSON responses."},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0,
+            "response_format": {"type": "json_object"}
+        }
+        
+        # Make the API request to Azure OpenAI
+        response = requests.post(
+            f"{endpoint}",
+            headers=headers,
+            json=request_body,
+            timeout=60  # Add timeout to prevent hanging
         )
-
-        # Parse the response text as JSON
-        response_text = response.text
+        
+        response.raise_for_status()
+        result = response.json()
+        
+        # Extract the generated content from Azure OpenAI response
+        response_text = result["choices"][0]["message"]["content"]
 
         # Print the raw response for debugging problematic chunks
         if chunk_number == 1:
-            print(
-                f"Raw API response for chunk 1 (size {chunk_size}): {response_text[:200]}...")
+            print(f"Raw API response for chunk 1 (size {chunk_size}): {response_text[:200]}...")
 
-        # Handle potential list response
+        # Try to parse the JSON response
         try:
+            # First try direct parsing
             response_json = json.loads(response_text)
-
+            
             # If response_json is a list, handle it appropriately
             if isinstance(response_json, list):
-                print(
-                    f"API returned a list for chunk {chunk_number} (size {chunk_size}) instead of a dictionary")
+                print(f"API returned a list for chunk {chunk_number} (size {chunk_size}) instead of a dictionary")
                 # Try to extract a dictionary from the list if possible
-                dict_items = [
-                    item for item in response_json if isinstance(item, dict)]
+                dict_items = [item for item in response_json if isinstance(item, dict)]
                 if dict_items:
                     response_json = dict_items[0]  # Use the first dictionary
                 else:
                     # Create an empty dictionary if no dictionaries found
                     response_json = {}
+                    
+        except json.JSONDecodeError:
+            # If direct parsing fails, try to extract JSON from the text
+            import re
+            json_match = re.search(r'(\{.*\})', response_text, re.DOTALL)
+            if json_match:
+                try:
+                    response_json = json.loads(json_match.group(1))
+                except:
+                    print(f"Failed to parse extracted JSON for chunk {chunk_number}")
+                    response_json = {}
+            else:
+                print(f"No JSON found in response for chunk {chunk_number}")
+                response_json = {}
 
-            # Fix potential issues with the response format
-            fixed_response = {}
+        # Fix potential issues with the response format
+        fixed_response = {}
 
-            # Process each field in the response
-            for key, value in response_json.items():
-                # Handle list of single characters
-                if isinstance(value, list) and all(isinstance(item, str) and len(item) == 1 for item in value):
-                    fixed_response[key] = [''.join(value)]
-                # Handle dictionary fields
-                elif key in ['Media_Coverage_Level', 'Expected_Brand_Impact']:
-                    if isinstance(value, str):
-                        level_key = "level" if key == "Media_Coverage_Level" else "impact"
-                        fixed_response[key] = {
-                            level_key: value,
-                            "explanation": f"No detailed explanation provided for the {level_key}."
-                        }
-                    else:
-                        fixed_response[key] = value
-                # Handle all other fields
+        # Process each field in the response
+        for key, value in response_json.items():
+            # Handle list of single characters
+            if isinstance(value, list) and all(isinstance(item, str) and len(item) == 1 for item in value):
+                fixed_response[key] = [''.join(value)]
+            # Handle dictionary fields
+            elif key in ['Media_Coverage_Level', 'Expected_Brand_Impact']:
+                if isinstance(value, str):
+                    level_key = "level" if key == "Media_Coverage_Level" else "impact"
+                    fixed_response[key] = {
+                        level_key: value,
+                        "explanation": f"No detailed explanation provided for the {level_key}."
+                    }
                 else:
                     fixed_response[key] = value
+            # Handle all other fields
+            else:
+                fixed_response[key] = value
 
-            print(
-                f"Successfully processed chunk {chunk_number} (size {chunk_size})")
-            return fixed_response
-
-        except json.JSONDecodeError:
-            print(
-                f"Invalid JSON response for chunk {chunk_number} (size {chunk_size})")
-            return {}
+        print(f"Successfully processed chunk {chunk_number} (size {chunk_size})")
+        return fixed_response
 
     except Exception as e:
-        print(
-            f"An error occurred while calling the API for chunk {chunk_number} (size {chunk_size}): {e}")
+        print(f"An error occurred while calling Azure OpenAI for chunk {chunk_number} (size {chunk_size}): {e}")
         # Return a valid empty response
         return {}
 
@@ -148,7 +178,6 @@ def split_text_into_chunks(text, chunk_size=2000):
         list: A list of text chunks.
     """
     return [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
-
 
 def merge_case_information(info_list):
     """
@@ -240,7 +269,6 @@ def merge_case_information(info_list):
 
     return merged_info
 
-
 def clean_response(response_dict):
     """
     Cleans the response dictionary to ensure consistent formatting.
@@ -255,8 +283,7 @@ def clean_response(response_dict):
     if "Number_of_Claimants" in response_dict and isinstance(response_dict["Number_of_Claimants"], str):
         try:
             if response_dict["Number_of_Claimants"].isdigit():
-                response_dict["Number_of_Claimants"] = int(
-                    response_dict["Number_of_Claimants"])
+                response_dict["Number_of_Claimants"] = int(response_dict["Number_of_Claimants"])
         except:
             pass
 
@@ -272,7 +299,6 @@ def clean_response(response_dict):
 
     return response_dict
 
-
 def process_chunk(args):
     """
     Process a single chunk (for parallel processing).
@@ -285,19 +311,18 @@ def process_chunk(args):
     """
     chunk, chunk_number, chunk_size = args
     try:
-        # Add a small delay to avoid rate limiting
+        # Add a small delay to avoid overwhelming the API
         if chunk_number > 1:
-            time.sleep(0.5)
-        return call_gemini_flashlight(chunk, chunk_number, chunk_size)
+            time.sleep(1)
+        return call_azure_openai_flashlight(chunk, chunk_number, chunk_size)
     except Exception as e:
-        print(
-            f"Error in process_chunk for chunk {chunk_number} (size {chunk_size}): {e}")
+        print(f"Error in process_chunk for chunk {chunk_number} (size {chunk_size}): {e}")
         return {}
 
-
-def process_with_chunk_size(text, chunk_size, max_workers=4):
+def process_with_chunk_size(text, chunk_size, max_workers=2):
     """
     Process the text with a specific chunk size using parallel processing.
+    Using fewer workers to avoid overwhelming the API.
 
     Args:
         text (str): The text to process.
@@ -308,8 +333,7 @@ def process_with_chunk_size(text, chunk_size, max_workers=4):
         dict: The merged case information from all chunks.
     """
     chunks = split_text_into_chunks(text, chunk_size)
-    print(
-        f"Processing {len(chunks)} chunks of size {chunk_size} in parallel (max {max_workers} workers)...")
+    print(f"Processing {len(chunks)} chunks of size {chunk_size} in parallel (max {max_workers} workers)...")
 
     # Prepare arguments for parallel processing
     chunk_args = [(chunk, i+1, chunk_size) for i, chunk in enumerate(chunks)]
@@ -318,8 +342,7 @@ def process_with_chunk_size(text, chunk_size, max_workers=4):
     all_chunk_info = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Submit all tasks
-        future_to_chunk = {executor.submit(
-            process_chunk, arg): arg[1] for arg in chunk_args}
+        future_to_chunk = {executor.submit(process_chunk, arg): arg[1] for arg in chunk_args}
 
         # Collect results as they complete
         for future in concurrent.futures.as_completed(future_to_chunk):
@@ -327,17 +350,14 @@ def process_with_chunk_size(text, chunk_size, max_workers=4):
             try:
                 chunk_info = future.result()
                 all_chunk_info.append(chunk_info)
-                print(
-                    f"Completed chunk {chunk_number}/{len(chunks)} (size {chunk_size})")
+                print(f"Completed chunk {chunk_number}/{len(chunks)} (size {chunk_size})")
             except Exception as e:
-                print(
-                    f"Exception processing chunk {chunk_number} (size {chunk_size}): {e}")
+                print(f"Exception processing chunk {chunk_number} (size {chunk_size}): {e}")
                 all_chunk_info.append({})
 
     # Merge information from all chunks
     merged_case_info = merge_case_information(all_chunk_info)
     return merged_case_info
-
 
 def extract_other_types(extracted_text: str) -> CaseInformation:
     """
@@ -350,13 +370,27 @@ def extract_other_types(extracted_text: str) -> CaseInformation:
         CaseInformation: The structured case analysis.
     """
     # Process the text with a specific chunk size
-    chunk_size = 2000
-    merged_case_info = process_with_chunk_size(
-        extracted_text, chunk_size, max_workers=4)
+    chunk_size = 5000
+    # Using fewer workers to avoid overwhelming the API
+    merged_case_info = process_with_chunk_size(extracted_text, chunk_size, max_workers=2)
 
+    print("merged_case_info")
     # Clean the response
     cleaned_response = clean_response(merged_case_info)
 
+    print("cleaned_response")
     # Convert to CaseInformation model
     case_info = CaseInformation(**cleaned_response)
     return case_info
+
+# Example usage
+if __name__ == "__main__":
+    # Make sure to set these environment variables before running:
+    # export AZURE_OPENAI_API_KEY="your-api-key"
+    # export AZURE_OPENAI_ENDPOINT="https://your-resource-name.openai.azure.com"
+    # export AZURE_OPENAI_DEPLOYMENT_NAME="your-gpt4o-deployment-name"
+    # export AZURE_OPENAI_API_VERSION="2023-12-01-preview"
+    
+    sample_text = "Your legal text here..."
+    result = extract_other_types(sample_text)
+    print(result.model_dump_json(indent=2))
