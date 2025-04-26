@@ -235,7 +235,6 @@ async def create_case(files: List[UploadFile] = File(None)):
         "defenseArgumentation": None,
         "suggestions": [],
         "outcomePrediction": None,
-        "defectType": defect_type,
         "numberOfClaimants": number_of_claimants,
         "mediaCoverageLevel": media_coverage_level,
         "outcome": outcome,
