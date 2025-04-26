@@ -6,6 +6,12 @@ A legal case management system with analytics capabilities for vehicle-related l
 
 Bayerische Datenwerke is a web application designed to manage and analyze legal cases for the automotive industry. It provides a modern interface for case tracking, statistical analysis, and visualization of trends in legal cases. The system helps legal professionals manage their caseload efficiently and identify patterns in automotive-related legal issues.
 
+## AI tools used during development
+
+-   v0.dev
+-   GitHub Copilot
+-   ChatGPT
+
 ## Project Architecture
 
 The project follows a modern client-server architecture:
@@ -76,13 +82,19 @@ The project follows a modern client-server architecture:
     pip install -r requirements.txt
     ```
 
-5. Start the backend server:
+5. Create a `.env` file in the backend directory with your Google API key:
+
+    ```
+    API_KEY=your_google_api_key_here
+    ```
+
+6. Start the backend server:
     ```
     ./start.sh
     ```
     Or manually with:
     ```
-    uvicorn main:app --reload --host 0.0.0.0 --port 8000
+    uvicorn main:app --reload --host 0.0.0.0 --port 8000 --env-file .env
     ```
 
 The API will be available at http://localhost:8000 with documentation at http://localhost:8000/docs.
@@ -98,12 +110,12 @@ The API will be available at http://localhost:8000 with documentation at http://
 2. Install dependencies:
 
     ```
-    pnpm install
+    npm install --legacy-peer-deps
     ```
 
 3. Start the development server:
     ```
-    pnpm dev
+    npm run dev
     ```
 
 The application will be available at http://localhost:3000.
