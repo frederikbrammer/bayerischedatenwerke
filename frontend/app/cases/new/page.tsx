@@ -11,12 +11,14 @@ import { ArrowLeft, Upload, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { TopNavigation } from '@/components/top-navigation';
 import { createCase } from '@/lib/api';
+import { Progress } from '@/components/ui/progress';
 
 export default function NewCasePage() {
     const router = useRouter();
     const [files, setFiles] = useState<File[]>([]);
     const [isDragging, setIsDragging] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
@@ -47,25 +49,34 @@ export default function NewCasePage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setProgress(0);
+
+        // Fake progress bar for 20 seconds
+        let elapsed = 0;
+        const interval = setInterval(() => {
+            elapsed += 100;
+            setProgress(Math.min(100, (elapsed / 20000) * 100));
+        }, 100);
 
         try {
             // Create a FormData object to send files
             const formData = new FormData();
-
-            // Append each file to the form data - FastAPI expects "files" as the field name
             files.forEach((file) => {
                 formData.append('files', file);
             });
-
+            // Simulate 20s upload/processing
+            await new Promise((resolve) => setTimeout(resolve, 20000));
+            clearInterval(interval);
+            setProgress(100);
             // Send the form data to the backend
             const response = await createCase(formData);
-
-            // Redirect to the new case page
             router.push(`/cases/${response.id}`);
         } catch (error) {
+            clearInterval(interval);
+            setIsSubmitting(false);
+            setProgress(0);
             console.error('Error creating case:', error);
             alert('Failed to create case. Please try again.');
-            setIsSubmitting(false);
         }
     };
 
@@ -160,6 +171,14 @@ export default function NewCasePage() {
                             )}
                         </Button>
                     </div>
+                    {isSubmitting && (
+                        <div className='mt-4'>
+                            <Progress value={progress} />
+                            <div className='text-xs text-muted-foreground mt-1'>
+                                Uploading & processing documents...
+                            </div>
+                        </div>
+                    )}
                 </form>
             </div>
         </>
