@@ -1,4 +1,3 @@
-import PyPDF2
 import json
 from typing import List, Dict, Optional
 from google import genai

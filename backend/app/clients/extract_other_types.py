@@ -1,6 +1,4 @@
-import PyPDF2
-import ollama
-import requests
+
 import json
 import concurrent.futures
 import time
