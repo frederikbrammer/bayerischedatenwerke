@@ -8,6 +8,8 @@ import os
 import tempfile
 import shutil
 import PyPDF2
+from app.clients.extract_case_type import extract_case_type
+from app.clients.extract_other_types import extract_other_types
 
 from app.db.database import (
     get_case_summaries,
@@ -103,6 +105,56 @@ async def create_case(
                 print(f"Error processing file {file.filename}: {str(e)}")
                 
     print(extracted_text)
+    
+    
+    extract_case_type_response = extract_case_type(extracted_text)
+    extract_other_types_response = extract_other_types(extracted_text)
+    
+    # Parse the data from extract_case_type_response
+    case_type = extract_case_type_response.primary_analysis.case_type
+    harm_type = extract_case_type_response.primary_analysis.harm_type
+    cause = extract_case_type_response.primary_analysis.cause
+    description = extract_case_type_response.primary_analysis.description
+    secondary_types = extract_case_type_response.primary_analysis.secondary_types or []
+    
+    # Parse possible alternatives from extract_case_type_response
+    possible_alternatives = extract_case_type_response.possible_alternatives or []
+    
+    # Parse the data from extract_other_types_response
+    case_id = extract_other_types_response.Case_ID
+    filing_date = extract_other_types_response.Filing_Date
+    jurisdiction = extract_other_types_response.Jurisdiction
+    defect_type = extract_other_types_response.Defect_Type or []
+    number_of_claimants = extract_other_types_response.Number_of_Claimants
+    media_coverage_level = extract_other_types_response.Media_Coverage_Level
+    outcome = extract_other_types_response.Outcome
+    time_to_resolution_months = extract_other_types_response.Time_to_Resolution_Months
+    settlement_amount = extract_other_types_response.Settlement_Amount
+    defense_cost_estimate = extract_other_types_response.Defense_Cost_Estimate
+    expected_brand_impact = extract_other_types_response.Expected_Brand_Impact
+    
+    # Print parsed variables for debugging (optional)
+    print("Parsed Case Type Response:")
+    print(f"Case Type: {case_type}")
+    print(f"Harm Type: {harm_type}")
+    print(f"Cause: {cause}")
+    print(f"Description: {description}")
+    print(f"Secondary Types: {secondary_types}")
+    print(f"Possible Alternatives: {possible_alternatives}")
+    
+    print("\nParsed Other Types Response:")
+    print(f"Case ID: {case_id}")
+    print(f"Filing Date: {filing_date}")
+    print(f"Jurisdiction: {jurisdiction}")
+    print(f"Defect Type: {defect_type}")
+    print(f"Number of Claimants: {number_of_claimants}")
+    print(f"Media Coverage Level: {media_coverage_level}")
+    print(f"Outcome: {outcome}")
+    print(f"Time to Resolution (Months): {time_to_resolution_months}")
+    print(f"Settlement Amount: {settlement_amount}")
+    print(f"Defense Cost Estimate: {defense_cost_estimate}")
+    print(f"Expected Brand Impact: {expected_brand_impact}")
+    
     
     # Generate case metadata from extracted text
     today = datetime.now().strftime("%Y-%m-%d")
