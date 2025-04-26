@@ -131,31 +131,6 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
         );
     }
 
-    // MOCK: Add mock media articles about quality defects if not present
-    const mockMediaArticles = [
-        {
-            title: 'Major Recall: BMW Recalls Thousands of Vehicles Over Brake Defect',
-            publisher: 'Automotive Safety News',
-            sentiment: 'negative',
-            date: '2025-04-25',
-        },
-        {
-            title: 'BMW Addresses Customer Concerns After Quality Issues Surface',
-            publisher: 'Car Industry Today',
-            sentiment: 'neutral',
-            date: '2025-04-22',
-        },
-        {
-            title: 'BMW Implements New Quality Control Measures Following Defect Reports',
-            publisher: 'Global Auto Journal',
-            sentiment: 'positive',
-            date: '2025-04-20',
-        },
-    ];
-    if (!caseData.mediaArticles) {
-        caseData.mediaArticles = mockMediaArticles;
-    }
-
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', {
@@ -454,9 +429,6 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                 </h3>
                                                 <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
                                                     <div className='flex items-center gap-2 mb-2'>
-                                                        <span className='font-medium'>
-                                                            Level:
-                                                        </span>
                                                         <Badge
                                                             className={
                                                                 caseData
@@ -502,9 +474,6 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                 </h3>
                                                 <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
                                                     <div className='flex items-center gap-2 mb-2'>
-                                                        <span className='font-medium'>
-                                                            Impact:
-                                                        </span>
                                                         <Badge
                                                             className={
                                                                 caseData
@@ -550,9 +519,6 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                 </h3>
                                                 <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
                                                     <div className='flex items-center gap-2 mb-2'>
-                                                        <span className='font-medium'>
-                                                            Impact:
-                                                        </span>
                                                         <Badge
                                                             className={
                                                                 caseData
@@ -599,9 +565,6 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                 </h3>
                                                 <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
                                                     <div className='flex items-center gap-2 mb-2'>
-                                                        <span className='font-medium'>
-                                                            Likelihood:
-                                                        </span>
                                                         <Badge
                                                             className={
                                                                 caseData
@@ -641,59 +604,6 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             </div>
                         </CardContent>
                     </Card>
-
-                    {/* Media Coverage Section */}
-                    {caseData.mediaArticles &&
-                        Array.isArray(caseData.mediaArticles) &&
-                        caseData.mediaArticles.length > 0 && (
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Media coverage</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
-                                        {caseData.mediaArticles.map(
-                                            (article: any, idx: number) => (
-                                                <li
-                                                    key={idx}
-                                                    className='py-3 flex items-center justify-between'
-                                                >
-                                                    <div>
-                                                        <div className='font-medium text-base'>
-                                                            {article.title}
-                                                        </div>
-                                                        <div className='text-xs text-muted-foreground'>
-                                                            {article.date}
-                                                        </div>
-                                                        <div className='text-xs text-muted-foreground'>
-                                                            {article.publisher}
-                                                        </div>
-                                                    </div>
-                                                    <span
-                                                        className={
-                                                            article.sentiment ===
-                                                            'positive'
-                                                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded text-xs'
-                                                                : article.sentiment ===
-                                                                  'negative'
-                                                                ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 px-2 py-1 rounded text-xs'
-                                                                : 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 px-2 py-1 rounded text-xs'
-                                                        }
-                                                    >
-                                                        {article.sentiment
-                                                            .charAt(0)
-                                                            .toUpperCase() +
-                                                            article.sentiment.slice(
-                                                                1
-                                                            )}
-                                                    </span>
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </CardContent>
-                            </Card>
-                        )}
 
                     {/* Argumentation Section */}
                     <Card>
