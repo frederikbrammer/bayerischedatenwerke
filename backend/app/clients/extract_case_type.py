@@ -1,13 +1,12 @@
 import json
 from typing import List, Dict, Optional
-from google import genai
 from pydantic import BaseModel, Field
+import requests
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
 # Define the data model for case analysis
-
-
-
 class CaseAnalysis(BaseModel):
     case_type: str = Field(description="The primary legal case type")
     harm_type: str = Field(
@@ -18,18 +17,13 @@ class CaseAnalysis(BaseModel):
     secondary_types: Optional[List[str]] = Field(
         default=None, description="Additional relevant case types")
 
-
 class CaseAnalysisResponse(BaseModel):
     primary_analysis: CaseAnalysis
     possible_alternatives: Optional[List[CaseAnalysis]] = None
 
-
-client = genai.Client(api_key=os.getenv("API_KEY"))
-
-
-def call_gemini_analyzer(chunk):
+def call_azure_openai_analyzer(chunk):
     """
-    Analyzes legal text to identify case type, harm, and cause.
+    Analyzes legal text using Azure OpenAI API with GPT-4o to identify case type, harm, and cause.
 
     Args:
         chunk (str): The text chunk to process.
@@ -37,10 +31,18 @@ def call_gemini_analyzer(chunk):
     Returns:
         str: The structured case analysis in JSON format.
     """
+    # Azure OpenAI API configuration
+    api_key = os.environ.get("AZURE_OPENAI_API_KEY")
+    endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
+    deployment_name = os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME", "gpt-4o")
+    api_version = os.environ.get("AZURE_OPENAI_API_VERSION", "2023-12-01-preview")
+    
+    if not api_key or not endpoint:
+        raise ValueError("Azure OpenAI API key and endpoint must be set as environment variables")
+    
     prompt = (
         "Analyze the following legal text and classify it based on case type, harm, and cause. "
         "Return a structured analysis in JSON format according to these guidelines:\n\n"
-
 
         "HARM CLASSIFICATION:\n"
         "- Physical harm: Injury\n"
@@ -113,22 +115,51 @@ def call_gemini_analyzer(chunk):
     )
 
     try:
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=prompt,
-            # Set temperature to 0 for deterministic, precise responses
-            config={
-                "temperature": 0,
-                "top_p": 1,
-                "top_k": 40,
-                "response_mime_type": "application/json",
-                "response_schema": CaseAnalysisResponse,
-            },
+        # Prepare the API request
+        headers = {
+            "Content-Type": "application/json",
+            "api-key": api_key
+        }
+        
+        # Azure OpenAI API request body
+        request_body = {
+            "messages": [
+                {"role": "system", "content": "You are a legal analysis assistant that provides structured JSON responses."},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0,
+            "response_format": {"type": "json_object"}
+        }
+        
+        # Make the API request to Azure OpenAI
+        response = requests.post(
+            f"{endpoint}",
+            headers=headers,
+            json=request_body
         )
-        case_analysis = response.parsed
-        return case_analysis.model_dump_json()
+        
+        response.raise_for_status()
+        result = response.json()
+        
+        # Extract the generated content from Azure OpenAI response
+        generated_text = result["choices"][0]["message"]["content"]
+        
+        # Parse the JSON response
+        try:
+            case_analysis = json.loads(generated_text)
+            return json.dumps(case_analysis)
+        except json.JSONDecodeError:
+            # If direct parsing fails, try to extract JSON from the text
+            import re
+            json_match = re.search(r'(\{.*\})', generated_text, re.DOTALL)
+            if json_match:
+                case_analysis = json.loads(json_match.group(1))
+                return json.dumps(case_analysis)
+            else:
+                raise ValueError("Could not extract valid JSON from model response")
+                
     except Exception as e:
-        print(f"Error calling API: {e}")
+        print(f"Error calling Azure OpenAI API: {e}")
         return json.dumps({
             "primary_analysis": {
                 "case_type": "Error",
@@ -138,13 +169,9 @@ def call_gemini_analyzer(chunk):
             }
         })
 
-
-
 def split_text_into_chunks(text, chunk_size=2000):
     """Splits text into smaller chunks for processing."""
     return [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
-
-
 
 def extract_case_type(extracted_text: str) -> CaseAnalysisResponse:
     """
@@ -162,11 +189,12 @@ def extract_case_type(extracted_text: str) -> CaseAnalysisResponse:
     # Process each chunk and collect results
     results = []
     if chunks:
-        result = call_gemini_analyzer(chunks[0])
+        result = call_azure_openai_analyzer(chunks[0])
         results.append(result)
 
     parsed_results = [json.loads(result) for result in results]
     print(parsed_results)
+    
     # Combine results into a single response
     combined_response = {
         "primary_analysis": parsed_results[0]["primary_analysis"],
@@ -174,3 +202,15 @@ def extract_case_type(extracted_text: str) -> CaseAnalysisResponse:
     }
 
     return CaseAnalysisResponse(**combined_response)
+
+# Example usage
+if __name__ == "__main__":
+    # Make sure to set these environment variables before running:
+    # export AZURE_OPENAI_API_KEY="your-api-key"
+    # export AZURE_OPENAI_ENDPOINT="https://your-resource-name.openai.azure.com"
+    # export AZURE_OPENAI_DEPLOYMENT_NAME="your-gpt4o-deployment-name"
+    # export AZURE_OPENAI_API_VERSION="2023-12-01-preview"
+    
+    sample_text = "Your legal text here..."
+    result = extract_case_type(sample_text)
+    print(result.model_dump_json(indent=2))
