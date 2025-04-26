@@ -313,13 +313,13 @@ async def create_case(files: List[UploadFile] = File(None)):
     processed_timeline = []
 
     # Add the case creation event
-    processed_timeline.append(
-        {
-            "date": today,
-            "event": "Case created",
-            "description": "Initial case documents uploaded",
-        }
-    )
+    # processed_timeline.append(
+    #     {
+    #         "date": today,
+    #         "event": "Case created",
+    #         "description": "Initial case documents uploaded",
+    #     }
+    # )
 
     # Process the extracted timeline events
     for event in timeline_of_events:
