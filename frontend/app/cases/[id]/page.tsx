@@ -12,31 +12,52 @@ import { ArgumentationSection } from '@/components/argumentation-section';
 import { OutcomePrediction } from '@/components/outcome-prediction';
 import { fetchCaseById } from '@/lib/api';
 
-type CaseStatus = 'won' | 'lost' | 'in progress';
+type CaseStatus =
+    | 'in favour of defendant'
+    | 'in favour of plaintiff'
+    | 'settled'
+    | 'in progress first instance'
+    | 'dismissed'
+    | 'in progress appeal'
+    | 'in progress supreme court';
 
 const getStatusColor = (status: CaseStatus) => {
-    switch (status) {
-        case 'won':
+    const status_lower = status.toLowerCase();
+    if (status_lower.includes('in progress')) {
+        return 'bg-blue-500 hover:bg-blue-600';
+    }
+
+    switch (status_lower) {
+        case 'in favour of defendant':
             return 'bg-green-500 hover:bg-green-600';
-        case 'lost':
+        case 'in favour of plaintiff':
             return 'bg-red-500 hover:bg-red-600';
-        case 'in progress':
-            return 'bg-blue-500 hover:bg-blue-600';
+        case 'settled':
+            return 'bg-yellow-500 hover:bg-yellow-600';
+        case 'dismissed':
+            return 'bg-gray-500 hover:bg-gray-600';
         default:
-            return '';
+            return 'bg-gray-300 hover:bg-gray-400';
     }
 };
 
 const getStatusIcon = (status: CaseStatus) => {
-    switch (status) {
-        case 'won':
+    const status_lower = status.toLowerCase();
+    if (status_lower.includes('in progress')) {
+        return <Clock className='h-5 w-5 text-blue-500' />;
+    }
+
+    switch (status_lower) {
+        case 'in favour of defendant':
             return <CheckCircle className='h-5 w-5 text-green-500' />;
-        case 'lost':
+        case 'in favour of plaintiff':
             return <AlertCircle className='h-5 w-5 text-red-500' />;
-        case 'in progress':
-            return <Clock className='h-5 w-5 text-blue-500' />;
+        case 'settled':
+            return <Clock className='h-5 w-5 text-yellow-500' />;
+        case 'dismissed':
+            return <Info className='h-5 w-5 text-gray-500' />;
         default:
-            return <Info className='h-5 w-5' />;
+            return <Info className='h-5 w-5 text-gray-300' />;
     }
 };
 
@@ -110,6 +131,31 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
         );
     }
 
+    // MOCK: Add mock media articles about quality defects if not present
+    const mockMediaArticles = [
+        {
+            title: 'Major Recall: BMW Recalls Thousands of Vehicles Over Brake Defect',
+            publisher: 'Automotive Safety News',
+            sentiment: 'negative',
+            date: '2025-04-25',
+        },
+        {
+            title: 'BMW Addresses Customer Concerns After Quality Issues Surface',
+            publisher: 'Car Industry Today',
+            sentiment: 'neutral',
+            date: '2025-04-22',
+        },
+        {
+            title: 'BMW Implements New Quality Control Measures Following Defect Reports',
+            publisher: 'Global Auto Journal',
+            sentiment: 'positive',
+            date: '2025-04-20',
+        },
+    ];
+    if (!caseData.mediaArticles) {
+        caseData.mediaArticles = mockMediaArticles;
+    }
+
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', {
@@ -143,8 +189,8 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             {caseData.caseWinLikelihood && (
                                 <Badge
                                     className={
-                                        caseData.caseWinLikelihood.likelihood ===
-                                        'High'
+                                        caseData.caseWinLikelihood
+                                            .likelihood === 'High'
                                             ? 'bg-red-500 hover:bg-red-600'
                                             : caseData.caseWinLikelihood
                                                   .likelihood === 'Medium'
@@ -152,7 +198,8 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                             : 'bg-green-500 hover:bg-green-600'
                                     }
                                 >
-                                    Risk: {caseData.caseWinLikelihood.likelihood}
+                                    Risk:{' '}
+                                    {caseData.caseWinLikelihood.likelihood}
                                 </Badge>
                             )}
                             {caseData.brandImpactEstimate && (
@@ -180,9 +227,27 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                     caseData.status.slice(1)}
                             </Badge>
                         </div>
-                        <Button variant='default' size='sm' className='bg-black hover:bg-black text-white'>
+                        <Button
+                            variant='default'
+                            size='sm'
+                            className='bg-black hover:bg-black text-white'
+                        >
                             <span className='flex items-center gap-1'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m7-7H5"/></svg>
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='16'
+                                    height='16'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                >
+                                    <path
+                                        stroke='currentColor'
+                                        strokeWidth='2'
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                        d='M12 5v14m7-7H5'
+                                    />
+                                </svg>
                                 Upload document
                             </span>
                         </Button>
@@ -577,6 +642,59 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                         </CardContent>
                     </Card>
 
+                    {/* Media Coverage Section */}
+                    {caseData.mediaArticles &&
+                        Array.isArray(caseData.mediaArticles) &&
+                        caseData.mediaArticles.length > 0 && (
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Media coverage</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
+                                        {caseData.mediaArticles.map(
+                                            (article: any, idx: number) => (
+                                                <li
+                                                    key={idx}
+                                                    className='py-3 flex items-center justify-between'
+                                                >
+                                                    <div>
+                                                        <div className='font-medium text-base'>
+                                                            {article.title}
+                                                        </div>
+                                                        <div className='text-xs text-muted-foreground'>
+                                                            {article.date}
+                                                        </div>
+                                                        <div className='text-xs text-muted-foreground'>
+                                                            {article.publisher}
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                        className={
+                                                            article.sentiment ===
+                                                            'positive'
+                                                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded text-xs'
+                                                                : article.sentiment ===
+                                                                  'negative'
+                                                                ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 px-2 py-1 rounded text-xs'
+                                                                : 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 px-2 py-1 rounded text-xs'
+                                                        }
+                                                    >
+                                                        {article.sentiment
+                                                            .charAt(0)
+                                                            .toUpperCase() +
+                                                            article.sentiment.slice(
+                                                                1
+                                                            )}
+                                                    </span>
+                                                </li>
+                                            )
+                                        )}
+                                    </ul>
+                                </CardContent>
+                            </Card>
+                        )}
+
                     {/* Argumentation Section */}
                     <Card>
                         <CardHeader>
@@ -585,7 +703,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                         <CardContent>
                             <ArgumentationSection
                                 offenseArgumentation={
-                                    caseData.offenseArgumentation
+                                    caseData.plaintiffArgumentation
                                 }
                                 defenseArgumentation={
                                     caseData.defenseArgumentation
@@ -594,30 +712,6 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             />
                         </CardContent>
                     </Card>
-
-                    {/* Plaintiff Argumentation Section */}
-                    {caseData.plaintiffArgumentation &&
-                        Array.isArray(caseData.plaintiffArgumentation) &&
-                        caseData.plaintiffArgumentation.length > 0 &&
-                        caseData.plaintiffArgumentation[0] !==
-                            'Not specified' && (
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>
-                                        Plaintiff Argumentation
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <ul className='list-disc pl-5 space-y-3'>
-                                        {caseData.plaintiffArgumentation.map(
-                                            (argument, index) => (
-                                                <li key={index}>{argument}</li>
-                                            )
-                                        )}
-                                    </ul>
-                                </CardContent>
-                            </Card>
-                        )}
 
                     {/* Outcome Prediction Section */}
                     <Card>
