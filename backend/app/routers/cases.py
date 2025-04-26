@@ -2,20 +2,14 @@ from fastapi import (
     APIRouter,
     HTTPException,
     Query,
-    Body,
     File,
     UploadFile,
-    Form,
-    Depends,
 )
 from fastapi.responses import JSONResponse
 from typing import List, Optional, Dict, Any
 import uuid
 from datetime import date, datetime
 import io
-import os
-import tempfile
-import shutil
 import PyPDF2
 from app.clients.extract_case_type import extract_case_type
 from app.clients.extract_other_types import extract_other_types
@@ -26,7 +20,8 @@ from app.db.database import (
     get_case_by_id,
     add_new_case,
 )
-from app.models.models import Case, CreateCaseRequest, CaseResponse
+from app.clients.embed import embed, find_similar
+from app.models.models import Case, CaseResponse
 
 router = APIRouter(
     prefix="/cases",
@@ -389,7 +384,6 @@ async def create_case(files: List[UploadFile] = File(None)):
         ),
         "defenseArgumentation": "",
         "suggestions": [],
-        "outcomePrediction": None,
         "numberOfClaimants": number_of_claimants,
         "mediaCoverageLevel": media_coverage_level,
         "outcome": outcome,
@@ -404,7 +398,12 @@ async def create_case(files: List[UploadFile] = File(None)):
         "caseWinLikelihood": case_win_likelihood,
         "reputationImpactCase": reputation_impact_case,
         "reputationImpactMedia": reputation_impact_media,
+        
     }
+    
+    new_case = embed(new_case)
+    new_case = find_similar(new_case, threshold=0.5, top_k=5)
+    
 
     new_case = add_win_likelihood_to_case(new_case)
 

@@ -396,7 +396,7 @@ if __name__ == "__main__":
         ],
         "caseType": "Product Liability",
         "harmType": "Physical harm",
-        "cause": "Defective Vehicle Component"
+        "cause": "Defective Vehicle Component",
     }
     
     # Add win likelihood prediction

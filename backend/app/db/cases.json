@@ -1,1352 +1,7 @@
 {
-  "ce91c30f": {
-    "id": "ce91c30f",
-    "title": "ce91c30f",
-    "status": "In Progress appeal",
-    "jurisdiction": "California - Court of Appeal of the State of California, Third Appellate District",
-    "stateJurisdiction": "California",
-    "courtJurisdiction": "Court of Appeal of the State of California, Third Appellate District",
-    "caseType": "Wrongful Death",
-    "harmType": "Wrongful Death",
-    "cause": "Defective Vehicle Component",
-    "description": "In the case of Arriagarazo v. BMW of North America, the appellants allege wrongful death resulting from a car accident involving a vehicle manufactured by BMW. The legal standard for wrongful death requires the plaintiffs to establish that the defendant's negligence or product defect was a substantial factor in causing the death of the decedent. The plaintiffs must prove that the vehicle had a defect at the time of sale, which contributed to the accident leading to the fatality. Relevant statutes include California Civil Code \u00a7 1714, which establishes the general duty of care, and case law such as McGowan v. State of California, which discusses liability in wrongful death actions. The burden of proof lies with the plaintiffs to demonstrate the connection between the alleged defect and the fatal incident.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Code of Civil Procedure section 998",
-      "Civil Code section 1542",
-      "Section 437, subdivisions (a)(1) and (d)",
-      "Section 663",
-      "Section 998",
-      "California Civil Code \u00a7 998"
-    ],
-    "timeline": [
-      {
-        "date": "2014-01-01",
-        "event": "January 2014: Appellants' son was injured in a car accident.",
-        "description": ""
-      },
-      {
-        "date": "2016-03-01",
-        "event": "March 2016: Appellants' son died.",
-        "description": ""
-      },
-      {
-        "date": "2016-09-01",
-        "event": "September 2016: Appellants filed a wrongful death action against BMW.",
-        "description": ""
-      },
-      {
-        "date": "2019-04-03",
-        "event": "April 3, 2019: BMW served appellants with a section 998 offer.",
-        "description": ""
-      },
-      {
-        "date": "2019-04-10",
-        "event": "April 10, 2019: Appellants accepted the section 998 offer.",
-        "description": ""
-      },
-      {
-        "date": "2019-05-28",
-        "event": "May 28, 2019: Stipulated judgment was entered by the trial court.",
-        "description": ""
-      },
-      {
-        "date": "2019-05-28",
-        "event": "May 28, 2019: Judgment entered by the court.",
-        "description": ""
-      },
-      {
-        "date": "2019-06-03",
-        "event": "June 3, 2019: BMW submitted a written objection to entry of the judgment.",
-        "description": ""
-      },
-      {
-        "date": "2019-09-25",
-        "event": "September 25, 2019: BMW's counsel learned that judgment had been entered.",
-        "description": ""
-      },
-      {
-        "date": "2019-09-26",
-        "event": "September 26, 2019: BMW proposed a resolution to vacate the judgment.",
-        "description": ""
-      },
-      {
-        "date": "2019-10-10",
-        "event": "October 10, 2019: BMW moved to vacate the judgment.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "The trial court erred in vacating the judgment related to the settlement.",
-      "The settlement was accepted under section 998, which should have led to a valid judgment.",
-      "The trial court erred in vacating the judgment.",
-      "The judgment accurately reflected the parties' intent as expressed in the section 998 offer.",
-      "The offer neither called for a judgment nor a dismissal.",
-      "BMW had the burden of drafting the offer with sufficient precision."
-    ],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "2",
-    "mediaCoverageLevel": {
-      "level": "Medium",
-      "explanation": "The case involves a well-known automobile manufacturer, BMW, and has been certified for publication, indicating a level of public interest and potential media coverage."
-    },
-    "outcome": "Affirmed",
-    "caseSummary": "The case involves a wrongful death suit filed by Antonio Arriagarazo and Alicia Rodriguez de Arriaga against BMW of North America following the death of their son, who was injured in a car accident in January 2014. The appellants accepted a settlement offer from BMW but later contested the trial court's decision to vacate the judgment related to that settlement.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "$15,000",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Medium",
-      "explanation": "The case involves a legal dispute over a judgment related to a settlement offer, which could affect BMW's reputation if the appeal does not go in their favor. However, there is no mention of severe consequences such as injury or death, which would elevate the impact."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Medium",
-      "explanation": "The involvement of BMW in a legal dispute can affect its brand reputation, particularly if the case is widely reported. However, since the outcome was in favor of the defendant, the immediate impact may be less severe."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Medium",
-      "explanation": "The likelihood of the defendant winning the case is assessed as medium due to the complexities surrounding the acceptance of the settlement and the subsequent legal arguments regarding the validity of the judgment."
-    },
-    "reputationImpactCase": {
-      "impact": "Medium",
-      "explanation": "The affirmation of the judgment may mitigate negative perceptions of BMW, but the case's nature still keeps some level of scrutiny on the brand."
-    },
-    "reputationImpactMedia": {
-      "impact": "Medium",
-      "explanation": "The case's publication status suggests it may receive media attention, which can influence public perception of BMW."
-    }
-  },
-  "ee011415": {
-    "id": "ee011415",
-    "title": "ee011415",
-    "status": "In Progress appeal",
-    "jurisdiction": "New Jersey - United States District Court for the District of New Jersey",
-    "stateJurisdiction": "New Jersey",
-    "courtJurisdiction": "United States District Court for the District of New Jersey",
-    "caseType": "Breach of Contract",
-    "harmType": "Financial harm",
-    "cause": "Contract Breach",
-    "description": "In the case of Gelis v. BMW of North America, LLC, the primary legal issue revolves around the financial harm incurred by the plaintiffs as a result of the alleged breach of contract regarding class counsel fees. The plaintiffs, representing a class, entered into an agreement with BMW concerning the allocation of fees, which BMW subsequently contested. The legal standards applicable to breach of contract claims require the plaintiffs to demonstrate the existence of a valid contract, a breach of that contract by BMW, and resultant damages. The burden of proof lies with the plaintiffs to establish these elements, while BMW may assert defenses related to the interpretation of the contract terms and the appropriateness of the fee award. Relevant precedents may include cases that address the enforceability of fee agreements in class action settlements, as well as the standards for judicial review of such agreements.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Magnuson-Moss Warranty Act, 15 U.S.C. \u00a7 2301 et seq.",
-      "State consumer fraud statutes",
-      "Deceptive trade practice statutes"
-    ],
-    "timeline": [
-      {
-        "date": "Unknown",
-        "event": "2017: Class action lawsuit filed against BMW.",
-        "description": ""
-      },
-      {
-        "date": "2022-06-07",
-        "event": "June 7, 2022: Oral arguments presented.",
-        "description": ""
-      },
-      {
-        "date": "2022-09-09",
-        "event": "September 9, 2022: Opinion filed regarding attorney fees.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "BMW knowingly manufactured and sold vehicles with defective engines.",
-      "Breach of warranty under the Magnuson-Moss Warranty Act.",
-      "Violation of state consumer fraud and deceptive trade practice statutes.",
-      "Unjust enrichment."
-    ],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Medium",
-      "explanation": "The case involves a class action lawsuit against a well-known automotive manufacturer, which typically garners media attention due to the implications for consumer safety and corporate accountability."
-    },
-    "outcome": "Not specified",
-    "caseSummary": "The case involves a dispute over the attorneys' fees awarded to class counsel in a class action lawsuit against BMW. The court ruled in favor of the class counsel's requested fee amount, which BMW is now appealing.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Medium",
-      "explanation": "Given that the case involves allegations of knowingly selling defective vehicles, there is potential for reputational damage to BMW, especially if the settlement or outcome is unfavorable. However, the fact that a settlement was reached may mitigate some of the negative impact."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "N20 and N26 engines",
-    "brandImpactEstimate": {
-      "impact": "Medium",
-      "explanation": "The ongoing appeal and the nature of the case may lead to moderate negative perceptions of BMW, especially if the case garners media attention, but it does not involve life-threatening issues or widespread claims."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Medium",
-      "explanation": "The case has progressed to a settlement stage, indicating that there may be merit to the plaintiffs' claims. However, the appeal by BMW suggests that they believe they have a reasonable chance of winning on certain legal grounds."
-    },
-    "reputationImpactCase": {
-      "impact": "Medium",
-      "explanation": "The outcome of the case could have a moderate impact on BMW's reputation, especially if the settlement is perceived negatively by consumers."
-    },
-    "reputationImpactMedia": {
-      "impact": "Medium",
-      "explanation": "The case is likely to attract media attention due to its implications for consumer safety and corporate responsibility, which can influence public perception."
-    }
-  },
-  "d0509fd8": {
-    "id": "d0509fd8",
-    "title": "d0509fd8",
-    "status": "In Progress appeal",
-    "jurisdiction": "Texas - Fourteenth Court of Appeals",
-    "stateJurisdiction": "Texas",
-    "courtJurisdiction": "Fourteenth Court of Appeals",
-    "caseType": "Breach of Contract",
-    "harmType": "Financial harm",
-    "cause": "Contract Breach",
-    "description": "In the case of Asha Sherese Holloway v. BMW Financial Services NA, LLC, the appellant's failure to pay the required appellate filing fee and to arrange for the preparation of the clerk's record constitutes a breach of procedural obligations under Texas appellate rules. The appellant's inaction has resulted in the dismissal of the appeal, which can be interpreted as a financial harm due to the potential loss of rights to appeal and recover any damages that may have been awarded in the lower court. The burden of proof lies with the appellant to demonstrate compliance with the court's orders, and failure to do so may lead to a permanent forfeiture of the appeal rights. Relevant statutes include Tex. R. App. P. 5 and Tex. Gov\u2019t Code \u00a7 51.207, which govern the payment of fees in civil cases and the consequences of non-compliance.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Tex. R. App. P. 5",
-      "Tex. Gov\u2019t Code \u00a7 51.207",
-      "Tex. R. App. P. 37.3(b)",
-      "Tex. R. App. P. 4.1(a)",
-      "Tex. R. App. P. 42.3(c)"
-    ],
-    "timeline": [
-      {
-        "date": "2023-04-06",
-        "event": "April 6, 2023 - Final judgment signed.",
-        "description": ""
-      },
-      {
-        "date": "2023-05-15",
-        "event": "May 15, 2023 - Notice of appeal filed.",
-        "description": ""
-      },
-      {
-        "date": "2023-05-31",
-        "event": "May 31, 2023 - Appellant instructed to pay appellate filing fee by June 12, 2023.",
-        "description": ""
-      },
-      {
-        "date": "2023-06-08",
-        "event": "June 8, 2023 - Notification sent regarding potential dismissal for non-payment.",
-        "description": ""
-      },
-      {
-        "date": "2023-08-17",
-        "event": "August 17, 2023 - Appellant ordered to pay filing fee and provide proof of payment by August 28, 2023.",
-        "description": ""
-      },
-      {
-        "date": "2023-08-31",
-        "event": "August 31, 2023 - Appeal dismissed.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine the level of media coverage related to this case."
-    },
-    "outcome": "Dismissed",
-    "caseSummary": "This case involves an appeal by Asha Sherese Holloway against BMW Financial Services NA, LLC. The appeal was dismissed due to the appellant's failure to pay the required appellate filing fee and to provide proof of payment for the clerk's record.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to assess the expected brand impact as the case details do not indicate any significant allegations or outcomes that would affect the brand."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine the brand impact estimate as the case does not provide details on the nature of the claims or the implications for the brand."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Not specified",
-      "explanation": "Insufficient information to assess the likelihood of the defendant winning the case, as the appeal was dismissed primarily due to procedural issues rather than substantive legal arguments."
-    },
-    "reputationImpactCase": {
-      "impact": "Low",
-      "explanation": "The dismissal of the appeal is unlikely to have a significant impact on the brand's reputation as it appears to be a procedural issue rather than a substantive legal defeat."
-    },
-    "reputationImpactMedia": {
-      "impact": "Low",
-      "explanation": "There is no indication of significant media coverage related to this case, suggesting minimal impact on the brand's reputation."
-    }
-  },
-  "bda6e6b3": {
-    "id": "bda6e6b3",
-    "title": "bda6e6b3",
-    "status": "In favour of plaintiff",
-    "jurisdiction": "Ohio - Franklin County Municipal Court",
-    "stateJurisdiction": "Ohio",
-    "courtJurisdiction": "Franklin County Municipal Court",
-    "caseType": "Breach of Contract",
-    "harmType": "Financial harm",
-    "cause": "Contract Breach",
-    "description": "In the case of Autovest, L.L.C. v. Ruff, the plaintiff, Autovest, alleges that the defendants, Gerry and Adrienne Ruff, defaulted on a promissory note executed on October 17, 2014, with an original sum of $20,488.81. The legal basis for the claim rests on the defendants' failure to fulfill the terms of the promissory note, which constitutes a breach of contract under Ohio law. To prevail, Autovest must demonstrate the existence of a valid contract, the defendants' breach of that contract, and the resulting damages. The burden of proof lies with Autovest to establish these elements by a preponderance of the evidence. Potential defenses may include claims of improper notice or challenges to the validity of the contract itself.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Civ.R. 56 (Ohio Civil Rule regarding summary judgment)",
-      "Civ.R. 56(C) - Standard for summary judgment",
-      "Ohio case law regarding evidentiary standards for summary judgment",
-      "Ohio Rules of Civil Procedure, Civ.R. 36",
-      "Civ.R. 36 - Requests for admission",
-      "Civ.R. 56 - Summary judgment",
-      "Ohio law regarding pro se litigants"
-    ],
-    "timeline": [
-      {
-        "date": "2021-12-15",
-        "event": "December 15, 2021: Autovest filed a complaint against the Ruffs.",
-        "description": ""
-      },
-      {
-        "date": "2022-02-01",
-        "event": "February 1, 2022: Gerry Ruff filed a motion to dismiss.",
-        "description": ""
-      },
-      {
-        "date": "2022-03-30",
-        "event": "March 30, 2022: The trial court denied the motion to dismiss.",
-        "description": ""
-      },
-      {
-        "date": "2022-04-21",
-        "event": "April 21, 2022: Autovest served discovery requests on the Ruffs.",
-        "description": ""
-      },
-      {
-        "date": "2022-09-30",
-        "event": "September 30, 2022: Autovest filed a motion for summary judgment.",
-        "description": ""
-      },
-      {
-        "date": "2022-12-15",
-        "event": "December 15, 2022: Trial court filed a judgment entry granting summary judgment in favor of Autovest.",
-        "description": ""
-      },
-      {
-        "date": "2023-01-18",
-        "event": "January 18, 2023: Appellant filed a timely appeal.",
-        "description": ""
-      },
-      {
-        "date": "2022-04-21",
-        "event": "April 21, 2022 - Autovest served requests for admissions to the appellant.",
-        "description": ""
-      },
-      {
-        "date": "2022-04-21",
-        "event": "April 21, 2022 - Requests for admission served to appellant.",
-        "description": ""
-      },
-      {
-        "date": "2022-05-19",
-        "event": "May 19, 2022 - Deadline for appellant to respond to requests for admission.",
-        "description": ""
-      },
-      {
-        "date": "2022-11-01",
-        "event": "November 1, 2022 - Appellant filed an affidavit in trial court.",
-        "description": ""
-      },
-      {
-        "date": "2023-04-10",
-        "event": "April 10, 2023 - Autovest filed its brief.",
-        "description": ""
-      },
-      {
-        "date": "2023-04-20",
-        "event": "April 20, 2023 - Deadline for appellant's reply brief.",
-        "description": ""
-      },
-      {
-        "date": "2023-05-16",
-        "event": "May 16, 2023 - Appellant filed 'Judicial Notice' regarding his affidavit.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Judgment of the Franklin County Municipal Court affirmed.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "Autovest alleged that the Ruffs were in default under the terms of the promissory note.",
-      "Autovest claimed it had acquired rights to pursue the note.",
-      "Autovest argued that the Ruffs failed to respond to discovery requests, leading to deemed admissions.",
-      "The trial court erred in granting summary judgment in favor of Autovest.",
-      "Autovest failed to provide sufficient evidentiary quality materials to establish ownership of the note.",
-      "The appellant received originals or accurate copies of each document attached to the Complaint.",
-      "Each document attached to the Complaint is a true and correct copy of a genuine original document.",
-      "The appellant contracted for and received credit from the plaintiff on terms set forth in the documents.",
-      "The appellant signed the original of each document attached to the Complaint.",
-      "The appellant received everything expected in consideration of the credit extension.",
-      "The agreements have not been modified or superseded.",
-      "The appellant did not notify the plaintiff of any reasons for non-payment prior to the lawsuit.",
-      "The appellant has defaulted under the agreement by failing to make payments.",
-      "The balance sued for is due and owing by the appellant.",
-      "The appellant has no evidence of credits, offsets, or deductions.",
-      "The appellant received proper notice of the vehicle resale.",
-      "The resale of the vehicle was performed in a commercially reasonable manner.",
-      "There are no documents intended to be used as evidence for a defense or counterclaim."
-    ],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine the level of media coverage related to this case."
-    },
-    "outcome": "Summary judgment granted in favor of Autovest",
-    "caseSummary": "Autovest, L.L.C. filed a complaint against Gerry and Adrienne Ruff for defaulting on a promissory note. Autovest claimed it acquired rights to pursue the note and sought payment for the outstanding amount, including interest and fees. The trial court granted summary judgment in favor of Autovest, affirming that the Ruffs had not adequately responded to discovery requests and had not established a genuine issue of material fact.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Low",
-      "explanation": "The case does not involve allegations of serious harm or misconduct that would significantly impact the brand. The issues are primarily procedural and related to the appellant's failure to respond to legal requests."
-    },
-    "affectedCar": "2009 BMW 3 Series",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Low",
-      "explanation": "Given that the case revolves around a debt enforcement issue rather than a product defect or safety concern, the potential impact on the brand is minimal."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Medium",
-      "explanation": "The trial court granted summary judgment in favor of Autovest, indicating that they presented sufficient evidence to support their claim. However, the appellant's argument suggests there may be grounds for appeal, which could affect the likelihood of a win."
-    },
-    "reputationImpactCase": {
-      "impact": "Low",
-      "explanation": "The case outcome is in favor of the defendant, which typically has a low negative impact on the defendant's reputation."
-    },
-    "reputationImpactMedia": {
-      "impact": "Low",
-      "explanation": "There is no indication of significant media coverage surrounding this case, which would limit its impact on the company's reputation."
-    }
-  },
-  "6736238d": {
-    "id": "6736238d",
-    "title": "6736238d",
-    "status": "In Progress first instance",
-    "jurisdiction": "Not specified - United States District Court",
-    "stateJurisdiction": "Not specified",
-    "courtJurisdiction": "United States District Court",
-    "caseType": "IP Disputes",
-    "harmType": "Financial harm",
-    "cause": "Unlicensed Technology Use",
-    "description": "The case involves a patent dispute where Bayerische Motoren Werke AG (BMW) seeks a declaratory judgment of non-infringement against Arigna Technology Limited (Arigna). The legal standards applicable to this case include the requirements for establishing patent infringement under 35 U.S.C. \u00a7 271, which necessitates proving that the defendant has made, used, sold, or offered to sell a patented invention without permission. BMW's claim for a declaratory judgment is grounded in the need to clarify its legal standing in light of Arigna's previous infringement claims in other jurisdictions, including the United States International Trade Commission (ITC). The burden of proof lies with BMW to demonstrate that it has not infringed upon Arigna's patent rights, while Arigna must substantiate its claims of infringement in its prior suits. The potential defenses may include arguments regarding the validity of the patent in question and whether BMW's actions fall within the scope of permissible use under patent law.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Local Civil Rule 83.6(d)",
-      "Local Civil Rule 83.6",
-      "District of Columbia Rules of Professional Conduct",
-      "D.C. Rules of Professional Conduct",
-      "D.C. Rule of Professional Conduct 1.7(b)(4)",
-      "LCvR 83.6(d)"
-    ],
-    "timeline": [
-      {
-        "date": "Unknown",
-        "event": "Arigna filed patent infringement lawsuits against BMW in various tribunals.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "BMW filed for a declaratory judgment of non-infringement.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Susman files a motion to withdraw as counsel.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The court grants Susman's motion to withdraw.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The court stays the case for 90 days for Arigna to retain new counsel.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "BMW seeks a declaratory judgment of non-infringement.",
-      "Arigna has sued BMW in other tribunals for patent infringement."
-    ],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine the level of media coverage related to this case."
-    },
-    "outcome": "Not specified",
-    "caseSummary": "The case involves a motion for an attorney's withdrawal from representing a party, with considerations regarding potential delays and prejudice to the party involved.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to assess the brand impact as the case details do not indicate any allegations that would affect brand reputation."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine how this case might affect the company's brand reputation."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Not specified",
-      "explanation": "Insufficient information to assess the likelihood of the defendant winning the case based on the provided text."
-    },
-    "reputationImpactCase": {
-      "impact": "Not specified",
-      "explanation": "The impact on reputation based on the case outcome cannot be determined as the outcome is not specified."
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "The impact on reputation from media coverage cannot be assessed due to lack of information on media coverage."
-    }
-  },
-  "8536d87f": {
-    "id": "8536d87f",
-    "title": "8536d87f",
-    "status": "In Progress first instance",
-    "jurisdiction": "Not specified - United States District Court",
-    "stateJurisdiction": "Not specified",
-    "courtJurisdiction": "United States District Court",
-    "caseType": "IP Disputes",
-    "harmType": "Financial harm",
-    "cause": "Unlicensed Technology Use",
-    "description": "In the case of Bayerische Motoren Werke AG v. Arigna Technology Limited, the plaintiff, BMW, seeks a declaratory judgment asserting that it has not infringed upon a patent owned by the defendant, Arigna. This case arises from a series of patent infringement claims initiated by Arigna against BMW in various jurisdictions, including the ITC. The legal standards applicable to this case involve the interpretation of patent rights under Title 35 of the United States Code, particularly focusing on the elements of patent infringement, which require the plaintiff to prove that the defendant has made, used, sold, or offered for sale a patented invention without permission. The burden of proof lies with the plaintiff to establish non-infringement, while the defendant may assert defenses such as invalidity of the patent or non-infringement based on the specific claims of the patent. Precedent cases such as Markman v. Westview Instruments, Inc. provide guidance on claim construction, which is critical in determining the outcome of patent disputes.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Local Civil Rule 83.6",
-      "District of Columbia Rules of Professional Conduct",
-      "D.C. Rule of Professional Conduct 1.7(b)(4)",
-      "LCvR 83.6(d)",
-      "D.C. Rules of Professional Conduct"
-    ],
-    "timeline": [
-      {
-        "date": "Unknown",
-        "event": "Arigna filed a lawsuit against BMW for patent infringement.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "BMW filed for a declaratory judgment of non-infringement.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Susman files a motion to withdraw as counsel.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The court grants Susman's motion to withdraw.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The court stays the case for 90 days for Arigna to retain new counsel.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "BMW seeks a declaratory judgment of non-infringement.",
-      "Arigna has sued BMW in other tribunals for patent infringement."
-    ],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine the level of media coverage related to this case."
-    },
-    "outcome": "Not specified",
-    "caseSummary": "The case involves a motion for an attorney's withdrawal from representing a party, with considerations regarding undue delay and potential prejudice to the party involved.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to assess the expected brand impact as the case primarily revolves around legal representation issues rather than product liability or consumer safety."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "There is no information provided that indicates how this case might affect the company's brand reputation."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Not specified",
-      "explanation": "The likelihood of winning the case cannot be determined from the provided text, as it focuses on procedural matters rather than substantive claims."
-    },
-    "reputationImpactCase": {
-      "impact": "Not specified",
-      "explanation": "The impact on reputation based on the case outcome cannot be determined as the outcome is not specified."
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "The impact on reputation from media coverage cannot be assessed due to lack of information regarding media coverage."
-    }
-  },
-  "83ca8b7b": {
-    "id": "83ca8b7b",
-    "title": "83ca8b7b",
-    "status": "In favour of plaintiff",
-    "jurisdiction": "Ohio - Common Pleas Court",
-    "stateJurisdiction": "Ohio",
-    "courtJurisdiction": "Common Pleas Court",
-    "caseType": "Negligence in Recalls",
-    "harmType": "Physical harm",
-    "cause": "Failure to Recall Known Defect",
-    "description": "In the case of BMW of North America, LLC v. MacLean, the court addresses the liability of the manufacturer for failing to act upon discovering a defect in their vehicles that posed a risk of physical harm to consumers. Under Ohio law, a manufacturer has a duty to ensure that their products are safe for use and to take appropriate action upon discovering any defects. The failure to recall a known defect constitutes negligence, as it reflects a breach of the duty of care owed to consumers. Relevant statutes, such as R.C. 119.12, outline the standards for administrative appeals, which may also apply in assessing the adequacy of the manufacturer's response to the defect. The burden of proof lies with the plaintiffs to demonstrate that the defect existed and that the manufacturer failed to act responsibly, leading to physical harm. Precedent cases, such as Pons v. Ohio State Medical Board, highlight the importance of reliable evidence in establishing negligence claims.",
-    "secondaryTypes": [
-      "Product Liability"
-    ],
-    "possibleAlternatives": [],
-    "date": "Not specified",
-    "relevantLaws": [
-      "R.C. 4517.56(A) - Evaluation of transferee's qualifications.",
-      "R.C. 4517.56(C) - Protest of franchisor's decision.",
-      "R.C. 4517.57 - Burden of proof on the franchisor.",
-      "R.C. 4517.58 - Board decision on a protest is final except for appeal.",
-      "R.C. 119.12(B) - Any party adversely affected may appeal to the court of common pleas.",
-      "R.C. 4517.56(A)",
-      "R.C. 4517.56(D)",
-      "R.C. 4517.57(C)",
-      "Motor Vehicle Franchise Act",
-      "R.C. 4517.30",
-      "Chapter 119",
-      "R.C. 4517.56",
-      "R.C. 4517.57"
-    ],
-    "timeline": [
-      {
-        "date": "Unknown",
-        "event": "Kirtlund Frye submitted a request to transfer his BMW dealership to Colin MacLean.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "BMW rejected the transfer, leading to a protest filed with the Ohio Motor Vehicle Dealers Board.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The Board held a hearing and found that BMW did not show good cause to deny the transfer.",
-        "description": ""
-      },
-      {
-        "date": "2019-07-18",
-        "event": "July 18, 2019 - The Board approved the recommendation regarding the franchise transfer.",
-        "description": ""
-      },
-      {
-        "date": "2020-05-21",
-        "event": "May 21, 2020 - The common pleas court affirmed the Board's decision.",
-        "description": ""
-      },
-      {
-        "date": "2020-06-16",
-        "event": "June 16, 2020 - The Board adopted the stipulation for attorney fees and costs.",
-        "description": ""
-      },
-      {
-        "date": "2020-06-19",
-        "event": "June 19, 2020 - BMW filed a notice of appeal from the trial court's decision.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Mr. MacLean appointed as general manager.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Dealership performance improved under MacLean's management.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "BMW denied the transfer based on alleged poor performance.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Expert report submitted by Patrick L. Anderson.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "BMW denied the transfer request from Frye to MacLean.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The Board examined the franchise agreement and found BMW's criteria for denial lacking.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The Board concluded that the transfer should be allowed.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "BMW rejected the franchise ownership transfer to MacLean.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The Motor Vehicle Dealers Board upheld the rejection.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The common pleas court affirmed the Board's decision.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "BMW did not have good cause to reject the ownership transfer.",
-      "The Board's decision was supported by reliable evidence.",
-      "The Board's decision was supported by reliable, probative, and substantial evidence.",
-      "The decision is in accordance with law.",
-      "BMW's denial of the transfer was based on flawed performance metrics.",
-      "Mr. MacLean improved dealership performance during his tenure.",
-      "Expert testimony indicated that BMW's assessment criteria were not objective.",
-      "BMW did not provide reasonable and objective criteria for denying the transfer.",
-      "MacLean has significant experience and qualifications to manage the dealership.",
-      "The market conditions were poor, not MacLean's performance.",
-      "BMW failed to show good cause for rejecting the transfer.",
-      "The Board's determination was supported by reliable evidence.",
-      "BMW did not fairly evaluate MacLean's qualifications."
-    ],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine the level of media coverage related to this case."
-    },
-    "outcome": "In favour of plaintiff",
-    "caseSummary": "The case involves an administrative appeal where BMW of North America, LLC challenged the decision of the Ohio Motor Vehicle Dealers Board regarding the rejection of a proposed ownership transfer of a BMW dealership from Kirtlund Frye to Colin MacLean. The Board found that BMW did not have good cause to deny the transfer, leading to the appeal.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Medium",
-      "explanation": "The case involves a dealership transfer dispute which could affect BMW's reputation in the automotive market, especially if the appeal results in a negative outcome for BMW. However, since there are no allegations of severe misconduct or harm, the impact is assessed as medium."
-    },
-    "affectedCar": "MINI",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Medium",
-      "explanation": "Given that the case involves a legal dispute rather than a product defect or safety issue, the brand impact is likely to be medium, as it may affect dealer relationships and public perception but not directly harm consumer safety."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Medium",
-      "explanation": "The common pleas court affirmed the Board's decision, indicating that the evidence was deemed reliable and substantial. However, since BMW is appealing, there remains a possibility of a different outcome, leading to a medium likelihood of winning the appeal."
-    },
-    "reputationImpactCase": {
-      "impact": "Medium",
-      "explanation": "The outcome may lead to scrutiny of BMW's franchise practices, impacting its reputation in the automotive industry."
-    },
-    "reputationImpactMedia": {
-      "impact": "Medium",
-      "explanation": "If the case receives media attention, it could further affect BMW's reputation, especially if the coverage highlights issues of fairness in franchise operations."
-    }
-  },
-  "19bbb9ea": {
-    "id": "19bbb9ea",
-    "title": "19bbb9ea",
-    "status": "In Progress appeal",
-    "jurisdiction": "Florida - District Court of Appeal",
-    "stateJurisdiction": "Florida",
-    "courtJurisdiction": "District Court of Appeal",
-    "caseType": "Breach of Contract",
-    "harmType": "Financial harm",
-    "cause": "Contract Breach",
-    "description": "In the case of BMW of North America, LLC v. Marie Louise Henry, the plaintiff successfully established that BMW breached its express and implied warranties under the Magnuson-Moss Warranty Act (MMWA). The court found that the vehicle had various defects that BMW failed to repair adequately, resulting in financial harm to the plaintiff, specifically a diminished value of the vehicle and consequential damages. The MMWA allows for recovery of attorney's fees for the prevailing party, which further underscores the financial implications of the breach. The burden of proof rested on the plaintiff to demonstrate the existence of the defects and the failure of BMW to fulfill its warranty obligations, as well as the resulting damages. Relevant legal standards include the provisions of the MMWA, which governs warranty claims and provides for fee-shifting in favor of the prevailing consumer.",
-    "secondaryTypes": [
-      "Product Liability"
-    ],
-    "possibleAlternatives": [],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Federal fee-shifting statutes",
-      "MMWA (Magnuson-Moss Warranty Act)",
-      "Florida state law regarding attorney's fees",
-      "Magnuson-Moss Warranty Act (MMWA), 15 U.S.C. \u00a7\u00a7 2301 \u20132312",
-      "Magnuson-Moss Warranty Act (MMWA)",
-      "Perdue v. Kenny A. ex rel. Winn",
-      "Standard Guaranty Insurance Co. v. Quanstrom",
-      "Florida Patient\u2019s Compensation Fund v. Rowe",
-      "Dague v. City of Burlington"
-    ],
-    "timeline": [
-      {
-        "date": "Unknown",
-        "event": "Trial court made a ruling on attorney's fees.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Plaintiff appealed the trial court's decision.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Henry filed a lawsuit against BMW for warranty violations.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "A jury awarded Henry $11,549.48 for damages.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Henry moved for attorney's fees and costs as a prevailing party.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The trial court awarded attorney's fees and applied a contingency multiplier.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "BMW appealed the attorney's fee award.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Trial court awarded a contingency multiplier of 1.5.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Court found no abuse of discretion in not reducing Henry\u2019s fee award.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Court found trial court erred in determining entitlement to a contingency multiplier.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "The trial court erred in applying state law regarding attorney's fees.",
-      "Contingency multipliers are prohibited under federal fee-shifting statutes.",
-      "The plaintiff's representation was on a contingency basis, which should not allow for a multiplier.",
-      "BMW failed to reasonably repair defects in the vehicle.",
-      "Henry was entitled to a contingency multiplier for attorney's fees under the MMWA.",
-      "The trial court misunderstood the meaning of a contingency fee.",
-      "The application of a contingency multiplier should be affirmed under Perdue.",
-      "The trial court erred in applying a contingency multiplier to Henry\u2019s fee award."
-    ],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "1",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine the level of media coverage related to this case."
-    },
-    "outcome": "Plaintiff Win",
-    "caseSummary": "The case involves an appeal regarding the trial court's decision on attorney's fees and the application of contingency multipliers under federal fee-shifting statutes. The appeal argues that the trial court erred in applying state law instead of federal law, which prohibits contingency multipliers.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Medium",
-      "explanation": "The case involves a successful lawsuit against BMW, which may affect consumer perception and trust in the brand, especially if the defects are seen as systemic or if the case garners attention."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Medium",
-      "explanation": "Given that the case resulted in a plaintiff win and involved warranty issues, it could lead to negative perceptions about BMW's reliability and customer service, impacting brand reputation."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Medium",
-      "explanation": "The trial court's decision was partially affirmed and partially reversed, indicating that while there were errors, the court did not find significant grounds for the plaintiff's claims, suggesting a moderate likelihood of success for the defense."
-    },
-    "reputationImpactCase": {
-      "impact": "Medium",
-      "explanation": "The outcome of the case in favor of the plaintiff may lead to increased scrutiny of BMW's warranty practices and customer service."
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine the impact on reputation from media coverage regardless of case outcome."
-    }
-  },
-  "a58ccd86": {
-    "id": "a58ccd86",
-    "title": "a58ccd86",
-    "status": "In Progress first instance",
-    "jurisdiction": "California - Court of Appeal",
-    "stateJurisdiction": "California",
-    "courtJurisdiction": "Court of Appeal",
-    "caseType": "Employment Disputes",
-    "harmType": "Employment harm",
-    "cause": "Workplace Misconduct",
-    "description": "The case involves a dispute regarding the enforceability of an arbitration agreement in the context of claims brought under the Labor Code Private Attorneys General Act of 2004 (PAGA). The trial court's ruling that the arbitration agreement does not encompass PAGA claims is significant, as it highlights the limitations of arbitration clauses in employment contracts, particularly when they attempt to waive representative claims. The legal standard for arbitration agreements requires clarity and mutual consent, and the court's interpretation aligns with established precedents that protect employees' rights to pursue statutory claims without being compelled to arbitrate. The burden of proof lies with the party seeking to enforce the arbitration agreement, which must demonstrate that the agreement is clear and unambiguous regarding the claims it covers.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [
-      {
-        "text": "the parties\u2019 arbitration agreement specifically excluded all PAGA claims",
-        "relevance": "This statement directly supports the court's finding that the arbitration agreement does not apply to PAGA claims, which is central to the case.",
-        "strength": "strong"
-      },
-      {
-        "text": "Ford signed an arbitration agreement, pursuant to which he agreed to arbitrate any employment-related disputes",
-        "relevance": "This establishes that there was an arbitration agreement in place, which is a critical element in determining the enforceability of the agreement.",
-        "strength": "moderate"
-      },
-      {
-        "text": "the arbitration agreement contains a class, collective, and representative action waiver",
-        "relevance": "This clause is relevant as it indicates the intent of the parties regarding the scope of the arbitration agreement and its limitations, particularly concerning representative claims.",
-        "strength": "strong"
-      },
-      {
-        "text": "the trial court correctly interpreted the agreement",
-        "relevance": "This indicates the court's affirmation of the trial court's decision, reinforcing the legal interpretation of the arbitration agreement's scope.",
-        "strength": "strong"
-      }
-    ],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Federal Arbitration Act (FAA)",
-      "Private Attorneys General Act (PAGA)",
-      "Labor Code",
-      "Labor Code Private Attorneys General Act of 2004 (PAGA)",
-      "PAGA",
-      "FAA",
-      "California Labor Code",
-      "PAGA (Private Attorneys General Act)",
-      "California contract law",
-      "California Civil Code \u00a7 1636",
-      "California Civil Code \u00a7 1647",
-      "California contract law regarding arbitration agreements"
-    ],
-    "timeline": [
-      {
-        "date": "2018-09-01",
-        "event": "September 2018 - December 2021: Ford worked as a full-time security guard for Parkwest.",
-        "description": ""
-      },
-      {
-        "date": "2022-02-01",
-        "event": "February 2022: Ford filed a complaint against Parkwest alleging PAGA violations.",
-        "description": ""
-      },
-      {
-        "date": "2025-03-01",
-        "event": "March 2025: The Court of Appeal denied Parkwest's motion to compel arbitration.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Plaintiff filed a complaint asserting claims under PAGA.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Employer moved to enforce arbitration agreement.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Trial court ruled in favor of the employer.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Appellate court affirmed the trial court's decision.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "California Supreme Court granted review.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "California Supreme Court addressed the standing of employees in PAGA claims.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Court held that aggrieved employees can pursue nonindividual claims in court.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Parties entered into an arbitration agreement.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Dispute arose over the interpretation of the arbitration agreement regarding PAGA claims.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Trial court found that Ford's PAGA claims were excluded from arbitration.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Filing of the case (exact date not specified)",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Court ruling on the interpretation of the arbitration agreement",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Affirmation of the order denying Parkwest's motion to compel arbitration",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Filed 4/8/25",
-        "description": ""
-      },
-      {
-        "date": "2025-03-25",
-        "event": "Opinion filed on March 25, 2025",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Order certifying opinion for publication",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "The arbitration agreement expressly excludes all PAGA claims.",
-      "The defendant's motion to compel arbitration is based on an ambiguous interpretation of the agreement.",
-      "The trial court correctly interpreted the agreement to deny the motion.",
-      "The waiver of representative PAGA claims is unenforceable under state law.",
-      "Such waivers harm the state's interests in enforcing the Labor Code.",
-      "A prohibition of representative claims frustrates the objectives of PAGA.",
-      "Employees maintain standing to litigate nonindividual PAGA claims even if individual claims are compelled to arbitration.",
-      "PAGA claims are representative in nature, allowing for claims based on violations suffered by other employees.",
-      "The arbitration agreement's exclusionary clause is ambiguous regarding representative claims under PAGA.",
-      "The trial court correctly resolved the ambiguity against Parkwest as the drafter of the arbitration agreement.",
-      "PAGA claims must proceed in court instead of arbitration due to the unenforceability of the waiver of representative claims.",
-      "The exclusionary clause in the arbitration agreement was intended to exclude all PAGA claims.",
-      "The language used in the agreement supports the interpretation that all PAGA claims are excluded.",
-      "The ruling in Viking River does not change the principle that a party cannot be compelled to arbitrate a dispute they did not agree to resolve by arbitration."
-    ],
-    "defenseArgumentation": "",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "1",
-    "mediaCoverageLevel": {
-      "level": "Medium",
-      "explanation": "The case involves significant legal principles regarding employee rights and arbitration agreements, which are likely to attract media attention, especially given the implications for labor law in California."
-    },
-    "outcome": "Not specified",
-    "caseSummary": "The text discusses the Federal Arbitration Act (FAA) and its implications on arbitration agreements, as well as the Private Attorneys General Act (PAGA) which allows employees to sue for labor code violations on behalf of the state. It also references various legal precedents and amendments to PAGA.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Medium",
-      "explanation": "The case involves a significant legal interpretation regarding PAGA claims, which could affect the company's operations and legal standing. While no deaths or severe allegations are mentioned, the implications of the ruling could lead to increased scrutiny and potential reputational damage."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Medium",
-      "explanation": "Given the nature of the case and its implications for PAGA claims, there is a reasonable likelihood that the brand may face some reputational challenges, especially if similar cases arise or if the ruling leads to unfavorable outcomes for the company in the future."
-    },
-    "caseWinLikelihood": {
-      "likelihood": "Medium",
-      "explanation": "The trial court's interpretation favored the plaintiff's position, suggesting a reasonable likelihood that the plaintiff may prevail in the case. However, the ongoing legal arguments indicate that the outcome is not definitively in favor of either party."
-    },
-    "reputationImpactCase": {
-      "impact": "Medium",
-      "explanation": "The outcome of the case may lead to increased scrutiny of the company's practices regarding PAGA claims, potentially affecting its reputation."
-    },
-    "reputationImpactMedia": {
-      "impact": "Medium",
-      "explanation": "The case's certification for publication suggests a moderate level of media interest, which could impact the brand's reputation."
-    }
-  },
-  "6af2db9d": {
-    "id": "6af2db9d",
-    "title": "6af2db9d",
-    "status": "In Progress first instance",
-    "jurisdiction": "California - Court of Appeal",
-    "stateJurisdiction": "California",
-    "courtJurisdiction": "Court of Appeal",
-    "caseType": "Employment Disputes",
-    "harmType": "Employment harm",
-    "cause": "Workplace Misconduct",
-    "description": "The case involves a dispute regarding the enforceability of an arbitration agreement in the context of claims brought under the Labor Code Private Attorneys General Act of 2004 (PAGA). The trial court's ruling that the arbitration agreement does not encompass PAGA claims is significant, as it highlights the limitations of arbitration clauses in employment contracts, particularly when they attempt to waive representative claims. The legal standard for arbitration agreements requires clarity and mutual consent, and the court's interpretation aligns with established precedents that protect employees' rights to pursue statutory claims without being compelled to arbitrate. The burden of proof lies with the party seeking to enforce the arbitration agreement, which must demonstrate that the agreement is clear and unambiguous regarding the claims it covers.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [
-      {
-        "text": "the parties\u2019 arbitration agreement specifically excluded all PAGA claims",
-        "relevance": "This statement directly supports the court's finding that the arbitration agreement does not apply to PAGA claims, which is central to the case.",
-        "strength": "strong"
-      },
-      {
-        "text": "Ford signed an arbitration agreement, pursuant to which he agreed to arbitrate any employment-related disputes",
-        "relevance": "This establishes that there was an arbitration agreement in place, but it also sets the context for the dispute regarding its applicability to PAGA claims.",
-        "strength": "moderate"
-      },
-      {
-        "text": "the arbitration agreement contains a class, collective, and representative action waiver",
-        "relevance": "This clause is critical as it indicates the intent of the parties regarding the scope of the arbitration agreement and its limitations, particularly concerning representative claims.",
-        "strength": "strong"
-      },
-      {
-        "text": "the trial court correctly interpreted the agreement and therefore affirm",
-        "relevance": "This indicates the appellate court's agreement with the trial court's interpretation, reinforcing the legal standing of the trial court's decision.",
-        "strength": "strong"
-      }
-    ],
-    "date": "Not specified",
-    "relevantLaws": [
-      "Labor Code Private Attorneys General Act of 2004 (PAGA)",
-      "Federal Arbitration Act (FAA)",
-      "Private Attorneys General Act (PAGA)",
-      "California Labor Code",
-      "PAGA (Private Attorneys General Act)",
-      "PAGA",
-      "FAA",
-      "California Labor Code (PAGA)",
-      "California Civil Code \u00a7 1636",
-      "California Civil Code \u00a7 1647",
-      "California contract law",
-      "California contract law regarding arbitration agreements"
-    ],
-    "timeline": [
-      {
-        "date": "2018-09-01",
-        "event": "September 2018: Ford begins employment as a security guard at Parkwest.",
-        "description": ""
-      },
-      {
-        "date": "2022-02-01",
-        "event": "February 2022: Ford files a complaint against Parkwest under PAGA.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Trial court denies Parkwest's motion to compel arbitration.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Plaintiff filed a complaint asserting claims under PAGA.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Employer moved to enforce arbitration agreement including waiver of representative claims.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Trial court ruled in favor of the employer.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Appellate court affirmed the trial court's ruling.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "California Supreme Court granted review.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Parties entered into an arbitration agreement.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Dispute arose regarding the interpretation of the arbitration agreement concerning PAGA claims.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Trial court found that Ford's PAGA claims were excluded from arbitration.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "California Supreme Court addressed the standing of employees in PAGA claims.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Court held that employees maintain standing to litigate nonindividual PAGA claims even if individual claims are arbitrated.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Filed 4/8/25",
-        "description": ""
-      },
-      {
-        "date": "2025-03-25",
-        "event": "Opinion filed on March 25, 2025",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Order certifying opinion for publication",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Viking River decision was issued, changing the law regarding PAGA claims.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Court ruled on the interpretation of the arbitration agreement.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "The arbitration agreement expressly excludes all PAGA claims.",
-      "Mandatory health screenings were required off-the-clock, violating labor laws.",
-      "Inaccurate wage statements were issued to employees.",
-      "The waiver of representative PAGA claims is unenforceable under state law.",
-      "Such waivers harm the state's interests in enforcing the Labor Code.",
-      "A prohibition of representative claims frustrates the objectives of PAGA.",
-      "The waiver of 'representative' claims is unenforceable, necessitating that any PAGA claim must proceed in court instead of arbitration.",
-      "The exclusionary clause is ambiguous, and the trial court's interpretation should be upheld.",
-      "The plaintiff argues that PAGA claims are representative in nature and should not be compelled to arbitration.",
-      "The plaintiff maintains that the exclusion of representative claims under PAGA from arbitration agreements is valid.",
-      "The exclusion of 'representative claims under [PAGA]' was intended to exclude all PAGA claims.",
-      "The interpretation of the arbitration agreement should be based on the language used at the time it was formed.",
-      "Different terms in the agreement suggest different meanings were intended."
-    ],
-    "defenseArgumentation": [
-      {
-        "argument": "Highlight the clear exclusion of PAGA claims in the arbitration agreement, emphasizing the intent of the parties.",
-        "reasoning": "Reasoning unavailable",
-        "counter_to": ""
-      },
-      {
-        "argument": "Argue that the waiver of representative claims is enforceable under California law, citing relevant precedents.",
-        "reasoning": "Reasoning unavailable",
-        "counter_to": ""
-      },
-      {
-        "argument": "Challenge the plaintiff's claims of harm by demonstrating compliance with labor laws and the absence of damages.",
-        "reasoning": "Reasoning unavailable",
-        "counter_to": ""
-      }
-    ],
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "1",
-    "mediaCoverageLevel": {
-      "level": "Medium",
-      "explanation": "The case involves significant legal principles regarding employee rights and arbitration agreements, which are likely to attract media attention, especially given the implications for labor law in California."
-    },
-    "outcome": "Affirmed",
-    "caseSummary": "Billy Ford filed a complaint against The Silver F, Inc. under the Labor Code Private Attorneys General Act (PAGA) for labor violations, specifically alleging unlawful mandatory health screenings and inaccurate wage statements. The defendant's motion to compel arbitration of Ford's individual PAGA claims was denied by the trial court, which found that the arbitration agreement excluded all PAGA claims.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Medium",
-      "explanation": "The case involves labor law violations which can affect the company's reputation among employees and the public. Given that it concerns mandatory health screenings and wage issues, it could lead to negative perceptions of the company's treatment of its workforce."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Medium",
-      "explanation": "Given the involvement of PAGA claims, which are designed to protect employee rights and can lead to scrutiny of the company's labor practices, there is a reasonable likelihood of moderate impact on the brand's reputation."
-    },
-    "caseWinLikelihood": {
-      "percentage": 75.5,
-      "explanation": "The defense has a strong position due to the clear language in the arbitration agreement and the appellate court's affirmation of the trial court's ruling. However, the plaintiff's arguments regarding the enforceability of the waiver and the implications for PAGA claims present challenges.",
-      "keyFactors": [
-        {
-          "factor": "Strong documentary evidence from the arbitration agreement",
-          "impact": "positive for defense"
-        },
-        {
-          "factor": "Potential ambiguity in the plaintiff's interpretation of the arbitration agreement",
-          "impact": "positive for defense"
-        },
-        {
-          "factor": "Recent legal precedents affecting PAGA claims",
-          "impact": "negative for defense"
-        }
-      ],
-      "defenseArguments": [
-        "Highlight the clear exclusion of PAGA claims in the arbitration agreement, emphasizing the intent of the parties.",
-        "Argue that the waiver of representative claims is enforceable under California law, citing relevant precedents.",
-        "Challenge the plaintiff's claims of harm by demonstrating compliance with labor laws and the absence of damages."
-      ]
-    },
-    "reputationImpactCase": {
-      "impact": "Medium",
-      "explanation": "The outcome may have implications for the defendant's reputation, particularly if it suggests a failure to honor arbitration agreements."
-    },
-    "reputationImpactMedia": {
-      "impact": "Low",
-      "explanation": "There is no indication of significant media coverage surrounding this case, which would limit its impact on reputation."
-    }
-  },
-  "155c7e6f": {
-    "id": "155c7e6f",
-    "title": "155c7e6f",
+  "aff8d0a8": {
+    "id": "aff8d0a8",
+    "title": "aff8d0a8",
     "status": "In favour of plaintiff",
     "jurisdiction": "Ohio - Summit County Court of Common Pleas",
     "stateJurisdiction": "Ohio",
@@ -1354,23 +9,23 @@
     "caseType": "Breach of Contract",
     "harmType": "Financial harm",
     "cause": "Contract Breach",
-    "description": "In the case of Fravel v. BMW of North America, LLC, the plaintiff, John Fravel, asserts claims against BMW based on violations of the Ohio lemon law and various warranty claims, which are indicative of a breach of contract. The legal standards applicable to this case include the Magnuson-Moss Warranty Act, which governs warranties on consumer products, and the Ohio Consumer Sales Practices Act (CSPA), which protects consumers against unfair or deceptive acts. The jury's award of $30,000 to Mr. Fravel under the CSPA indicates a finding of financial harm due to BMW's failure to uphold its contractual obligations regarding the vehicle's performance and warranty. The burden of proof lies with the plaintiff to demonstrate that the vehicle was defective and that BMW failed to remedy the situation as required under the warranty agreements.",
+    "description": "In the case of Fravel v. BMW of North America, LLC, the plaintiff, John Fravel, asserts claims against BMW based on violations of the Ohio lemon law and various warranty claims, which are indicative of a breach of contract. The legal standards applicable to this case include the Magnuson-Moss Warranty Act, which governs warranties on consumer products, and the Ohio lemon law, which provides remedies for consumers who purchase defective vehicles. The jury's award of $30,000 under the Consumer Sales Practices Act (CSPA) further substantiates the financial harm suffered by the plaintiff due to the breach of warranty and the failure of the vehicle to meet the agreed-upon standards of quality and performance. The burden of proof lies with the plaintiff to demonstrate that the vehicle was defective at the time of sale and that BMW failed to fulfill its contractual obligations.",
     "secondaryTypes": [],
     "possibleAlternatives": [],
     "evidence": [
       {
         "text": "In December 2019, Plaintiff -Appellee John Fravel filed a complaint against BMW asserting violations of Ohio lemon law, Magnuson -Moss Federal Trade Commission Act, express warranty, implied warranty of merchantability, implied warranty of fitness for a particular purpose, implied warranty in tort, and the CSPA.",
-        "relevance": "This statement outlines the specific legal claims made by the plaintiff, indicating the basis for the breach of contract and financial harm.",
+        "relevance": "This statement outlines the specific legal claims made by the plaintiff, indicating a breach of contract and warranty issues.",
         "strength": "strong"
       },
       {
         "text": "The jury found in favor of BMW on all the claims aside from the CSPA claim. As to the CSPA claim, the jury awarded Mr. Fravel $30,000.",
-        "relevance": "The jury's decision to award damages under the CSPA directly supports the claim of financial harm due to BMW's breach of contract.",
+        "relevance": "The jury's decision to award damages under the CSPA highlights the financial harm suffered by the plaintiff and the breach of consumer protection laws.",
         "strength": "strong"
       },
       {
-        "text": "BMW filed a motion for judgment notwithstanding the verdict (JNOV).",
-        "relevance": "This indicates that BMW contested the jury's finding, which is relevant to the ongoing legal dispute regarding the breach of contract.",
+        "text": "BMW has appealed, raising a single assignment of error for our review.",
+        "relevance": "This indicates that BMW is contesting the trial court's decision, which is a common legal recourse in breach of contract cases.",
         "strength": "moderate"
       }
     ],
@@ -1379,18 +34,32 @@
       "Ohio lemon law",
       "Magnuson-Moss Federal Trade Commission Act",
       "Consumer Sales Practices Act (CSPA)",
-      "CSPA (Consumer Sales Practices Act)",
-      "R.C. 1345.02(A)"
+      "CSPA (Consumer Sales Practices Act)"
     ],
     "timeline": [
       {
+        "date": "2018-01-31",
+        "event": "January 31, 2018 - Mr. Fravel purchased a 2017 BMW X3.",
+        "description": ""
+      },
+      {
+        "date": "2019-12-01",
+        "event": "December 2019 - Mr. Fravel filed a complaint against BMW.",
+        "description": ""
+      },
+      {
+        "date": "2025-01-29",
+        "event": "January 29, 2025 - Court decision affirming the jury's verdict.",
+        "description": ""
+      },
+      {
         "date": "2019-01-01",
-        "event": "Late January 2019: First major incident reported.",
+        "event": "Late January 2019: First major incident occurs while stopping at a light.",
         "description": ""
       },
       {
         "date": "2019-06-01",
-        "event": "Early June 2019: Second major incident reported.",
+        "event": "Early June 2019: Another major incident occurs with a passenger in the vehicle.",
         "description": ""
       },
       {
@@ -1399,33 +68,13 @@
         "description": ""
       },
       {
-        "date": "2019-07-01",
-        "event": "End of July 2019: Vehicle returned to Mr. Fravel after inspection.",
-        "description": ""
-      },
-      {
         "date": "2019-07-17",
-        "event": "July 17, 2019: Mr. Schank informs Mr. Fravel of inspection results.",
+        "event": "July 17, 2019: Results of the inspection communicated to the plaintiff.",
         "description": ""
       },
       {
         "date": "2019-09-25",
-        "event": "September 25, 2019: Mr. Fravel receives Mr. Dowd's report.",
-        "description": ""
-      },
-      {
-        "date": "2018-01-31",
-        "event": "January 31, 2018: Mr. Fravel purchased a 2017 BMW X3.",
-        "description": ""
-      },
-      {
-        "date": "2019-12-01",
-        "event": "December 2019: Mr. Fravel filed a complaint against BMW.",
-        "description": ""
-      },
-      {
-        "date": "2025-01-29",
-        "event": "January 29, 2025: Court decision affirming the jury's verdict.",
+        "event": "September 25, 2019: Plaintiff receives a copy of the inspection report.",
         "description": ""
       },
       {
@@ -1475,632 +124,1105 @@
       }
     ],
     "plaintiffArgumentation": [
-      "The vehicle surged forward unexpectedly while braking.",
-      "The dealership and BMW were unable to diagnose or replicate the issue despite multiple reports.",
-      "The incidents posed a serious safety risk to the driver and passengers.",
       "Violations of Ohio lemon law",
       "Violations of Magnuson-Moss Federal Trade Commission Act",
-      "Breach of express warranty",
-      "Breach of implied warranty of merchantability",
-      "Breach of implied warranty of fitness for a particular purpose",
-      "Breach of implied warranty in tort",
-      "Violations of the Consumer Sales Practices Act (CSPA)",
+      "Express warranty claims",
+      "Implied warranty of merchantability",
+      "Implied warranty of fitness for a particular purpose",
+      "Implied warranty in tort",
+      "Claims under the Consumer Sales Practices Act (CSPA)",
+      "The vehicle surged forward unexpectedly while braking.",
+      "The dealership and BMW were unable to replicate the issue despite multiple inspections.",
+      "The plaintiff expressed concerns about the safety of the vehicle.",
       "Mr. Fravel reported multiple incidents of unintended acceleration.",
       "He believes the vehicle is unsafe, particularly for inexperienced drivers.",
       "He would not have purchased the vehicle had he known about the issue.",
-      "BMW violated the CSPA in respect to how the whole process was handled.",
-      "Allegations include inaccuracies and intentional deletions and modifications by BMW in various documents.",
+      "BMW violated the CSPA in respect to how the whole process was handled",
+      "Inaccuracies and intentional deletions and modifications by BMW in various documents",
       "Defendant sold a vehicle that did not meet the promised standard or quality.",
       "Defendant breached warranty obligations.",
       "Defendant exhibited a pattern of inefficiency and incompetency in warranty repairs.",
-      "Defendant's representations about the warranty were untrue."
+      "Defendant's representations about the warranty were false."
     ],
-    "defenseArgumentation": [
-      {
-        "argument": "Challenge causation by presenting alternative explanations for the harm, such as driver error or external factors.",
-        "reasoning": "Reasoning unavailable",
-        "counter_to": ""
-      },
-      {
-        "argument": "Argue contributory negligence based on the plaintiff's failure to adequately report or document issues during the warranty period.",
-        "reasoning": "Reasoning unavailable",
-        "counter_to": ""
-      },
-      {
-        "argument": "Question the admissibility of key evidence due to potential chain of custody issues, particularly regarding the accuracy of repair records.",
-        "reasoning": "Reasoning unavailable",
-        "counter_to": ""
-      }
-    ],
+    "defenseArgumentation": "### Defense Arguments Analysis\n\n---\n\n**1. Highlight inconsistencies in the timeline of reported incidents to question the reliability of the plaintiff's claims.**  \n- **Legal Reasoning:** Inconsistencies in the timeline can undermine the credibility of the plaintiff\u2019s testimony and suggest that the reported issues may not have occurred as stated, thereby weakening the causal link between the alleged defect and the claimed harm.  \n- **Counters:** This argument counters the claims related to the Ohio lemon law, Magnuson-Moss Act, and the CSPA, which rely on the reliability of the plaintiff's reported incidents.\n\n---\n\n**2. Present evidence that the vehicle was maintained according to warranty standards and that any issues were not due to BMW's negligence.**  \n- **Legal Reasoning:** If BMW can demonstrate that the vehicle was properly maintained and that any issues arose from factors outside of its control, it can argue that it fulfilled its warranty obligations and did not breach the contract.  \n- **Counters:** This argument counters the express warranty claims, implied warranty of merchantability, and implied warranty of fitness for a particular purpose, which assert that BMW failed to uphold its warranty responsibilities.\n\n---\n\n**3. Challenge the credibility of the plaintiff's claims regarding safety concerns by emphasizing the lack of corroborating evidence from independent inspections.**  \n- **Legal Reasoning:** The absence of corroborating evidence from independent inspections can suggest that the plaintiff's claims about safety concerns are exaggerated or unfounded, thereby undermining the basis for liability.  \n- **Counters:** This argument counters the claims regarding the vehicle's safety and the implied warranty in tort, which assert that BMW was responsible for providing a safe vehicle and addressing safety concerns raised by the plaintiff.\n\n--- \n\nBy employing these defense strategies, BMW can effectively challenge the validity of the plaintiff's claims and potentially mitigate liability in the breach of contract case.",
     "suggestions": [],
-    "outcomePrediction": null,
     "numberOfClaimants": "1",
     "mediaCoverageLevel": {
       "level": "Low",
       "explanation": "The case appears to involve a single claimant and does not mention widespread media attention or public interest, suggesting limited media coverage."
     },
     "outcome": "Plaintiff Win",
-    "caseSummary": "The case involves Mr. Fravel, who experienced multiple incidents of his vehicle surging forward unexpectedly while braking. Despite reporting the issue to the dealership and BMW, the problem could not be replicated or diagnosed. The case highlights concerns about the vehicle's brake system and the responsiveness of the dealership and manufacturer to the reported issues.",
+    "caseSummary": "John Fravel filed a complaint against BMW for violations of Ohio lemon law and other warranty claims related to a 2017 BMW X3. The jury found in favor of BMW on most claims but awarded Fravel $30,000 on the CSPA claim.",
     "timeToResolutionMonths": "Not specified",
     "settlementAmount": "Not specified",
     "defenseCostEstimate": "Not specified",
     "expectedBrandImpact": {
       "impact": "Medium",
-      "explanation": "The case involves significant safety concerns with the vehicle's braking system, which could lead to serious accidents. Although no fatalities are mentioned, the potential for harm and the ongoing issues reported by the plaintiff could negatively impact BMW's brand reputation."
+      "explanation": "The case involves significant safety concerns, including instances where the vehicle surged forward despite the driver applying the brakes. This could lead to serious accidents, which may impact BMW's brand reputation, especially if the issue is perceived as a defect in their vehicles."
     },
     "affectedCar": "2017 BMW X3",
     "affectedPart": "Not specified",
     "brandImpactEstimate": {
       "impact": "Medium",
-      "explanation": "Given the allegations of deceptive practices and the potential for a negative jury verdict, there is a reasonable likelihood that BMW's brand reputation could be impacted, particularly among consumers concerned about transparency and fairness in transactions."
+      "explanation": "Given the nature of the complaints regarding vehicle safety and the potential for accidents, there is a reasonable likelihood that this case could negatively affect BMW's brand reputation, particularly if it gains public attention."
     },
     "caseWinLikelihood": {
-      "percentage": 75.5,
-      "explanation": "The defense has a reasonable chance of winning due to the strong documentary evidence presented by the plaintiff, but the jurisdictional context and potential weaknesses in the plaintiff's causal claims provide a favorable outlook for the defense.",
+      "percentage": 65.0,
+      "explanation": "The defense has a reasonable chance of winning due to procedural strengths and potential weaknesses in the plaintiff's claims, but the strong jury verdict on the CSPA claim poses a significant challenge.",
       "keyFactors": [
         {
-          "factor": "Weak causal connection in evidence",
-          "impact": "positive for defense"
-        },
-        {
-          "factor": "Strong documentary evidence from plaintiff",
+          "factor": "Strong jury verdict on CSPA claim",
           "impact": "negative for defense"
         },
         {
-          "factor": "Jurisdiction typically favors defendants in similar cases",
-          "impact": "positive for defense"
-        }
-      ],
-      "defenseArguments": [
-        "Challenge causation by presenting alternative explanations for the harm, such as driver error or external factors.",
-        "Argue contributory negligence based on the plaintiff's failure to adequately report or document issues during the warranty period.",
-        "Question the admissibility of key evidence due to potential chain of custody issues, particularly regarding the accuracy of repair records."
-      ]
-    },
-    "reputationImpactCase": {
-      "impact": "Medium",
-      "explanation": "The outcome of the case, which favored the plaintiff, could lead to negative perceptions of BMW's customer service and warranty practices."
-    },
-    "reputationImpactMedia": {
-      "impact": "Medium",
-      "explanation": "While specific media coverage details are not provided, the nature of the case suggests it could attract attention, impacting BMW's reputation."
-    }
-  },
-  "e2a48fdf": {
-    "id": "e2a48fdf",
-    "title": "e2a48fdf",
-    "status": "In Progress first instance",
-    "jurisdiction": "Not specified - Not specified",
-    "stateJurisdiction": "Not specified",
-    "courtJurisdiction": "Not specified",
-    "caseType": "Error",
-    "harmType": "Unknown",
-    "cause": "Processing error",
-    "description": "Failed to analyze: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [],
-    "date": "Not specified",
-    "relevantLaws": [],
-    "timeline": [],
-    "plaintiffArgumentation": [],
-    "defenseArgumentation": "Defense Arguments:\n\n1. Review case data and try again\n   Reasoning: Unable to generate detailed reasoning due to an error.\n\n",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "outcome": "Not specified",
-    "caseSummary": "Not specified",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "caseWinLikelihood": {
-      "percentage": 50.0,
-      "explanation": "Error in prediction: 404 Client Error: Resource Not Found for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-      "keyFactors": [
-        {
-          "factor": "Error in analysis",
-          "impact": "negative"
-        }
-      ],
-      "defenseArguments": [
-        "Review case data and try again"
-      ]
-    },
-    "reputationImpactCase": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    }
-  },
-  "9a4ec468": {
-    "id": "9a4ec468",
-    "title": "9a4ec468",
-    "status": "In Progress first instance",
-    "jurisdiction": "Not specified - Not specified",
-    "stateJurisdiction": "Not specified",
-    "courtJurisdiction": "Not specified",
-    "caseType": "Error",
-    "harmType": "Unknown",
-    "cause": "Processing error",
-    "description": "Failed to analyze: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [],
-    "date": "Not specified",
-    "relevantLaws": [],
-    "timeline": [],
-    "plaintiffArgumentation": [],
-    "defenseArgumentation": "Defense Arguments:\n\n1. Review case data and try again\n   Reasoning: Unable to generate detailed reasoning due to an error.\n\n",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "outcome": "Not specified",
-    "caseSummary": "Not specified",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "caseWinLikelihood": {
-      "percentage": 50.0,
-      "explanation": "Error in prediction: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-      "keyFactors": [
-        {
-          "factor": "Error in analysis",
-          "impact": "negative"
-        }
-      ],
-      "defenseArguments": [
-        "Review case data and try again"
-      ]
-    },
-    "reputationImpactCase": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    }
-  },
-  "3034fd41": {
-    "id": "3034fd41",
-    "title": "3034fd41",
-    "status": "In Progress first instance",
-    "jurisdiction": "Not specified - Not specified",
-    "stateJurisdiction": "Not specified",
-    "courtJurisdiction": "Not specified",
-    "caseType": "Error",
-    "harmType": "Unknown",
-    "cause": "Processing error",
-    "description": "Failed to analyze: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [],
-    "date": "Not specified",
-    "relevantLaws": [],
-    "timeline": [],
-    "plaintiffArgumentation": [],
-    "defenseArgumentation": "Defense Arguments:\n\n1. Review case data and try again\n   Reasoning: Unable to generate detailed reasoning due to an error.\n\n",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "outcome": "Not specified",
-    "caseSummary": "Not specified",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "caseWinLikelihood": {
-      "percentage": 50.0,
-      "explanation": "Error in prediction: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-      "keyFactors": [
-        {
-          "factor": "Error in analysis",
-          "impact": "negative"
-        }
-      ],
-      "defenseArguments": [
-        "Review case data and try again"
-      ]
-    },
-    "reputationImpactCase": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    }
-  },
-  "632bfcfe": {
-    "id": "632bfcfe",
-    "title": "632bfcfe",
-    "status": "In Progress first instance",
-    "jurisdiction": "Not specified - Not specified",
-    "stateJurisdiction": "Not specified",
-    "courtJurisdiction": "Not specified",
-    "caseType": "Error",
-    "harmType": "Unknown",
-    "cause": "Processing error",
-    "description": "Failed to analyze: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [],
-    "date": "Not specified",
-    "relevantLaws": [],
-    "timeline": [],
-    "plaintiffArgumentation": [],
-    "defenseArgumentation": "Defense Arguments:\n\n1. Review case data and try again\n   Reasoning: Unable to generate detailed reasoning due to an error.\n\n",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "outcome": "Not specified",
-    "caseSummary": "Not specified",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "caseWinLikelihood": {
-      "percentage": 50.0,
-      "explanation": "Error in prediction: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-      "keyFactors": [
-        {
-          "factor": "Error in analysis",
-          "impact": "negative"
-        }
-      ],
-      "defenseArguments": [
-        "Review case data and try again"
-      ]
-    },
-    "reputationImpactCase": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    }
-  },
-  "4a0d2b7b": {
-    "id": "4a0d2b7b",
-    "title": "4a0d2b7b",
-    "status": "In Progress first instance",
-    "jurisdiction": "Not specified - Not specified",
-    "stateJurisdiction": "Not specified",
-    "courtJurisdiction": "Not specified",
-    "caseType": "Error",
-    "harmType": "Unknown",
-    "cause": "Processing error",
-    "description": "Failed to analyze: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [],
-    "date": "Not specified",
-    "relevantLaws": [],
-    "timeline": [],
-    "plaintiffArgumentation": [],
-    "defenseArgumentation": "Defense Arguments:\n\n1. Review case data and try again\n   Reasoning: Unable to generate detailed reasoning due to an error.\n\n",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "outcome": "Not specified",
-    "caseSummary": "Not specified",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "caseWinLikelihood": {
-      "percentage": 50.0,
-      "explanation": "Error in prediction: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-      "keyFactors": [
-        {
-          "factor": "Error in analysis",
-          "impact": "negative"
-        }
-      ],
-      "defenseArguments": [
-        "Review case data and try again"
-      ]
-    },
-    "reputationImpactCase": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    }
-  },
-  "a68dcf4f": {
-    "id": "a68dcf4f",
-    "title": "a68dcf4f",
-    "status": "In Progress first instance",
-    "jurisdiction": "Not specified - Not specified",
-    "stateJurisdiction": "Not specified",
-    "courtJurisdiction": "Not specified",
-    "caseType": "Error",
-    "harmType": "Unknown",
-    "cause": "Processing error",
-    "description": "Failed to analyze: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [],
-    "date": "Not specified",
-    "relevantLaws": [],
-    "timeline": [],
-    "plaintiffArgumentation": [],
-    "defenseArgumentation": "Defense Arguments:\n\n1. Review case data and try again\n   Reasoning: Unable to generate detailed reasoning due to an error.\n\n",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "outcome": "Not specified",
-    "caseSummary": "Not specified",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "caseWinLikelihood": {
-      "percentage": 50.0,
-      "explanation": "Error in prediction: 400 Client Error: model_error for url: https://legalhack.openai.azure.com/openai/deployments/o3-mini/chat/completions?api-version=2025-01-01-preview",
-      "keyFactors": [
-        {
-          "factor": "Error in analysis",
-          "impact": "negative"
-        }
-      ],
-      "defenseArguments": [
-        "Review case data and try again"
-      ]
-    },
-    "reputationImpactCase": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "reputationImpactMedia": {
-      "impact": "Not specified",
-      "explanation": "Insufficient information to determine"
-    }
-  },
-  "3eb6968f": {
-    "id": "3eb6968f",
-    "title": "3eb6968f",
-    "status": "In Progress appeal",
-    "jurisdiction": "New York - U.S. Court of Appeals for the Federal Circuit",
-    "stateJurisdiction": "New York",
-    "courtJurisdiction": "U.S. Court of Appeals for the Federal Circuit",
-    "caseType": "IP Disputes",
-    "harmType": "Financial harm",
-    "cause": "Contract Breach",
-    "description": "This case involves BMW of North America LLC challenging the final determination of the U.S. Department of Commerce regarding antidumping duties on ball bearings and parts from the United Kingdom. The legal standards applicable to antidumping duties are governed by the Tariff Act of 1930, as amended, which allows for the imposition of duties to offset unfair pricing practices. BMW's claim suggests a financial harm due to the imposition of these duties, which they argue are unjustified based on the administrative review process. The burden of proof lies with the plaintiff to demonstrate that the Department of Commerce's determination was not supported by substantial evidence or was otherwise contrary to law.",
-    "secondaryTypes": [],
-    "possibleAlternatives": [],
-    "evidence": [
-      {
-        "text": "BMW of North America LLC (\u201cBMW\u201d or \u201cPlaintiff\u201d) brought this action challenging the final determination in the 2010\u20132011 administrative review of the antidumping duty order on ball bearings and parts thereof from the United Kingdom.",
-        "relevance": "This statement establishes the basis of BMW's legal challenge, indicating that they are contesting a financial decision made by the Department of Commerce that directly affects their business operations.",
-        "strength": "strong"
-      },
-      {
-        "text": "See Ball Bearings and Parts Thereof From Japan and the United Kingdom, 80 Fed. Reg. 4248 (Dep\u2019t Commerce Jan. 27, 2015) (final results of 2010\u20132011 administrative review)",
-        "relevance": "This citation provides the regulatory framework and context for the antidumping duties that BMW is contesting, which is crucial for understanding the legal basis of the case.",
-        "strength": "strong"
-      },
-      {
-        "text": "Before the court are the Final Results of Remand Redetermination, ECF No. 113",
-        "relevance": "This indicates that the case is at a specific procedural stage, which is important for understanding the timeline and the nature of the judicial review process.",
-        "strength": "moderate"
-      }
-    ],
-    "date": "Not specified",
-    "relevantLaws": [
-      "19 U.S.C. \u00a7 1516a",
-      "28 U.S.C. \u00a7 1581(c)",
-      "Trade Preferences Extension Act of 2015",
-      "19 U.S.C. \u00a7 1677e",
-      "Trade Preferences Extension Act (TPEA)",
-      "Administrative Procedure Act",
-      "19 U.S.C. \u00a7 1675",
-      "Uruguay Round Agreements Act"
-    ],
-    "timeline": [
-      {
-        "date": "2015-01-21",
-        "event": "Final Results issued on January 21, 2015, assigning BMW a dumping margin of 254.25%.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Court upheld Commerce's determination but rejected the rate for lack of substantial evidence.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "First remand order sustained Commerce's revised AFA rate of 126.44%.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "U.S. Court of Appeals affirmed the resumption of the administrative review but vacated the AFA rate.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Second Remand Results applied the TPEA and assigned an AFA rate of 61.14%.",
-        "description": ""
-      },
-      {
-        "date": "2015-01-21",
-        "event": "January 21, 2015: Commerce published the Final Results applying AFA.",
-        "description": ""
-      },
-      {
-        "date": "2019-10-01",
-        "event": "October 1, 2019: Commerce selected a rate based on secondary information.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "BMW failed to cooperate in providing necessary information during the administrative review.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Commerce applied an AFA rate of 61.14% based on the all-others rate of 54.27%.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "The court sustained Commerce's application of the AFA rate.",
-        "description": ""
-      }
-    ],
-    "plaintiffArgumentation": [
-      "Commerce applied the TPEA impermissibly.",
-      "The AFA rate of 61.14% is unlawfully punitive and unsupported by substantial evidence.",
-      "The TPEA does not apply retroactively to pre-enactment conduct.",
-      "Commerce did not consider BMW's level of culpability.",
-      "BMW's failure to cooperate was due to an attorney's mistake, not intentional wrongdoing.",
-      "The AFA rate applied is excessively punitive compared to historical rates.",
-      "BMW argues for an AFA rate based on the commercially reasonable 1.43% rate.",
-      "BMW asserts that the AFA rate should be no greater than double the 1.43% to account for deterrence.",
-      "BMW contends that its counsel's inadvertent mistake involved a low level of culpability."
-    ],
-    "defenseArgumentation": "### Defense Arguments Analysis\n\n---\n\n**1. Challenge Causation by Presenting Alternative Explanations for the Harm, Such as Market Conditions Unrelated to the Alleged Dumping.**  \n**Legal Reasoning:** The defense can argue that the financial harm claimed by BMW was not solely a result of the alleged dumping practices, but rather due to broader market conditions, such as economic downturns or increased competition, which would break the causal link between the alleged breach and the harm.  \n**Counters Plaintiff Claim:** This argument counters the plaintiff's claim regarding the financial harm directly resulting from the alleged dumping practices.\n\n---\n\n**2. Argue Contributory Negligence Based on Plaintiff's Actions, Particularly Their Failure to Cooperate During the Administrative Review Process.**  \n**Legal Reasoning:** If BMW failed to cooperate during the administrative review, it could be argued that their own actions contributed to the situation, potentially mitigating their claims of harm and liability, as contributory negligence can reduce or eliminate damages.  \n**Counters Plaintiff Claim:** This argument counters the plaintiff's assertion that BMW's financial harm was solely due to the alleged breach and the punitive measures taken against them.\n\n---\n\n**3. Question the Admissibility of Key Evidence Due to Potential Chain of Custody Issues, Which Could Undermine the Reliability of the Evidence Presented by the Plaintiff.**  \n**Legal Reasoning:** If there are legitimate concerns regarding the chain of custody of the evidence presented by BMW, the defense can argue that such evidence may be inadmissible or less credible, thereby weakening the plaintiff's case and their claims of harm.  \n**Counters Plaintiff Claim:** This argument counters the plaintiff's reliance on the evidence from the administrative review and the conclusions drawn from it, which are critical to supporting their claims of breach and resultant harm. \n\n--- \n\nThis structured approach to the defense arguments provides a clear and concise legal reasoning framework to counter the plaintiff's claims effectively.",
-    "suggestions": [],
-    "outcomePrediction": null,
-    "numberOfClaimants": "Not specified",
-    "mediaCoverageLevel": {
-      "level": "Not specified",
-      "explanation": "Insufficient information to determine"
-    },
-    "outcome": "Not specified",
-    "caseSummary": "BMW of North America LLC challenged the final determination in the 2010\u20132011 administrative review of the antidumping duty order on ball bearings and parts from the United Kingdom.",
-    "timeToResolutionMonths": "Not specified",
-    "settlementAmount": "Not specified",
-    "defenseCostEstimate": "Not specified",
-    "expectedBrandImpact": {
-      "impact": "Medium",
-      "explanation": "The case involves significant financial implications for BMW due to the high dumping margin assigned. While there are no allegations of intentional wrongdoing, the adverse inference applied by Commerce suggests a serious concern regarding compliance, which could affect brand perception."
-    },
-    "affectedCar": "Not specified",
-    "affectedPart": "Not specified",
-    "brandImpactEstimate": {
-      "impact": "Medium",
-      "explanation": "Given the nature of the case, which involves regulatory compliance and potential penalties, there could be a moderate impact on BMW's brand reputation, especially if the public perceives the company as non-compliant or facing punitive measures."
-    },
-    "caseWinLikelihood": {
-      "percentage": 75.5,
-      "explanation": "The defense has a strong chance of winning due to procedural advantages and weaknesses in the plaintiff's arguments, particularly regarding the punitive nature of the AFA rate and the lack of substantial evidence supporting it.",
-      "keyFactors": [
-        {
-          "factor": "Weak causal connection in evidence",
+          "factor": "Potential inconsistencies in the timeline of incidents",
           "impact": "positive for defense"
         },
         {
-          "factor": "Strong documentary evidence from plaintiff",
-          "impact": "negative for defense"
-        },
-        {
-          "factor": "Jurisdiction typically favors defendants in similar cases",
+          "factor": "Appeal process may introduce uncertainties",
           "impact": "positive for defense"
         }
       ],
       "defenseArguments": [
-        "Challenge causation by presenting alternative explanations for the harm, such as market conditions unrelated to the alleged dumping.",
-        "Argue contributory negligence based on plaintiff's actions, particularly their failure to cooperate during the administrative review process.",
-        "Question the admissibility of key evidence due to potential chain of custody issues, which could undermine the reliability of the evidence presented by the plaintiff."
+        "Highlight inconsistencies in the timeline of reported incidents to question the reliability of the plaintiff's claims.",
+        "Present evidence that the vehicle was maintained according to warranty standards and that any issues were not due to BMW's negligence.",
+        "Challenge the credibility of the plaintiff's claims regarding safety concerns by emphasizing the lack of corroborating evidence from independent inspections."
       ]
     },
     "reputationImpactCase": {
       "impact": "Medium",
-      "explanation": "The outcome of the case could lead to a significant financial penalty for BMW, which may affect its reputation among consumers and investors."
+      "explanation": "The outcome of the case, which favored the plaintiff, could lead to a perception of BMW as a company that does not uphold warranty obligations, potentially harming its reputation."
     },
     "reputationImpactMedia": {
       "impact": "Medium",
-      "explanation": "The case's implications for BMW's financial practices and compliance may attract media attention, potentially impacting public perception."
-    }
+      "explanation": "The case involves consumer protection issues, which can attract media attention, but the specifics of the coverage are not detailed."
+    },
+    "caseEmbedding": [
+      -0.011307939887046814,
+      -0.021833112463355064,
+      -0.012127036228775978,
+      -0.018232908099889755,
+      0.03039468266069889,
+      -0.028996644541621208,
+      -0.030745232477784157,
+      0.0764918401837349,
+      0.04720029607415199,
+      -0.016082262620329857,
+      0.04360416904091835,
+      0.04854463413357735,
+      -0.05101463198661804,
+      -0.01984509825706482,
+      -0.04281632974743843,
+      -0.01180762518197298,
+      -0.00909351371228695,
+      0.032490506768226624,
+      -0.013421643525362015,
+      -0.00207300647161901,
+      0.041666217148303986,
+      -0.012282237410545349,
+      -0.05135035887360573,
+      -0.021271970123052597,
+      -0.030710509046912193,
+      -0.03377373144030571,
+      -0.042830388993024826,
+      -0.024751979857683182,
+      -0.007433739490807056,
+      -0.012095636688172817,
+      -0.025761129334568977,
+      0.018727118149399757,
+      -0.05274664983153343,
+      -0.01728641614317894,
+      -0.04614385962486267,
+      0.008903954178094864,
+      0.03566315397620201,
+      0.029470376670360565,
+      -0.03910718858242035,
+      0.02115986868739128,
+      -0.009881134144961834,
+      0.04630855843424797,
+      -0.017609337344765663,
+      -0.05916853994131088,
+      -0.008010780438780785,
+      0.028701774775981903,
+      0.05143238604068756,
+      0.01930953375995159,
+      0.010383561253547668,
+      -0.0005335602327249944,
+      0.032768186181783676,
+      0.018681349232792854,
+      -0.011947802267968655,
+      -0.03163549676537514,
+      -0.02106836438179016,
+      0.017657164484262466,
+      -0.03895057365298271,
+      0.012626662850379944,
+      -0.05769075080752373,
+      0.0357779935002327,
+      -0.027568213641643524,
+      -0.03683597967028618,
+      0.0027829071041196585,
+      -0.04172768443822861,
+      -0.03115377202630043,
+      0.056667961180210114,
+      0.022822421044111252,
+      -0.008639747276902199,
+      -0.03743987902998924,
+      0.020516347140073776,
+      -0.020285414531826973,
+      0.011846594512462616,
+      -0.002350645372644067,
+      -0.029801229014992714,
+      -0.01936078630387783,
+      0.0014271894469857216,
+      0.04684926196932793,
+      0.004768594168126583,
+      0.012580814771354198,
+      -0.02242683619260788,
+      0.05539940670132637,
+      0.0004153068584855646,
+      0.008603375405073166,
+      -0.05076660215854645,
+      0.03999527171254158,
+      0.025875026360154152,
+      0.008819377981126308,
+      0.03400501236319542,
+      0.03188971057534218,
+      0.047376107424497604,
+      -0.01596120558679104,
+      0.04895801097154617,
+      0.048420194536447525,
+      0.0015488885110244155,
+      -0.027405928820371628,
+      0.0298305656760931,
+      0.01796417497098446,
+      0.01661244034767151,
+      0.010222000069916248,
+      0.01560530997812748,
+      0.005497271195054054,
+      -0.02180757001042366,
+      0.04296994209289551,
+      -0.03342200443148613,
+      -0.001980542205274105,
+      0.04211506247520447,
+      0.014485156163573265,
+      0.03660619258880615,
+      0.0064552524127066135,
+      0.010595832020044327,
+      0.00775910122320056,
+      0.038498494774103165,
+      0.011073531582951546,
+      -0.03794271498918533,
+      0.010807611048221588,
+      0.01083958987146616,
+      0.020252706483006477,
+      -0.01790045015513897,
+      -0.01860491931438446,
+      0.010347647592425346,
+      0.019159965217113495,
+      0.02025422267615795,
+      0.023250754922628403,
+      -0.033537767827510834,
+      0.029042962938547134,
+      -0.0013824447523802519,
+      0.020992949604988098,
+      0.04382156580686569,
+      -0.03411639481782913,
+      0.007591812405735254,
+      0.03942731395363808,
+      0.02574915438890457,
+      -0.02073066122829914,
+      -0.034471295773983,
+      -0.06759123504161835,
+      -0.03828626498579979,
+      -0.02497597597539425,
+      -0.0022249736357480288,
+      -0.023263152688741684,
+      -0.0022174662444740534,
+      0.006907071452587843,
+      0.03255672752857208,
+      0.037010353058576584,
+      -0.017423750832676888,
+      -0.025491559877991676,
+      -0.052313853055238724,
+      -0.03520284965634346,
+      0.020221160724759102,
+      -0.021907242015004158,
+      -0.026539286598563194,
+      0.004865385591983795,
+      -0.043356187641620636,
+      -0.013273244723677635,
+      0.003587158862501383,
+      0.029650451615452766,
+      -0.034489162266254425,
+      0.009386355988681316,
+      0.027005024254322052,
+      0.013529378920793533,
+      0.008053290657699108,
+      -0.0401681512594223,
+      -0.027340970933437347,
+      -0.017229542136192322,
+      -0.029662715271115303,
+      -0.01946287974715233,
+      -0.009005536325275898,
+      0.030969906598329544,
+      0.03218051791191101,
+      0.007215750869363546,
+      -0.01591193862259388,
+      -0.01732688955962658,
+      -0.0466822125017643,
+      0.024515220895409584,
+      -0.05891500785946846,
+      -0.0041268798522651196,
+      0.004995503928512335,
+      0.05419363081455231,
+      0.03555857762694359,
+      0.009911928325891495,
+      -0.0451536625623703,
+      0.025436902418732643,
+      0.01704687997698784,
+      0.061964668333530426,
+      -0.00872049294412136,
+      -0.018200967460870743,
+      0.03980948030948639,
+      0.06084210425615311,
+      -0.006603763438761234,
+      0.03443310409784317,
+      0.01691749505698681,
+      0.05086466297507286,
+      -0.022229045629501343,
+      -0.010157760232686996,
+      0.023092081770300865,
+      -0.004752946086227894,
+      0.03768632560968399,
+      0.03951391577720642,
+      0.010425698012113571,
+      -0.020214810967445374,
+      -0.04019516333937645,
+      -0.011498930864036083,
+      0.04915158450603485,
+      -0.022070202976465225,
+      -0.006912191864103079,
+      0.022937249392271042,
+      0.004013725556433201,
+      -0.022275544703006744,
+      -0.04035899043083191,
+      0.012846126221120358,
+      -0.047240205109119415,
+      -0.037537116557359695,
+      -0.022129174321889877,
+      0.03596346452832222,
+      0.003934847190976143,
+      -0.005427849479019642,
+      -0.040111277252435684,
+      -0.010196465998888016,
+      -0.01730446331202984,
+      0.015662048012018204,
+      0.0022201973479241133,
+      -0.013359100557863712,
+      0.052859630435705185,
+      -0.009092568419873714,
+      0.04076036438345909,
+      0.004877125844359398,
+      0.03322165086865425,
+      0.026132825762033463,
+      0.03183998540043831,
+      0.03650904446840286,
+      -0.00537365535274148,
+      0.016513505950570107,
+      0.03638294339179993,
+      -0.06847697496414185,
+      -0.03048383630812168,
+      0.02561463788151741,
+      -0.009530355222523212,
+      -0.017539840191602707,
+      -0.02715073525905609,
+      0.02496788650751114,
+      0.06128942221403122,
+      -0.05566105619072914,
+      0.00899361539632082,
+      0.029042985290288925,
+      -0.022451210767030716,
+      -0.00527544179931283,
+      0.0028670523315668106,
+      0.00013323643361218274,
+      0.00797010213136673,
+      0.02496386133134365,
+      -0.04512559622526169,
+      0.0287078395485878,
+      0.023179078474640846,
+      -0.0038577052764594555,
+      -0.013261515647172928,
+      0.05302467197179794,
+      0.0440853051841259,
+      0.03578195348381996,
+      -0.004468697123229504,
+      -0.008495020680129528,
+      -0.02890203334391117,
+      -0.0036163688637316227,
+      0.005652866791933775,
+      -0.011138303205370903,
+      0.025961019098758698,
+      0.004547771532088518,
+      0.014070723205804825,
+      0.005992010701447725,
+      -0.04528094455599785,
+      -0.0357920303940773,
+      -0.0636698305606842,
+      -0.016665877774357796,
+      -0.01264846883714199,
+      -0.04669034108519554,
+      -0.03033450059592724,
+      -0.029731202870607376,
+      0.001413466059602797,
+      -0.04667630046606064,
+      -0.031411025673151016,
+      0.008897879160940647,
+      -0.006493071094155312,
+      0.012525769881904125,
+      -0.02687913365662098,
+      0.00336362118832767,
+      -0.02706971764564514,
+      0.013737068511545658,
+      -0.01997082494199276,
+      0.0015463680028915405,
+      -0.020343273878097534,
+      0.011629809625446796,
+      -0.0301390178501606,
+      0.06033362075686455,
+      -0.0283370241522789,
+      0.08420199900865555,
+      0.029321016743779182,
+      -0.013166076503694057,
+      0.03664296120405197,
+      -0.0515899583697319,
+      -0.09444815665483475,
+      -0.007557103876024485,
+      0.024629659950733185,
+      -0.025091219693422318,
+      -0.05264044925570488,
+      0.038892682641744614,
+      -0.0156769547611475,
+      -0.04328367859125137,
+      -0.02307424321770668,
+      -0.023944001644849777,
+      0.03138185292482376,
+      -0.061065372079610825,
+      -0.013357550837099552,
+      0.02928037755191326,
+      0.02638743817806244,
+      0.024520426988601685,
+      -0.0336243212223053,
+      -0.04922138899564743,
+      -0.0006536546279676259,
+      -0.03485839068889618,
+      0.02408931776881218,
+      0.007889102213084698,
+      0.020566793158650398,
+      -0.049631014466285706,
+      -0.019892074167728424,
+      -0.012189041823148727,
+      0.0154060497879982,
+      0.02491050399839878,
+      0.00034117151517421007,
+      0.03507016971707344,
+      -0.03798408433794975,
+      0.027648743242025375,
+      -0.030636059120297432,
+      0.02310248650610447,
+      -0.021247589960694313,
+      0.016132518649101257,
+      0.07558999955654144,
+      -0.028107499703764915,
+      0.018573645502328873,
+      -0.01731589436531067,
+      0.013507189229130745,
+      0.050284724682569504,
+      -0.02508113719522953,
+      -0.005682941526174545,
+      0.01033511757850647,
+      -0.04780389741063118,
+      -0.008400560356676579,
+      0.012406041845679283,
+      -0.04574017599225044,
+      0.005797041580080986,
+      -0.04077522084116936,
+      0.013090476393699646,
+      0.015903212130069733,
+      0.01284630037844181,
+      -0.010630331002175808,
+      0.01720012165606022,
+      -0.0011277165031060576,
+      0.0002754534361883998,
+      0.06379189342260361,
+      0.0060827722772955894,
+      -0.020925074815750122,
+      -0.005140739493072033,
+      -0.025825459510087967,
+      0.010735046118497849,
+      -0.010361673310399055,
+      0.020657341927289963,
+      -0.03022816963493824,
+      -0.021463636308908463,
+      -0.006500387564301491,
+      -0.009313756600022316,
+      -0.014952999539673328,
+      -0.05433890223503113,
+      -0.04796835780143738,
+      0.021044164896011353,
+      -0.0008643492474220693,
+      -0.008890119381248951,
+      0.014601428061723709,
+      0.0134193804115057,
+      -0.006975171156227589,
+      -0.07554636150598526,
+      -0.011714166030287743,
+      0.012955954298377037,
+      -0.049475740641355515,
+      -0.045466408133506775,
+      -0.039811260998249054,
+      0.008844353258609772,
+      -0.03224201872944832,
+      0.013358790427446365,
+      -0.03621232137084007,
+      0.1828141212463379,
+      -0.003588785184547305,
+      0.03867827728390694,
+      -0.027681240811944008,
+      0.0016210537869483232,
+      0.0037952428683638573,
+      0.02529926225543022,
+      0.051290880888700485,
+      0.012869835831224918,
+      0.03272263705730438,
+      -0.02676343359053135,
+      0.015043254010379314,
+      0.03106808476150036,
+      -0.035875361412763596,
+      0.004038577433675528,
+      0.008548366837203503,
+      0.038615137338638306,
+      0.02645069919526577,
+      0.026215510442852974,
+      -0.007786260452121496,
+      0.06236374005675316,
+      -0.048208773136138916,
+      0.03445684537291527,
+      0.026320816949009895,
+      -0.052648935467004776,
+      -0.03932050243020058,
+      -0.003971946891397238,
+      0.0038696187548339367,
+      -0.048064544796943665,
+      0.03877459466457367,
+      -0.038263652473688126,
+      0.03551684319972992,
+      -0.035672660917043686,
+      -0.012702517211437225,
+      0.012372445315122604,
+      0.0014657587744295597,
+      0.02466042898595333,
+      -0.035156019032001495,
+      0.02754373475909233,
+      0.00022038684983272105,
+      -0.03673844784498215,
+      0.004283242858946323,
+      -0.06658203899860382,
+      0.034362416714429855,
+      -0.008542669005692005,
+      0.031914208084344864,
+      0.042563844472169876,
+      0.007879689335823059,
+      -0.0357065424323082,
+      0.033592432737350464,
+      -0.023852432146668434,
+      0.029423920437693596,
+      -0.02605942077934742,
+      -0.01751011051237583,
+      -0.03357672318816185,
+      -0.04579894617199898,
+      -0.03466721251606941,
+      -0.0344463512301445,
+      -0.006082579493522644,
+      0.0555911585688591,
+      0.026006003841757774,
+      -0.0055597987957298756,
+      -0.02590383216738701,
+      -0.0005846237181685865,
+      0.04089943692088127,
+      0.03034401498734951,
+      -0.014197926968336105,
+      -0.07976336777210236,
+      -0.042037103325128555,
+      -0.054207757115364075,
+      -0.030307607725262642,
+      -0.01306099258363247,
+      -0.005629824474453926,
+      0.025390924885869026,
+      -0.008522233925759792,
+      -0.0019634359050542116,
+      -0.040111441165208817,
+      0.056655462831258774,
+      0.03296533226966858,
+      -0.0017459667287766933,
+      -0.0008755134185776114,
+      -0.02913484163582325,
+      -0.040184251964092255,
+      3.6190958780935034e-05,
+      0.05474408343434334,
+      -0.035425495356321335,
+      0.016946112737059593,
+      0.04884842783212662,
+      -0.020391853526234627,
+      0.03486214578151703,
+      0.018197443336248398,
+      0.030573178082704544,
+      0.009797407314181328,
+      0.043616291135549545,
+      0.004560972563922405,
+      -0.02342950366437435,
+      0.00325103965587914,
+      0.04587520658969879,
+      -0.03470868989825249,
+      -0.033846862614154816,
+      -0.02493031695485115,
+      -0.006472500506788492,
+      -0.03239361569285393,
+      -0.04165166988968849,
+      -0.034553322941064835,
+      0.0039511555805802345,
+      0.043507449328899384,
+      0.022982213646173477,
+      0.020260989665985107,
+      -0.03937003016471863,
+      0.027731945738196373,
+      0.007666527759283781,
+      0.03229010850191116,
+      -0.005834490992128849,
+      0.03142872825264931,
+      0.03374315798282623,
+      -0.0026173568330705166,
+      -0.037683311849832535,
+      0.015003758482635021,
+      0.031410422176122665,
+      -0.006212530191987753,
+      0.06161363795399666,
+      -0.05223650485277176,
+      0.039682939648628235,
+      -0.010091155767440796,
+      0.038461603224277496,
+      -0.038244158029556274,
+      -0.00176950020249933,
+      0.05728202313184738,
+      0.008851084858179092,
+      0.022742854431271553,
+      -0.021054387092590332,
+      -0.04385968670248985,
+      0.029617391526699066,
+      0.024440068751573563,
+      -0.03024379536509514,
+      0.03587235137820244,
+      -0.028886355459690094,
+      -0.025191403925418854,
+      0.04246624559164047,
+      -0.00821681972593069,
+      0.0230245403945446,
+      -0.04151320457458496,
+      -0.010296804830431938,
+      0.0075568160973489285,
+      0.031404901295900345,
+      -0.034064218401908875,
+      -0.018838301301002502,
+      -0.03517664223909378,
+      -0.021287817507982254,
+      0.003690012264996767,
+      -0.011050470173358917,
+      0.01591653935611248,
+      0.001941951340995729,
+      -0.015749547630548477,
+      -0.042828574776649475,
+      0.07024479657411575,
+      0.03776995837688446,
+      0.026702655479311943,
+      -0.011621830984950066,
+      -0.020197000354528427,
+      -0.027021534740924835,
+      -0.009058093652129173,
+      0.07077299803495407,
+      0.07829245179891586,
+      0.06177153438329697,
+      -0.03894989192485809,
+      0.03949882090091705,
+      0.04038943722844124,
+      0.04634958878159523,
+      0.0071253287605941296,
+      -0.01253664493560791,
+      0.01915150135755539,
+      0.04147256165742874,
+      0.01959066651761532,
+      -0.0015515924897044897,
+      -0.01259392686188221,
+      0.023513969033956528,
+      -0.04222412779927254,
+      0.025191836059093475,
+      -0.023050587624311447,
+      0.022660281509160995,
+      0.012295917607843876,
+      -0.034766968339681625,
+      -0.03956421837210655,
+      -0.008747139945626259,
+      -0.0004212098428979516,
+      -0.03202669322490692,
+      -0.010462623089551926,
+      0.007606349885463715,
+      -0.04874322563409805,
+      0.07577861100435257,
+      -0.04855715483427048,
+      0.019132256507873535,
+      -0.06105509027838707,
+      0.018687332049012184,
+      0.006156909745186567,
+      0.020657582208514214,
+      -0.03568166494369507,
+      -0.034493450075387955,
+      0.003781410399824381,
+      -0.03970817103981972,
+      0.001441094558686018,
+      -0.002297290600836277,
+      0.011451770551502705,
+      -0.04286104068160057,
+      -0.003694637678563595,
+      0.047393716871738434,
+      0.05341082438826561,
+      0.033296748995780945,
+      0.021669700741767883,
+      -0.018110599368810654,
+      0.005921763833612204,
+      0.02190413326025009,
+      0.00564617570489645,
+      0.03820723295211792,
+      0.035245709121227264,
+      0.027237553149461746,
+      0.013898923993110657,
+      -0.028367048129439354,
+      0.012196080759167671,
+      0.010130828246474266,
+      0.0019633753690868616,
+      -0.015131520107388496,
+      -0.040512487292289734,
+      -0.005683131515979767,
+      0.01964128203690052,
+      0.011822210624814034,
+      0.006064374465495348,
+      -0.04522281512618065,
+      0.010962279513478279,
+      -0.005698384251445532,
+      -0.01694292575120926,
+      -0.04624401777982712,
+      -0.013068949803709984,
+      -0.02771882526576519,
+      0.0333225354552269,
+      0.030754728242754936,
+      0.019814569503068924,
+      -0.032748833298683167,
+      0.028788099065423012,
+      -0.029879258945584297,
+      0.03960001841187477,
+      -0.0261856559664011,
+      -0.02918822318315506,
+      -0.008629529736936092,
+      -0.05955199524760246,
+      -0.02270609699189663,
+      0.035369034856557846,
+      0.029646994546055794,
+      0.010044529102742672,
+      -0.052905768156051636,
+      0.06925852596759796,
+      0.052699923515319824,
+      -0.023514164611697197,
+      -0.03091217391192913,
+      0.017447786405682564,
+      -0.015045881271362305,
+      -0.05822322517633438,
+      -0.058097682893276215,
+      0.0248427614569664,
+      0.022271139547228813,
+      -0.02647455595433712,
+      0.012975112535059452,
+      -0.03468116372823715,
+      0.01047974731773138,
+      0.03882182016968727,
+      -0.017920460551977158,
+      -0.030122900381684303,
+      -0.044257596135139465,
+      0.035950127989053726,
+      -0.01647782325744629,
+      -0.04482632875442505,
+      -0.06074359267950058,
+      0.04748903587460518,
+      0.04378708824515343,
+      -0.04320603609085083,
+      -0.019326739013195038,
+      -0.038056377321481705,
+      -0.037249498069286346,
+      0.02747162990272045,
+      0.02398480847477913,
+      -0.008390098810195923,
+      -0.007624921388924122,
+      0.020190520212054253,
+      0.01466385368257761,
+      -0.020194802433252335,
+      0.02489130198955536,
+      -0.00496614770963788,
+      -0.042698509991168976,
+      -0.01988743618130684,
+      0.028862152248620987,
+      -0.021457916125655174,
+      0.005496069323271513,
+      -0.029043862596154213,
+      -0.04410665109753609,
+      -0.043497733771800995,
+      -0.00838039256632328,
+      -0.030376147478818893,
+      -0.04701000079512596,
+      0.022278355434536934,
+      -0.022512542083859444,
+      -0.06041055545210838,
+      -0.01819848082959652,
+      -0.013757121749222279,
+      0.012536562979221344,
+      -0.011053965426981449,
+      -0.000862946966663003,
+      0.053332068026065826,
+      0.055574022233486176,
+      -0.0032990749459713697,
+      -0.05389508605003357,
+      -0.004385106265544891,
+      0.054739296436309814,
+      0.021883634850382805,
+      -0.0022951795253902674,
+      0.037814557552337646,
+      -0.030623046681284904,
+      -0.02158125303685665,
+      0.049792852252721786,
+      -0.03175217658281326,
+      -0.0077365003526210785,
+      -0.02373947575688362,
+      -0.019648905843496323,
+      0.006618363317102194,
+      0.008163753896951675,
+      0.04843588545918465,
+      0.029793355613946915,
+      0.03338196873664856,
+      0.009361452423036098,
+      -0.010414618998765945,
+      -0.004768962040543556,
+      -0.03382621705532074,
+      -0.014667296782135963,
+      -0.019132491201162338,
+      -0.00424595270305872,
+      -0.029047967866063118,
+      0.003429770702496171,
+      -0.00802405271679163,
+      -0.03513117507100105,
+      -0.021780284121632576,
+      0.02069992572069168,
+      0.06927269697189331,
+      -0.02828548662364483,
+      0.026706384494900703,
+      -0.011179585941135883,
+      -0.03265725448727608,
+      0.007002097088843584,
+      -0.03373345360159874,
+      -0.012302643619477749,
+      -0.014597691595554352,
+      0.04431954398751259,
+      -0.048709455877542496,
+      -0.007690419442951679,
+      -0.02751321904361248,
+      0.06359255313873291,
+      -0.020633071660995483,
+      0.029607851058244705,
+      0.009242519736289978,
+      -0.045965131372213364,
+      -0.018083998933434486,
+      -0.013616088777780533,
+      0.02714272029697895,
+      -0.0014880328672006726,
+      0.010502251796424389,
+      0.03399350866675377,
+      -0.005602817051112652,
+      0.02298150770366192,
+      -0.030287547037005424,
+      0.013020703569054604,
+      -0.00281923939473927,
+      0.00730410311371088,
+      -0.03625323995947838,
+      -0.010205691680312157,
+      -0.016982803121209145,
+      0.04428498446941376,
+      -0.010318119078874588,
+      0.00260771531611681,
+      0.025845356285572052,
+      0.006558223627507687,
+      0.027007929980754852,
+      -0.04217080399394035,
+      -0.024918649345636368,
+      -0.008285042829811573,
+      0.05386318266391754,
+      -0.034884534776210785,
+      0.0012185918167233467,
+      0.004610538482666016,
+      0.016023533418774605,
+      0.0581023171544075,
+      -0.018343167379498482,
+      0.046630412340164185,
+      -0.02660910226404667,
+      0.014793166890740395,
+      -0.08362103998661041,
+      0.0014252944383770227,
+      -0.005730224307626486,
+      -0.03096923604607582,
+      -0.017091892659664154,
+      -0.0031678166706115007,
+      -0.04317406564950943,
+      0.016029154881834984,
+      0.0413997657597065,
+      -0.016749707981944084,
+      0.0018415945814922452,
+      0.013736454769968987,
+      0.020817747339606285,
+      0.02582358755171299,
+      -0.030337652191519737,
+      0.041954364627599716,
+      0.06211032345890999,
+      -0.02720346488058567,
+      0.016434984281659126,
+      -0.0007719719433225691,
+      0.023985842242836952,
+      -0.011300099082291126,
+      -0.011873823590576649,
+      0.006848342716693878,
+      0.01306642685085535,
+      0.010704735293984413,
+      0.028667377308011055,
+      0.03348082676529884,
+      -0.034348320215940475,
+      -0.05199788510799408,
+      -0.015813278034329414,
+      -0.020093873143196106,
+      0.004913948476314545,
+      0.07369419932365417,
+      -0.0040013412944972515,
+      0.04767837002873421,
+      -0.004613509867340326,
+      -0.00035148276947438717,
+      -0.021711494773626328,
+      0.011699775233864784,
+      -0.03529924154281616,
+      0.006999804638326168,
+      -0.034817710518836975,
+      0.027903996407985687,
+      -0.002071182942017913,
+      0.04345003515481949,
+      0.0019662498962134123,
+      -0.010893186554312706,
+      0.001416870392858982,
+      -0.034200213849544525,
+      -0.04277084395289421,
+      -0.00837052520364523,
+      -0.013913027010858059,
+      0.03392183780670166,
+      0.03927339240908623,
+      0.012282665818929672,
+      0.04250289499759674,
+      -0.01629018783569336,
+      0.029641536995768547,
+      0.06791500002145767,
+      -0.020305784419178963,
+      -0.0395614393055439,
+      -0.0489242784678936,
+      -0.04917589947581291,
+      -0.004599597305059433,
+      -0.005655721295624971,
+      -0.07265246659517288,
+      0.002832507248967886,
+      -0.018893936648964882,
+      0.028300877660512924,
+      0.021558748558163643,
+      -0.006876831874251366,
+      0.051645077764987946,
+      -0.008303431794047356,
+      0.03465047851204872,
+      -0.061801452189683914,
+      -0.04542509466409683,
+      -0.003489273600280285,
+      0.05425768718123436,
+      0.0113333435729146,
+      -0.020655471831560135,
+      -0.016294457018375397,
+      -0.019193589687347412,
+      0.03302065283060074,
+      0.00030460787820629776,
+      0.02521340735256672,
+      0.02125631459057331,
+      -0.017704231664538383,
+      -0.04011169448494911,
+      0.018300876021385193,
+      -0.06846984475851059,
+      0.041300952434539795,
+      0.047409746795892715,
+      -0.01443423517048359,
+      0.028422510251402855,
+      -0.025504663586616516,
+      -0.03705507516860962,
+      -0.03161938115954399,
+      -0.03944329544901848,
+      0.00045365269761532545,
+      -0.019759973511099815,
+      -0.001344246556982398,
+      0.0032880124635994434,
+      0.02955908328294754,
+      -0.007992871105670929,
+      0.019129158928990364,
+      0.047185420989990234,
+      -0.03726237267255783,
+      0.026454366743564606,
+      -0.02905508689582348,
+      -0.03146408125758171,
+      -0.03301187977194786,
+      -0.019762489944696426,
+      -0.02206188440322876,
+      -0.034071724861860275,
+      0.01925709843635559,
+      -0.0020367943216115236,
+      0.006175986956804991,
+      -0.04182950779795647,
+      0.04499863088130951,
+      -0.020801763981580734,
+      -0.05284753441810608,
+      0.04604761302471161,
+      -0.039790522307157516,
+      0.014094332233071327,
+      -0.02793651632964611,
+      0.02678171917796135,
+      -0.05653510242700577,
+      -0.011383811943233013,
+      -0.019754085689783096,
+      0.030891360715031624,
+      -0.03281199559569359,
+      0.04770490154623985,
+      0.002128340071067214,
+      -0.04469704255461693,
+      0.007456973195075989,
+      -0.006726475898176432,
+      0.05931297689676285,
+      -0.01990116387605667,
+      0.02663647197186947,
+      -0.006576935760676861,
+      -0.0010638745734468102,
+      0.000412267487263307,
+      -0.01651412434875965,
+      -0.03835893049836159,
+      0.04561812803149223,
+      -0.03004390187561512,
+      -0.040077973157167435,
+      -0.01746414788067341,
+      -0.020630087703466415,
+      -0.014532176777720451,
+      -0.010426852852106094,
+      -0.0355551540851593,
+      0.058777932077646255,
+      0.00890569481998682,
+      0.0435328483581543,
+      0.022224146872758865,
+      -0.03600667417049408,
+      0.02541247196495533,
+      0.005028579384088516,
+      -0.028850428760051727,
+      0.005773239303380251,
+      -0.022758523002266884,
+      0.024050531908869743,
+      -0.0033857193775475025,
+      -0.03893120959401131,
+      0.005212271120399237,
+      -0.0014724634820595384,
+      -0.03026258572936058,
+      -0.014646993018686771,
+      0.010180966928601265,
+      0.0043843709863722324,
+      -0.04301408678293228,
+      0.026761086657643318,
+      -0.005141144618391991,
+      -3.1623135328118224e-06,
+      0.03805006295442581,
+      -0.01508917473256588,
+      0.029314881190657616,
+      0.03472646325826645,
+      0.030114682391285896,
+      0.005344553384929895,
+      -0.01989164389669895,
+      0.029101384803652763,
+      0.01005878672003746,
+      0.05336879566311836,
+      0.0332336500287056,
+      0.02340826392173767,
+      -0.03574734181165695,
+      0.011248073540627956,
+      -0.043630342930555344,
+      0.00012134711869293824,
+      -0.05815722420811653,
+      0.03762679919600487,
+      0.027111908420920372,
+      -0.03395748883485794,
+      -0.02415691874921322,
+      -0.002209360245615244,
+      0.008436919189989567,
+      0.005866092164069414,
+      0.033615611493587494,
+      -0.01653878390789032,
+      0.050552722066640854,
+      -0.021808084100484848,
+      -0.0328250378370285,
+      -0.013635535724461079,
+      -0.024773139506578445,
+      -0.013679273426532745,
+      -0.053654320538043976,
+      0.03920835256576538,
+      0.04145404323935509,
+      -0.009068041108548641,
+      0.019287923350930214,
+      0.030964845791459084,
+      0.006381001323461533,
+      0.02883499301970005,
+      0.0347176156938076,
+      -0.015887439250946045,
+      0.01308426633477211,
+      -0.007899653166532516,
+      0.028549809008836746,
+      0.044361844658851624,
+      0.0006847899057902396,
+      -0.036096975207328796,
+      -0.0066889929585158825,
+      0.036119990050792694,
+      -0.020580744370818138,
+      0.02311078831553459,
+      -0.00885905884206295,
+      -0.03205399960279465,
+      -0.03607398644089699,
+      0.02683059312403202,
+      0.02834281697869301,
+      0.020089631900191307,
+      -0.04320700839161873,
+      -0.045408956706523895,
+      0.02718336693942547,
+      0.009830178692936897,
+      -0.002306698588654399,
+      0.007603214588016272,
+      -0.017498118802905083,
+      -0.026539528742432594,
+      -0.06288765370845795,
+      0.014833584427833557
+    ],
+    "similarCases": []
   }
 }
