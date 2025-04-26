@@ -12,18 +12,32 @@ import { ArgumentationSection } from '@/components/argumentation-section';
 import { OutcomePrediction } from '@/components/outcome-prediction';
 import { fetchCaseById } from '@/lib/api';
 
-type CaseStatus = 'won' | 'lost' | 'in progress';
+type CaseStatus =
+    | 'in favour of defendant'
+    | 'in favour of plaintiff'
+    | 'settled'
+    | 'in progress first instance'
+    | 'dismissed'
+    | 'in progress appeal'
+    | 'in progress supreme court';
 
 const getStatusColor = (status: CaseStatus) => {
-    switch (status) {
-        case 'won':
+    const status_lower = status.toLowerCase();
+    if (status_lower.includes('in progress')) {
+        return 'bg-blue-500 hover:bg-blue-600';
+    }
+
+    switch (status_lower) {
+        case 'in favour of defendant':
             return 'bg-green-500 hover:bg-green-600';
-        case 'lost':
+        case 'in favour of plaintiff':
             return 'bg-red-500 hover:bg-red-600';
-        case 'in progress':
-            return 'bg-blue-500 hover:bg-blue-600';
+        case 'settled':
+            return 'bg-yellow-500 hover:bg-yellow-600';
+        case 'dismissed':
+            return 'bg-gray-500 hover:bg-gray-600';
         default:
-            return '';
+            return 'bg-gray-300 hover:bg-gray-400';
     }
 };
 
