@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 from typing import List, Dict, Optional, Any, Union
 from pydantic import BaseModel, Field
+from datetime import datetime  # Added import
 
 load_dotenv()
 class CaseInformation(BaseModel):
@@ -217,6 +218,7 @@ def merge_case_information(info_list):
         dict: A merged dictionary with all case information.
     """
     merged_info = {}
+    print(f"DEBUG: Starting merge_case_information with {len(info_list)} chunks.") # DEBUG log added
 
     # Fields that should be lists of unique items
     list_fields = ['Defect_Type', 'Plaintiff_Argumentation', 'Timeline_of_Events', 'Relevant_Laws']
@@ -233,9 +235,17 @@ def merge_case_information(info_list):
     # Handle Jurisdiction separately as it's now a dictionary
     jurisdiction_field = 'Jurisdiction'
 
+    chunk_index = 0
     for info in info_list:
+        chunk_index += 1
         if not info:
+            print(f"DEBUG: Chunk {chunk_index} is empty, skipping.")
             continue
+
+        # DEBUG log added for Filing_Date specifically
+        chunk_filing_date = info.get('Filing_Date', 'Not Present')
+        merged_filing_date_before = merged_info.get('Filing_Date', 'Not Present')
+        print(f"DEBUG: Chunk {chunk_index} - Filing_Date: '{chunk_filing_date}'. Merged Filing_Date before processing this chunk: '{merged_filing_date_before}'")
 
         # Process list fields
         for field in list_fields:
@@ -298,9 +308,20 @@ def merge_case_information(info_list):
 
         # Process single value fields
         for field in single_value_fields:
-            if field in info and info[field] and info[field] != "Not specified" and (field not in merged_info or merged_info[field] == "Not specified"):
-                merged_info[field] = info[field]
-        
+            if field in info and info[field] and info[field] != "Not specified":
+                if field not in merged_info or merged_info[field] == "Not specified":
+                    merged_info[field] = info[field]
+                    # DEBUG log added when Filing_Date is updated
+                    if field == 'Filing_Date':
+                        print(f"DEBUG: Chunk {chunk_index} - Updated merged Filing_Date to: '{merged_info[field]}'")
+                # DEBUG log added if Filing_Date is present but not updated
+                elif field == 'Filing_Date':
+                     print(f"DEBUG: Chunk {chunk_index} - Filing_Date '{info[field]}' present but not updating merged value '{merged_info[field]}'")
+            # DEBUG log added if Filing_Date is not present or 'Not specified' in chunk
+            elif field == 'Filing_Date':
+                 chunk_val = info.get(field, 'Not Present')
+                 print(f"DEBUG: Chunk {chunk_index} - Filing_Date '{chunk_val}' not valid for update.")
+
         # Process Jurisdiction field (now a dictionary)
         if jurisdiction_field in info and info[jurisdiction_field]:
             if jurisdiction_field not in merged_info:
@@ -376,6 +397,9 @@ def merge_case_information(info_list):
             'court_jurisdiction': 'Not specified'
         }
 
+    final_merged_filing_date = merged_info.get('Filing_Date', 'Not Present') # DEBUG log added
+    print(f"DEBUG: Finished merge. Final merged Filing_Date: '{final_merged_filing_date}'") # DEBUG log added
+
     return merged_info
 
 def clean_response(response_dict):
@@ -392,9 +416,51 @@ def clean_response(response_dict):
     if "Number_of_Claimants" in response_dict and isinstance(response_dict["Number_of_Claimants"], str):
         try:
             if response_dict["Number_of_Claimants"].isdigit():
-                response_dict["Number_of_Claimants"] = response_dict["Number_of_Claimants"]
+                pass  # Keep as string as per model definition
         except:
             pass
+
+    # Format Filing_Date
+    if "Filing_Date" in response_dict:
+        original_date_str = response_dict["Filing_Date"]
+        print(f"DEBUG: Initial Filing_Date from merge/LLM: '{original_date_str}' (type: {type(original_date_str)})") # DEBUG log added
+
+        if isinstance(original_date_str, str) and original_date_str != "Not specified":
+            # Attempt to parse common date formats
+            possible_formats = [
+                "%Y-%m-%d", "%m/%d/%Y", "%d-%b-%Y", "%B %d, %Y", "%d %B %Y",
+                "%Y/%m/%d", "%d.%m.%Y", "%m-%d-%Y", "%b %d, %Y"
+            ]
+            parsed_date = None
+            for fmt in possible_formats:
+                try:
+                    parsed_date = datetime.strptime(original_date_str, fmt)
+                    print(f"DEBUG: Successfully parsed Filing_Date '{original_date_str}' with format '{fmt}'") # DEBUG log added
+                    break # Stop if parsing is successful
+                except ValueError:
+                    continue # Try the next format
+
+            if parsed_date:
+                response_dict["Filing_Date"] = parsed_date.strftime("%Y-%m-%d")
+                print(f"DEBUG: Formatted Filing_Date to: '{response_dict['Filing_Date']}'") # DEBUG log added
+            else:
+                # If parsing fails with all formats, keep original or mark as unspecified?
+                # For now, keep the original string if unparseable, but log a warning?
+                print(f"Warning: Could not parse Filing_Date '{original_date_str}' into YYYY-MM-DD format. Keeping original.") # Changed log message slightly
+                # Optionally set back to "Not specified" if strict formatting is required
+                # response_dict["Filing_Date"] = "Not specified"
+        elif original_date_str is None or original_date_str == "": # Handle None or empty string explicitly
+             print("DEBUG: Filing_Date is None or empty string, setting to 'Not specified'")
+             response_dict["Filing_Date"] = "Not specified"
+        elif original_date_str == "Not specified":
+             print("DEBUG: Filing_Date was already 'Not specified'")
+        else:
+             print(f"DEBUG: Filing_Date is not a string or 'Not specified': '{original_date_str}'. Setting to 'Not specified'.")
+             response_dict["Filing_Date"] = "Not specified" # Ensure it's set if type is wrong
+
+    else:
+        print("DEBUG: Filing_Date key not found in response_dict, setting to 'Not specified'") # DEBUG log added
+        response_dict["Filing_Date"] = "Not specified" # Ensure field exists
 
     # Ensure dictionary fields have the correct structure
     dict_fields = ['Media_Coverage_Level', 'Expected_Brand_Impact', 'Brand_Impact_Estimate', 'Case_Win_Likelihood']
@@ -407,34 +473,38 @@ def clean_response(response_dict):
                     level_key = "impact"
                 else:
                     level_key = "level"
-                
+
                 response_dict[field] = {
                     level_key: response_dict[field],
                     "explanation": f"No detailed explanation provided for the {level_key}."
                 }
-    
-    # Ensure Reputation_Impact has the correct structure
+
+    # Ensure Reputation_Impact has the correct structure (Refactored)
+    final_reputation_impact = {
+        'case_outcome': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'},
+        'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
+    }
+
     if 'Reputation_Impact' in response_dict:
-        if isinstance(response_dict['Reputation_Impact'], str):
-            response_dict['Reputation_Impact'] = {
-                'case_outcome': {'impact': response_dict['Reputation_Impact'], 'explanation': 'No detailed explanation provided.'},
-                'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
-            }
-        elif isinstance(response_dict['Reputation_Impact'], dict) and not ('case_outcome' in response_dict['Reputation_Impact'] and 'media_coverage' in response_dict['Reputation_Impact']):
-            # If it's a dict but doesn't have the right structure
-            temp_impact = response_dict['Reputation_Impact'].get('impact', 'Not specified')
-            temp_explanation = response_dict['Reputation_Impact'].get('explanation', 'No detailed explanation provided.')
-            
-            response_dict['Reputation_Impact'] = {
-                'case_outcome': {'impact': temp_impact, 'explanation': temp_explanation},
-                'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
-            }
-    else:
-        response_dict['Reputation_Impact'] = {
-            'case_outcome': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'},
-            'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
-        }
-    
+        current_reputation = response_dict['Reputation_Impact']
+        if isinstance(current_reputation, str) and current_reputation != 'Not specified':
+            # If Reputation_Impact is a non-default string, use it for case_outcome
+            final_reputation_impact['case_outcome'] = {'impact': current_reputation, 'explanation': 'No detailed explanation provided.'}
+        elif isinstance(current_reputation, dict):
+            # Check if it has the correct nested structure
+            if 'case_outcome' in current_reputation and 'media_coverage' in current_reputation and isinstance(current_reputation['case_outcome'], dict) and isinstance(current_reputation['media_coverage'], dict):
+                # Assume it's correctly structured, use it directly
+                final_reputation_impact = current_reputation
+            else:
+                # If it's a dict but not nested correctly, try to salvage top-level info
+                temp_impact = current_reputation.get('impact', 'Not specified')
+                temp_explanation = current_reputation.get('explanation', 'No detailed explanation provided.')
+                if temp_impact != 'Not specified' or temp_explanation != 'No detailed explanation provided.':
+                     final_reputation_impact['case_outcome'] = {'impact': temp_impact, 'explanation': temp_explanation}
+                # Keep media_coverage as default
+
+    response_dict['Reputation_Impact'] = final_reputation_impact # Assign the processed structure
+
     # Ensure list fields have the correct structure
     list_fields = ['Defect_Type', 'Plaintiff_Argumentation', 'Timeline_of_Events', 'Relevant_Laws']
     for field in list_fields:
