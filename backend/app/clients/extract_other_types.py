@@ -20,6 +20,11 @@ class CaseInformation(BaseModel):
     Settlement_Amount: Optional[str] = None
     Defense_Cost_Estimate: Optional[str] = None
     Expected_Brand_Impact: Optional[Dict[str, str]] = None
+    Affected_Car: Optional[str] = None
+    Affected_Part: Optional[str] = None
+    Brand_Impact_Estimate: Optional[Dict[str, str]] = None
+    Case_Win_Likelihood: Optional[Dict[str, str]] = None
+    Plaintiff_Argumentation: Optional[List[str]] = None
     
 
 def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
@@ -46,10 +51,10 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
     prompt = (
         "Extract the following information from the legal case text provided. "
         "All fields are optional - include information that is explicitly mentioned in the text. "
-        "For certain fields like Expected_Brand_Impact and Media_Coverage_Level, make a reasonable inference based on the context and provide a detailed explanation for your assessment. "
+        "For certain fields like Expected_Brand_Impact, Brand_Impact_Estimate, Media_Coverage_Level, and Case_Win_Likelihood, make a reasonable inference based on the context and provide a detailed explanation for your assessment. "
         "If a piece of information appears multiple times, include all instances in a list. "
         "If information is not found for a field, use the exact string 'Not specified' as the value. "
-        "For list fields like Defect_Type, if no information is found, include a single item with value 'Not specified'. "
+        "For list fields like Defect_Type and Plaintiff_Argumentation, if no information is found, include a single item with value 'Not specified'. "
         "Return the output as a JSON object with the following structure and descriptions:\n\n"
         "{\n"
         "  'Case_ID': 'A unique identifier assigned to each legal case for tracking and reference purposes',\n"
@@ -62,12 +67,17 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
         "  'Time_to_Resolution_Months': 'The total duration, measured in months, from the case's filing date to its conclusion',\n"
         "  'Settlement_Amount': 'The amount of money paid by the defendant to the plaintiff(s) if the case was resolved through a settlement agreement',\n"
         "  'Defense_Cost_Estimate': 'The estimated total cost incurred by the defense, including legal fees, expert witness fees, and other litigation expenses',\n"
-        "  'Expected_Brand_Impact': {'impact': 'Low/Medium/High', 'explanation': 'Detailed explanation of why this impact level was assigned based on the case details'}\n"
+        "  'Expected_Brand_Impact': {'impact': 'Low/Medium/High', 'explanation': 'Detailed explanation of why this impact level was assigned based on the case details'},\n"
+        "  'Affected_Car': 'The specific car model or vehicle type that is involved in the case',\n"
+        "  'Affected_Part': 'The specific component or part of the vehicle that is alleged to be defective',\n"
+        "  'Brand_Impact_Estimate': {'impact': 'Low/Medium/High', 'explanation': 'Detailed assessment of how this case might affect the company's brand reputation'},\n"
+        "  'Case_Win_Likelihood': {'likelihood': 'Low/Medium/High', 'explanation': 'Assessment of how likely the defendant will win the case based on available information'},\n"
+        "  'Plaintiff_Argumentation': ['Key arguments made by the plaintiff in support of their case']\n"
         "}\n\n"
         "Important: For any field where information is not available in the text, use the exact string 'Not specified'. "
         "Do not break down strings into individual characters. For example, if Defect_Type is not specified, return ['Not specified'] not ['N','o','t',' ','s','p','e','c','i','f','i','e','d']. "
-        "For Expected_Brand_Impact and Media_Coverage_Level, provide a detailed explanation for your assessment. For example, if you assess Media_Coverage_Level as 'Low', explain why (e.g., 'The case appears to be a routine legal proceeding with limited public interest'). "
-        "If you cannot make a reasonable assessment, use {'level': 'Not specified', 'explanation': 'Insufficient information to determine media coverage'} or similar.\n\n"
+        "For Expected_Brand_Impact, Brand_Impact_Estimate, Media_Coverage_Level, and Case_Win_Likelihood, provide a detailed explanation for your assessment. "
+        "If you cannot make a reasonable assessment, use {'level': 'Not specified', 'explanation': 'Insufficient information to determine'} or similar.\n\n"
         + chunk
     )
 
@@ -145,9 +155,15 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
             if isinstance(value, list) and all(isinstance(item, str) and len(item) == 1 for item in value):
                 fixed_response[key] = [''.join(value)]
             # Handle dictionary fields
-            elif key in ['Media_Coverage_Level', 'Expected_Brand_Impact']:
+            elif key in ['Media_Coverage_Level', 'Expected_Brand_Impact', 'Brand_Impact_Estimate', 'Case_Win_Likelihood']:
                 if isinstance(value, str):
-                    level_key = "level" if key == "Media_Coverage_Level" else "impact"
+                    if key == 'Case_Win_Likelihood':
+                        level_key = "likelihood"
+                    elif key in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                        level_key = "impact"
+                    else:
+                        level_key = "level"
+                    
                     fixed_response[key] = {
                         level_key: value,
                         "explanation": f"No detailed explanation provided for the {level_key}."
@@ -192,17 +208,17 @@ def merge_case_information(info_list):
     merged_info = {}
 
     # Fields that should be lists of unique items
-    list_fields = ['Defect_Type']
+    list_fields = ['Defect_Type', 'Plaintiff_Argumentation']
 
     # Fields that are dictionaries with explanations
-    dict_fields = ['Media_Coverage_Level', 'Expected_Brand_Impact']
+    dict_fields = ['Media_Coverage_Level', 'Expected_Brand_Impact', 'Brand_Impact_Estimate', 'Case_Win_Likelihood']
 
     # Fields that should take the first non-empty value
     single_value_fields = [
         'Case_ID', 'Filing_Date', 'Jurisdiction',
         'Number_of_Claimants', 'Outcome',
         'Time_to_Resolution_Months', 'Settlement_Amount',
-        'Defense_Cost_Estimate'
+        'Defense_Cost_Estimate', 'Affected_Car', 'Affected_Part'
     ]
 
     for info in info_list:
@@ -225,16 +241,24 @@ def merge_case_information(info_list):
             if field in info and info[field]:
                 # If the field is a string, convert it to a dictionary
                 if isinstance(info[field], str):
-                    level_key = "level" if field == "Media_Coverage_Level" else "impact"
+                    if field == 'Case_Win_Likelihood':
+                        level_key = "likelihood"
+                    elif field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                        level_key = "impact"
+                    else:
+                        level_key = "level"
+                        
                     info[field] = {
                         level_key: info[field],
                         "explanation": f"No detailed explanation provided for the {level_key}."
                     }
 
                 # If this is the first instance or has a better explanation
+                level_key = "likelihood" if field == 'Case_Win_Likelihood' else "impact" if field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate'] else "level"
+                
                 if (field not in merged_info or
                     isinstance(merged_info[field], str) or
-                    merged_info[field].get('level' if field == 'Media_Coverage_Level' else 'impact') == 'Not specified' or
+                    merged_info[field].get(level_key) == 'Not specified' or
                         (len(info[field].get('explanation', '')) > len(merged_info[field].get('explanation', '')))):
                     merged_info[field] = info[field]
 
@@ -255,20 +279,31 @@ def merge_case_information(info_list):
     # Add default dictionaries for missing dict fields
     for field in dict_fields:
         if field not in merged_info:
-            level_key = "level" if field == "Media_Coverage_Level" else "impact"
+            if field == 'Case_Win_Likelihood':
+                level_key = "likelihood"
+            elif field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                level_key = "impact"
+            else:
+                level_key = "level"
+                
             merged_info[field] = {
                 level_key: "Not specified",
                 "explanation": "Insufficient information to determine"
             }
         elif isinstance(merged_info[field], str):
-            level_key = "level" if field == "Media_Coverage_Level" else "impact"
+            if field == 'Case_Win_Likelihood':
+                level_key = "likelihood"
+            elif field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                level_key = "impact"
+            else:
+                level_key = "level"
+                
             merged_info[field] = {
                 level_key: merged_info[field],
                 "explanation": f"No detailed explanation provided for the {level_key}."
             }
 
     return merged_info
-
 def clean_response(response_dict):
     """
     Cleans the response dictionary to ensure consistent formatting.
@@ -287,15 +322,34 @@ def clean_response(response_dict):
         except:
             pass
 
-    # Ensure Media_Coverage_Level and Expected_Brand_Impact have the correct structure
-    for field in ['Media_Coverage_Level', 'Expected_Brand_Impact']:
+    # Ensure dictionary fields have the correct structure
+    dict_fields = ['Media_Coverage_Level', 'Expected_Brand_Impact', 'Brand_Impact_Estimate', 'Case_Win_Likelihood']
+    for field in dict_fields:
         if field in response_dict:
             if isinstance(response_dict[field], str):
-                level_key = "level" if field == "Media_Coverage_Level" else "impact"
+                if field == 'Case_Win_Likelihood':
+                    level_key = "likelihood"
+                elif field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                    level_key = "impact"
+                else:
+                    level_key = "level"
+                
                 response_dict[field] = {
                     level_key: response_dict[field],
                     "explanation": f"No detailed explanation provided for the {level_key}."
                 }
+    
+    # Ensure list fields have the correct structure
+    list_fields = ['Defect_Type', 'Plaintiff_Argumentation']
+    for field in list_fields:
+        if field in response_dict:
+            if not isinstance(response_dict[field], list):
+                if response_dict[field] == "Not specified":
+                    response_dict[field] = ["Not specified"]
+                else:
+                    response_dict[field] = [response_dict[field]]
+            elif len(response_dict[field]) == 0:
+                response_dict[field] = ["Not specified"]
 
     return response_dict
 
