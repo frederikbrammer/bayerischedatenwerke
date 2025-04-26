@@ -171,7 +171,7 @@ export function CaseTable({ searchQuery }: CaseTableProps) {
                                 className='p-0 font-medium'
                                 onClick={() => handleSort('title')}
                             >
-                                Title <SortIcon field='title' />
+                                Case <SortIcon field='title' />
                             </Button>
                         </TableHead>
                         <TableHead>

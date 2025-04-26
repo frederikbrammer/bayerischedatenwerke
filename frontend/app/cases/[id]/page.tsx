@@ -131,53 +131,61 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                     </Button>
                 </div>
 
-                <div className='flex justify-between items-center mb-6'>
+                <div className='flex flex-col items-left mb-6'>
                     <div>
                         <h1 className='text-3xl font-bold'>{caseData.title}</h1>
                         <p className='text-muted-foreground'>
                             Filed on {formatDate(caseData.date)}
                         </p>
                     </div>
-                    <div className='flex gap-2'>
-                        {caseData.caseWinLikelihood && (
-                            <Badge
-                                className={
-                                    caseData.caseWinLikelihood.likelihood ===
-                                    'High'
-                                        ? 'bg-red-500 hover:bg-red-600'
-                                        : caseData.caseWinLikelihood
-                                              .likelihood === 'Medium'
-                                        ? 'bg-yellow-500 hover:bg-yellow-600'
-                                        : 'bg-green-500 hover:bg-green-600'
-                                }
-                            >
-                                Risk: {caseData.caseWinLikelihood.likelihood}
-                            </Badge>
-                        )}
-                        {caseData.brandImpactEstimate && (
-                            <Badge
-                                className={
-                                    caseData.brandImpactEstimate.impact ===
-                                    'High'
-                                        ? 'bg-red-500 hover:bg-red-600'
-                                        : caseData.brandImpactEstimate
-                                              .impact === 'Medium'
-                                        ? 'bg-yellow-500 hover:bg-yellow-600'
-                                        : 'bg-green-500 hover:bg-green-600'
-                                }
-                            >
-                                Brand Impact:{' '}
-                                {caseData.brandImpactEstimate.impact}
-                            </Badge>
-                        )}
-                        <Badge
-                            className={getStatusColor(
-                                caseData.status as CaseStatus
+                    <div className='flex items-center justify-between pt-2 w-full'>
+                        <div className='flex gap-2'>
+                            {caseData.caseWinLikelihood && (
+                                <Badge
+                                    className={
+                                        caseData.caseWinLikelihood.likelihood ===
+                                        'High'
+                                            ? 'bg-red-500 hover:bg-red-600'
+                                            : caseData.caseWinLikelihood
+                                                  .likelihood === 'Medium'
+                                            ? 'bg-yellow-500 hover:bg-yellow-600'
+                                            : 'bg-green-500 hover:bg-green-600'
+                                    }
+                                >
+                                    Risk: {caseData.caseWinLikelihood.likelihood}
+                                </Badge>
                             )}
-                        >
-                            {caseData.status.charAt(0).toUpperCase() +
-                                caseData.status.slice(1)}
-                        </Badge>
+                            {caseData.brandImpactEstimate && (
+                                <Badge
+                                    className={
+                                        caseData.brandImpactEstimate.impact ===
+                                        'High'
+                                            ? 'bg-red-500 hover:bg-red-600'
+                                            : caseData.brandImpactEstimate
+                                                  .impact === 'Medium'
+                                            ? 'bg-yellow-500 hover:bg-yellow-600'
+                                            : 'bg-green-500 hover:bg-green-600'
+                                    }
+                                >
+                                    Brand Impact:{' '}
+                                    {caseData.brandImpactEstimate.impact}
+                                </Badge>
+                            )}
+                            <Badge
+                                className={getStatusColor(
+                                    caseData.status as CaseStatus
+                                )}
+                            >
+                                {caseData.status.charAt(0).toUpperCase() +
+                                    caseData.status.slice(1)}
+                            </Badge>
+                        </div>
+                        <Button variant='default' size='sm' className='bg-black hover:bg-black text-white'>
+                            <span className='flex items-center gap-1'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m7-7H5"/></svg>
+                                Upload document
+                            </span>
+                        </Button>
                     </div>
                 </div>
 
