@@ -119,13 +119,17 @@ async def create_case(files: List[UploadFile] = File(None)):
 
     print(extracted_text)
 
+    
     extract_case_type_response = extract_case_type(extracted_text)
     extract_other_types_response = extract_other_types(extracted_text)
+
 
     print(extract_case_type_response)
     print(extract_other_types_response)
 
+
     print("Extracted Case Type Response:")
+
 
     # Parse the data from extract_case_type_response
     case_type = extract_case_type_response.primary_analysis.case_type
@@ -134,8 +138,10 @@ async def create_case(files: List[UploadFile] = File(None)):
     description = extract_case_type_response.primary_analysis.description
     secondary_types = extract_case_type_response.primary_analysis.secondary_types or []
 
+
     # Parse possible alternatives from extract_case_type_response
     possible_alternatives = extract_case_type_response.possible_alternatives or []
+
 
     # Parse the data from extract_other_types_response
     case_id = extract_other_types_response.Case_ID
@@ -149,7 +155,14 @@ async def create_case(files: List[UploadFile] = File(None)):
     settlement_amount = extract_other_types_response.Settlement_Amount
     defense_cost_estimate = extract_other_types_response.Defense_Cost_Estimate
     expected_brand_impact = extract_other_types_response.Expected_Brand_Impact
-    
+
+    # Parse the new information from extract_other_types_response
+    affected_car = extract_other_types_response.Affected_Car
+    affected_part = extract_other_types_response.Affected_Part
+    brand_impact_estimate = extract_other_types_response.Brand_Impact_Estimate
+    case_win_likelihood = extract_other_types_response.Case_Win_Likelihood
+    plaintiff_argumentation = extract_other_types_response.Plaintiff_Argumentation or []
+
     # Print parsed variables for debugging (optional)
     print("Parsed Case Type Response:")
     print(f"Case Type: {case_type}")
@@ -158,6 +171,7 @@ async def create_case(files: List[UploadFile] = File(None)):
     print(f"Description: {description}")
     print(f"Secondary Types: {secondary_types}")
     print(f"Possible Alternatives: {possible_alternatives}")
+
 
     print("\nParsed Other Types Response:")
     print(f"Case ID: {case_id}")
@@ -171,8 +185,16 @@ async def create_case(files: List[UploadFile] = File(None)):
     print(f"Settlement Amount: {settlement_amount}")
     print(f"Defense Cost Estimate: {defense_cost_estimate}")
     print(f"Expected Brand Impact: {expected_brand_impact}")
-    
-    
+
+    # Print the new information
+    print("\nNew Information:")
+    print(f"Affected Car: {affected_car}")
+    print(f"Affected Part: {affected_part}")
+    print(f"Brand Impact Estimate: {brand_impact_estimate}")
+    print(f"Case Win Likelihood: {case_win_likelihood}")
+    print(f"Plaintiff Argumentation: {plaintiff_argumentation}")
+
+
     # Generate case metadata from extracted text
     today = datetime.now().strftime("%Y-%m-%d")
 
@@ -202,6 +224,14 @@ async def create_case(files: List[UploadFile] = File(None)):
             "event": "Case created",
             "description": "Initial case documents uploaded"
         }],
+        "offenseArgumentation": plaintiff_argumentation,
+        "timeline": [
+            {
+                "date": today,
+                "event": "Case created",
+                "description": "Initial case documents uploaded",
+            }
+        ],
         "offenseArgumentation": extracted_text,
         "defenseArgumentation": None,
         "suggestions": [],
