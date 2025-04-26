@@ -4,9 +4,16 @@ from pydantic import BaseModel, Field
 import requests
 from dotenv import load_dotenv
 import os
+import re
 
 load_dotenv()
-# Define the data model for case analysis
+
+# Define the data model for case analysis with evidence extraction
+class Evidence(BaseModel):
+    text: str = Field(description="The specific text from the document that serves as evidence")
+    relevance: str = Field(description="Why this evidence is relevant to the case analysis")
+    strength: str = Field(description="Assessment of the evidence strength (strong, moderate, weak)")
+
 class CaseAnalysis(BaseModel):
     case_type: str = Field(description="The primary legal case type")
     harm_type: str = Field(
@@ -16,6 +23,8 @@ class CaseAnalysis(BaseModel):
         description="Legal analysis of the case with relevant precedents and statutes")
     secondary_types: Optional[List[str]] = Field(
         default=None, description="Additional relevant case types")
+    evidence: Optional[List[Evidence]] = Field(
+        default=None, description="Key evidence extracted from the document")
 
 class CaseAnalysisResponse(BaseModel):
     primary_analysis: CaseAnalysis
@@ -23,7 +32,7 @@ class CaseAnalysisResponse(BaseModel):
 
 def call_azure_openai_analyzer(chunk):
     """
-    Analyzes legal text using Azure OpenAI API with GPT-4o to identify case type, harm, and cause.
+    Analyzes legal text using Azure OpenAI API with GPT-4o to identify case type, harm, cause, and extract evidence.
 
     Args:
         chunk (str): The text chunk to process.
@@ -42,6 +51,7 @@ def call_azure_openai_analyzer(chunk):
     
     prompt = (
         "Analyze the following legal text and classify it based on case type, harm, and cause. "
+        "Also extract key evidence from the text. "
         "Return a structured analysis in JSON format according to these guidelines:\n\n"
 
         "HARM CLASSIFICATION:\n"
@@ -74,6 +84,12 @@ def call_azure_openai_analyzer(chunk):
         "- Unlicensed Technology Use: Using patented tech without permission\n"
         "- Workplace Misconduct: Discrimination, harassment, or unlawful termination\n\n"
 
+        "EVIDENCE EXTRACTION:\n"
+        "- Identify 3-5 key pieces of evidence from the text that support your analysis\n"
+        "- For each piece of evidence, extract the exact text, explain its relevance, and assess its strength\n"
+        "- Evidence strength should be categorized as 'strong', 'moderate', or 'weak'\n"
+        "- Focus on facts, dates, statements, or descriptions that directly support the case classification\n\n"
+
         "DECISION FLOW:\n"
         "1. First identify the type of harm (physical, financial, privacy, environmental, employment)\n"
         "2. Based on harm type, determine the most likely case type:\n"
@@ -100,14 +116,28 @@ def call_azure_openai_analyzer(chunk):
         "    'harm_type': 'Type of harm caused',\n"
         "    'cause': 'Specific cause of the harm',\n"
         "    'description': 'Legal analysis with relevant standards and precedents',\n"
-        "    'secondary_types': ['Additional relevant case types']\n"
+        "    'secondary_types': ['Additional relevant case types'],\n"
+        "    'evidence': [\n"
+        "      {\n"
+        "        'text': 'Extracted text from document',\n"
+        "        'relevance': 'Why this evidence matters',\n"
+        "        'strength': 'strong/moderate/weak'\n"
+        "      }\n"
+        "    ]\n"
         "  },\n"
         "  'possible_alternatives': [\n"
         "    {\n"
         "      'case_type': 'Alternative case type',\n"
         "      'harm_type': 'Alternative harm type',\n"
         "      'cause': 'Alternative cause',\n"
-        "      'description': 'Legal analysis of why this might also apply'\n"
+        "      'description': 'Legal analysis of why this might also apply',\n"
+        "      'evidence': [\n"
+        "        {\n"
+        "          'text': 'Extracted text from document',\n"
+        "          'relevance': 'Why this evidence matters',\n"
+        "          'strength': 'strong/moderate/weak'\n"
+        "        }\n"
+        "      ]\n"
         "    }\n"
         "  ]\n"
         "}\n\n"
@@ -150,7 +180,6 @@ def call_azure_openai_analyzer(chunk):
             return json.dumps(case_analysis)
         except json.JSONDecodeError:
             # If direct parsing fails, try to extract JSON from the text
-            import re
             json_match = re.search(r'(\{.*\})', generated_text, re.DOTALL)
             if json_match:
                 case_analysis = json.loads(json_match.group(1))
@@ -165,7 +194,8 @@ def call_azure_openai_analyzer(chunk):
                 "case_type": "Error",
                 "harm_type": "Unknown",
                 "cause": "Processing error",
-                "description": f"Failed to analyze: {str(e)}"
+                "description": f"Failed to analyze: {str(e)}",
+                "evidence": []
             }
         })
 
@@ -175,13 +205,13 @@ def split_text_into_chunks(text, chunk_size=2000):
 
 def extract_case_type(extracted_text: str) -> CaseAnalysisResponse:
     """
-    Extracts case type and related information from the provided text.
+    Extracts case type, related information, and evidence from the provided text.
 
     Args:
         extracted_text (str): The text to analyze.
 
     Returns:
-        CaseAnalysisResponse: The structured case analysis.
+        CaseAnalysisResponse: The structured case analysis with evidence.
     """
     # Split the text into manageable chunks
     chunks = split_text_into_chunks(extracted_text)

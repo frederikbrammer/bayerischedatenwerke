@@ -66,7 +66,6 @@ async def get_case(case_id: str):
         raise HTTPException(status_code=404, detail="Case not found")
     return case
 
-
 @router.post("/", response_model=CaseResponse)
 async def create_case(files: List[UploadFile] = File(None)):
     """
@@ -134,9 +133,20 @@ async def create_case(files: List[UploadFile] = File(None)):
     cause = extract_case_type_response.primary_analysis.cause
     description = extract_case_type_response.primary_analysis.description
     secondary_types = extract_case_type_response.primary_analysis.secondary_types or []
+    
+    # Extract evidence from the primary analysis
+    evidence = extract_case_type_response.primary_analysis.evidence or []
 
     # Parse possible alternatives from extract_case_type_response
     possible_alternatives = extract_case_type_response.possible_alternatives or []
+    
+    # Extract evidence from possible alternatives if available
+    for alt in possible_alternatives:
+        if hasattr(alt, 'evidence') and alt.evidence:
+            # Add evidence from alternatives to a separate field if needed
+            alt_evidence = alt.evidence
+        else:
+            alt_evidence = []
 
     # Parse the data from extract_other_types_response
     case_id_from_extract = extract_other_types_response.Case_ID
@@ -226,6 +236,7 @@ async def create_case(files: List[UploadFile] = File(None)):
     print(f"Cause: {cause}")
     print(f"Description: {description}")
     print(f"Secondary Types: {secondary_types}")
+    print(f"Evidence: {evidence}")
     print(f"Possible Alternatives: {possible_alternatives}")
 
     print("\nParsed Other Types Response:")
@@ -312,15 +323,6 @@ async def create_case(files: List[UploadFile] = File(None)):
     # Process timeline events to extract dates
     processed_timeline = []
 
-    # Add the case creation event
-    # processed_timeline.append(
-    #     {
-    #         "date": today,
-    #         "event": "Case created",
-    #         "description": "Initial case documents uploaded",
-    #     }
-    # )
-
     # Process the extracted timeline events
     for event in timeline_of_events:
         if event != "Not specified":
@@ -351,6 +353,16 @@ async def create_case(files: List[UploadFile] = File(None)):
                 }
             )
 
+    # Process evidence for storage in the database
+    processed_evidence = []
+    if evidence:
+        for item in evidence:
+            processed_evidence.append({
+                "text": item.text if hasattr(item, 'text') else item.get('text', ''),
+                "relevance": item.relevance if hasattr(item, 'relevance') else item.get('relevance', ''),
+                "strength": item.strength if hasattr(item, 'strength') else item.get('strength', '')
+            })
+
     # Create a new case object with updated field names
     new_case = {
         "id": case_id,
@@ -365,6 +377,7 @@ async def create_case(files: List[UploadFile] = File(None)):
         "description": description,
         "secondaryTypes": secondary_types,
         "possibleAlternatives": possible_alternatives,
+        "evidence": processed_evidence,  # Add the evidence to the case
         "date": filing_date,
         "relevantLaws": relevant_laws if relevant_laws != ["Not specified"] else [],
         "timeline": processed_timeline,
