@@ -42,15 +42,22 @@ const getStatusColor = (status: CaseStatus) => {
 };
 
 const getStatusIcon = (status: CaseStatus) => {
-    switch (status) {
-        case 'won':
+    const status_lower = status.toLowerCase();
+    if (status_lower.includes('in progress')) {
+        return <Clock className='h-5 w-5 text-blue-500' />;
+    }
+
+    switch (status_lower) {
+        case 'in favour of defendant':
             return <CheckCircle className='h-5 w-5 text-green-500' />;
-        case 'lost':
+        case 'in favour of plaintiff':
             return <AlertCircle className='h-5 w-5 text-red-500' />;
-        case 'in progress':
-            return <Clock className='h-5 w-5 text-blue-500' />;
+        case 'settled':
+            return <Clock className='h-5 w-5 text-yellow-500' />;
+        case 'dismissed':
+            return <Info className='h-5 w-5 text-gray-500' />;
         default:
-            return <Info className='h-5 w-5' />;
+            return <Info className='h-5 w-5 text-gray-300' />;
     }
 };
 
@@ -696,7 +703,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                         <CardContent>
                             <ArgumentationSection
                                 offenseArgumentation={
-                                    caseData.offenseArgumentation
+                                    caseData.plaintiffArgumentation
                                 }
                                 defenseArgumentation={
                                     caseData.defenseArgumentation
@@ -705,30 +712,6 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             />
                         </CardContent>
                     </Card>
-
-                    {/* Plaintiff Argumentation Section */}
-                    {caseData.plaintiffArgumentation &&
-                        Array.isArray(caseData.plaintiffArgumentation) &&
-                        caseData.plaintiffArgumentation.length > 0 &&
-                        caseData.plaintiffArgumentation[0] !==
-                            'Not specified' && (
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>
-                                        Plaintiff Argumentation
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <ul className='list-disc pl-5 space-y-3'>
-                                        {caseData.plaintiffArgumentation.map(
-                                            (argument, index) => (
-                                                <li key={index}>{argument}</li>
-                                            )
-                                        )}
-                                    </ul>
-                                </CardContent>
-                            </Card>
-                        )}
 
                     {/* Outcome Prediction Section */}
                     <Card>
