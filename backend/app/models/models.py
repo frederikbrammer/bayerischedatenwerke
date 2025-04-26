@@ -38,7 +38,7 @@ class Case(BaseModel):
     outcomePrediction: Optional[OutcomePrediction] = None
     # Additional fields from extract_other_types.py
     defectType: Optional[List[str]] = None
-    numberOfClaimants: Optional[int] = None
+    numberOfClaimants: Optional[str] = None
     mediaCoverageLevel: Optional[Dict] = None
     outcome: Optional[str] = None
     timeToResolutionMonths: Optional[str] = None
