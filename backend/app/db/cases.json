@@ -2,7 +2,7 @@
   "1": {
     "id": "1",
     "title": "Smith v. Bayersche Motors",
-    "status": "won",
+    "status": "In favour of defendant",
     "jurisdiction": "California",
     "caseType": "Liability",
     "date": "2023-05-15",
@@ -53,7 +53,7 @@
   "2": {
     "id": "2",
     "title": "Johnson Family Trust v. Bayersche",
-    "status": "lost",
+    "status": "In favour of plaintiff",
     "jurisdiction": "New York",
     "caseType": "Liability",
     "date": "2023-08-22",
@@ -104,7 +104,7 @@
   "3": {
     "id": "3",
     "title": "Martinez Product Liability Claim",
-    "status": "in progress",
+    "status": "In Progress first instance",
     "jurisdiction": "Texas",
     "caseType": "Liability",
     "date": "2024-01-10",
@@ -145,7 +145,7 @@
   "4": {
     "id": "4",
     "title": "Williams Class Action",
-    "status": "in progress",
+    "status": "In Progress appeal",
     "jurisdiction": "Florida",
     "caseType": "Liability",
     "date": "2024-02-28",
@@ -186,7 +186,7 @@
   "5": {
     "id": "5",
     "title": "Garcia v. Bayersche Manufacturing",
-    "status": "won",
+    "status": "In favour of defendant",
     "jurisdiction": "Michigan",
     "caseType": "Liability",
     "date": "2023-11-05",
@@ -234,28 +234,182 @@
       "winProbability": "80%"
     }
   },
-  "1b72ea0f": {
-    "id": "1b72ea0f",
-    "title": " \n    \nv.         ",
-    "status": "settled",
-    "jurisdiction": "Ohio - Franklin County Municipal Court",
-    "stateJurisdiction": "Ohio",
-    "courtJurisdiction": "Franklin County Municipal Court",
-    "caseType": "Breach of Contract",
+  "6": {
+    "id": "6",
+    "title": "Rodriguez Consumer Protection Suit",
+    "status": "Settled",
+    "jurisdiction": "Arizona",
+    "caseType": "Consumer Protection",
+    "date": "2023-12-18",
+    "relevantLaws": [
+      "Arizona Consumer Fraud Act",
+      "Arizona Lemon Law"
+    ],
+    "timeline": [
+      {
+        "date": "2023-08-03",
+        "event": "Initial complaint filed",
+        "description": "Plaintiff alleged misleading advertising about vehicle range"
+      },
+      {
+        "date": "2023-09-15",
+        "event": "Response filed",
+        "description": "Bayersche filed response contesting allegations"
+      },
+      {
+        "date": "2023-11-10",
+        "event": "Settlement negotiations",
+        "description": "Parties entered mediation to discuss settlement"
+      },
+      {
+        "date": "2023-12-18",
+        "event": "Settlement reached",
+        "description": "Case settled with confidential terms"
+      }
+    ],
+    "offenseArgumentation": "The plaintiff alleged that Bayersche's advertising misrepresented the real-world range of their electric vehicles, constituting false advertising under Arizona law.",
+    "defenseArgumentation": "Our defense maintained that range estimates were based on standard testing protocols and that variables affecting real-world performance were properly disclosed in marketing materials and owner documentation.",
+    "suggestions": [
+      "Review marketing materials to ensure clearer disclaimers about factors affecting range",
+      "Consider more conservative range estimates in future advertising",
+      "Develop customer education about maximizing range in various conditions"
+    ],
+    "outcomePrediction": {
+      "cost": "$175,000 - $225,000",
+      "reputationalLoss": "Medium",
+      "winProbability": "55%"
+    }
+  },
+  "7": {
+    "id": "7",
+    "title": "Thompson v. Bayersche Technologies",
+    "status": "Dismissed",
+    "jurisdiction": "Washington",
+    "caseType": "Product Liability",
+    "date": "2024-03-05",
+    "relevantLaws": [
+      "Washington Product Liability Act",
+      "Washington Consumer Protection Act"
+    ],
+    "timeline": [
+      {
+        "date": "2024-01-20",
+        "event": "Initial complaint filed",
+        "description": "Plaintiff alleged software defect causing navigation errors"
+      },
+      {
+        "date": "2024-02-12",
+        "event": "Motion to dismiss filed",
+        "description": "Bayersche filed motion to dismiss based on lack of standing"
+      },
+      {
+        "date": "2024-03-05",
+        "event": "Case dismissed",
+        "description": "Court dismissed the case for lack of evidence of actual harm"
+      }
+    ],
+    "offenseArgumentation": "The plaintiff claimed that software defects in the navigation system created safety hazards by providing incorrect directions and distracting the driver.",
+    "defenseArgumentation": "Our defense successfully argued that the plaintiff failed to demonstrate any actual harm resulting from the alleged navigation errors, and that software updates had already addressed the reported issues.",
+    "suggestions": [
+      "Use similar standing arguments in future software-related cases",
+      "Emphasize over-the-air update capabilities as mitigating factors",
+      "Maintain detailed records of software improvements and bug fixes"
+    ],
+    "outcomePrediction": {
+      "cost": "$85,000 - $120,000",
+      "reputationalLoss": "Low",
+      "winProbability": "90%"
+    }
+  },
+  "8": {
+    "id": "8",
+    "title": "Patel v. Bayersche International",
+    "status": "In Progress Supreme Court",
+    "jurisdiction": "Federal",
+    "caseType": "Patent Infringement",
+    "date": "2024-04-10",
+    "relevantLaws": [
+      "U.S. Patent Act",
+      "Federal Rules of Civil Procedure"
+    ],
+    "timeline": [
+      {
+        "date": "2022-05-18",
+        "event": "Initial complaint filed",
+        "description": "Plaintiff alleged infringement of battery management patents"
+      },
+      {
+        "date": "2022-07-25",
+        "event": "Response filed",
+        "description": "Bayersche filed response denying infringement"
+      },
+      {
+        "date": "2023-03-12",
+        "event": "District court ruling",
+        "description": "District court ruled in favor of Bayersche"
+      },
+      {
+        "date": "2023-05-30",
+        "event": "Appeal filed",
+        "description": "Plaintiff appealed to Circuit Court"
+      },
+      {
+        "date": "2023-11-15",
+        "event": "Circuit court reversal",
+        "description": "Circuit court reversed district court decision"
+      },
+      {
+        "date": "2024-01-22",
+        "event": "Supreme Court petition",
+        "description": "Bayersche filed petition for Supreme Court review"
+      },
+      {
+        "date": "2024-04-10",
+        "event": "Certiorari granted",
+        "description": "Supreme Court agreed to hear the case"
+      }
+    ],
+    "offenseArgumentation": "The plaintiff claims that Bayersche's battery management system infringes on their patents for thermal regulation and charge optimization technology.",
+    "defenseArgumentation": "Our defense maintains that our battery management technology was independently developed, uses different technical approaches, and that the plaintiff's patents are overly broad and potentially invalid.",
+    "suggestions": [
+      "Prepare comprehensive technical comparison showing independent development",
+      "Consider patent invalidation strategy based on prior art",
+      "Evaluate potential licensing options as fallback position"
+    ],
+    "outcomePrediction": {
+      "cost": "$3,500,000 - $5,000,000",
+      "reputationalLoss": "Medium",
+      "winProbability": "65%"
+    }
+  },
+  "9c79b44f": {
+    "id": "9c79b44f",
+    "title": "  v.  UNITED STATES",
+    "status": "In Progress first instance",
+    "jurisdiction": "New York - U.S. Court of Appeals for the Federal Circuit",
+    "stateJurisdiction": "New York",
+    "courtJurisdiction": "U.S. Court of Appeals for the Federal Circuit",
+    "caseType": "IP Disputes",
     "harmType": "Financial harm",
     "cause": "Contract Breach",
-    "description": "In the case of Autovest, L.L.C. v. Ruff, the plaintiff, Autovest, alleges that the defendants, Gerry and Adrienne Ruff, defaulted on a promissory note executed on October 17, 2014, with an original sum of $20,488.81. The legal standard for breach of contract requires the plaintiff to demonstrate the existence of a valid contract, the defendant's breach of that contract, and resultant damages. Autovest has provided evidence of the promissory note and the default, which establishes the basis for its claim. The defendants' failure to fulfill the terms of the note constitutes a breach, thereby entitling Autovest to seek recovery of the owed amount, including interest. The burden of proof lies with Autovest to establish the breach and the amount due, while the defendants may raise defenses related to the enforceability of the note or any alleged agreements that may have modified the original terms.",
+    "description": "In the case of BMW of North America LLC v. United States, the plaintiff challenges the final determination of the U.S. Department of Commerce regarding antidumping duties on ball bearings and parts from the United Kingdom. The legal analysis centers on the implications of antidumping duties, which are designed to protect domestic industries from foreign competition that is unfairly priced. The plaintiff must demonstrate that the duties imposed are not in accordance with the law, potentially invoking the Administrative Procedure Act (APA) and relevant trade statutes. The burden of proof lies with the plaintiff to show that the Department of Commerce's determination was arbitrary, capricious, or otherwise not in accordance with law. Precedent cases such as Chevron U.S.A. Inc. v. Natural Resources Defense Council, Inc. may be relevant in assessing the standard of review applicable to agency determinations.",
     "secondaryTypes": [],
     "possibleAlternatives": [],
-    "date": "December 15, 2021",
+    "date": "Not specified",
     "relevantLaws": [
-      "Civ.R. 56 (Ohio Civil Rule for Summary Judgment)",
-      "Civ.R. 56(C) - Standard for summary judgment",
-      "Ohio case law regarding evidentiary standards in summary judgment",
-      "Civ.R. 36",
-      "Civ.R. 56",
-      "Ohio law regarding pro se litigants",
-      "Ohio Rules of Civil Procedure, Civ.R. 36"
+      "Antidumping Duty Orders",
+      "U.S. International Trade Commission regulations",
+      "19 U.S.C. \u00a7 1516a",
+      "28 U.S.C. \u00a7 1581(c)",
+      "Trade Preferences Extension Act of 2015",
+      "19 U.S.C. \u00a7 1677e",
+      "Trade Preferences Extension Act (TPEA)",
+      "Administrative Procedure Act",
+      "Landgraf v. USI Film Products",
+      "19 U.S.C. \u00a7 1677e(c)",
+      "Statement of Administrative Action Accompanying Uruguay Round Agreements Act",
+      "19 U.S.C. \u00a7 1675",
+      "Uruguay Round Agreements Act"
     ],
     "timeline": [
       {
@@ -265,138 +419,140 @@
       },
       {
         "date": "Unknown",
-        "event": "December 15, 2021: Autovest filed a complaint.",
+        "event": "1989: Commerce issued an antidumping duty order on ball bearings from the United Kingdom.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "February 1, 2022: Gerry Ruff filed a motion to dismiss.",
+        "event": "2011: Commerce revoked the order and discontinued the administrative review.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "March 30, 2022: The trial court denied the motion to dismiss.",
+        "event": "2013: Commerce reinstated the order and resumed the administrative review.",
+        "description": ""
+      },
+      {
+        "date": "2020-03-26",
+        "event": "March 26, 2020: Court sustains the Second Remand Results.",
+        "description": ""
+      },
+      {
+        "date": "2015-01-21",
+        "event": "Final Results issued on January 21, 2015, assigning BMW a dumping margin of 254.25%.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "April 21, 2022: Autovest served discovery requests.",
+        "event": "Court upheld Commerce's determination but rejected the rate for lack of substantial evidence.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "September 30, 2022: Autovest filed a motion for summary judgment.",
+        "event": "First remand order sustained revised AFA rate of 126.44%.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "December 15, 2022: The trial court granted summary judgment.",
+        "event": "U.S. Court of Appeals affirmed the resumption of the administrative review and remanded for reconsideration of the AFA rate.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "December 15, 2022 - Trial court granted summary judgment in favor of Autovest.",
+        "event": "Second Remand Results applied TPEA and assigned AFA rate of 61.14%.",
+        "description": ""
+      },
+      {
+        "date": "2015-01-21",
+        "event": "January 21, 2015: Commerce published the Final Results and announced its decision to apply AFA for BMW's failure to cooperate.",
+        "description": ""
+      },
+      {
+        "date": "2019-10-01",
+        "event": "October 1, 2019: Commerce decided to select a rate based on secondary information.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "January 18, 2023 - Appellant filed an appeal.",
+        "event": "Commerce published a notice in the Federal Register regarding the resumption of the administrative review",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "April 21, 2022: Requests for admissions served to appellant.",
+        "event": "BMW's attorney claimed unawareness of the resumption",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "May 19, 2022: Deadline for appellant to respond to requests for admissions.",
+        "event": "Commerce reduced the AFA rate from 126.44% to 61.14%",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "November 1, 2022: Appellant filed an affidavit in trial court.",
+        "event": "BMW failed to cooperate in providing necessary information during the administrative review.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "April 10, 2023: Autovest filed its brief.",
+        "event": "Commerce imposed an AFA rate of 61.14% based on the all-others rate applied to BMW.",
         "description": ""
       },
       {
         "date": "Unknown",
-        "event": "April 20, 2023: Deadline for appellant's reply brief.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "May 16, 2023: Appellant filed 'Judicial Notice' regarding his affidavit.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "April 21, 2022 - Autovest served requests for admissions to the appellant.",
-        "description": ""
-      },
-      {
-        "date": "Unknown",
-        "event": "Judgment affirmed by the court",
+        "event": "The court sustained Commerce's application of the AFA rate.",
         "description": ""
       }
     ],
     "plaintiffArgumentation": [
-      "Autovest alleged it had acquired rights to pursue the Note.",
-      "The Ruff defendants were in default under the terms of the Note.",
-      "Autovest provided evidence including the Note, general ledger, and correspondence from the original lender.",
-      "The trial court erred in granting summary judgment.",
-      "Autovest failed to provide sufficient evidentiary quality materials to establish ownership of the note.",
-      "The appellant received originals or accurate copies of each document attached to the Complaint.",
-      "Each document attached to the Complaint is a true and correct copy of a genuine original document.",
-      "The appellant contracted for and received credit from the plaintiff or plaintiff\u2019s predecessor.",
-      "The appellant signed the original of each document attached to the Complaint.",
-      "The appellant received everything expected in exchange for the credit extension.",
-      "The agreements have not been modified or superseded.",
-      "The appellant did not notify the plaintiff of any reasons for non-payment prior to the lawsuit.",
-      "The appellant has defaulted under the agreement by failing to make payments.",
-      "The balance sued for is due and owing by the appellant.",
-      "The appellant has no evidence of any credits or offsets.",
-      "The appellant received proper notice of the vehicle resale.",
-      "The resale of the vehicle was performed in a commercially reasonable manner."
+      "Challenging the final determination of the antidumping duty order",
+      "Claiming procedural issues regarding notification of the quantity and value questionnaire",
+      "Commerce applied the TPEA impermissibly.",
+      "The AFA rate of 61.14% is unlawfully punitive and unsupported by substantial evidence.",
+      "The TPEA does not apply retroactively to pre-enactment conduct.",
+      "Commerce's application of the TPEA to remand determinations is inappropriate.",
+      "The TPEA does not regulate primary conduct but governs Commerce's decision-making.",
+      "The controlling date for the application of AFA (adverse facts available) should be before the TPEA's enactment.",
+      "Commerce's duty to notify was fulfilled",
+      "BMW's lack of participation affected its culpability",
+      "The AFA rate was reduced based on secondary information",
+      "BMW argues for an AFA rate based on the commercially reasonable 1.43% rate.",
+      "BMW asserts that the AFA rate should not exceed double the 1.43% margin to account for deterrence.",
+      "BMW claims that its counsel's inadvertent mistake reflects a low level of culpability."
     ],
     "defenseArgumentation": "",
     "suggestions": [],
     "outcomePrediction": null,
-    "numberOfClaimants": "2",
+    "numberOfClaimants": "1",
     "mediaCoverageLevel": {
       "level": "Not specified",
-      "explanation": "Insufficient information to determine the level of media coverage related to this case."
+      "explanation": "Insufficient information to determine"
     },
-    "outcome": "Affirmed the judgment of the trial court",
-    "caseSummary": "Autovest, L.L.C. filed a complaint against Gerry and Adrienne Ruff for defaulting on a promissory note. Autovest claimed it acquired rights to pursue the note and sought payment of the outstanding amount, which included principal, interest, and fees. The trial court granted summary judgment in favor of Autovest.",
+    "outcome": "Not specified",
+    "caseSummary": "BMW of North America LLC challenges the final determination in the 2010\u20132011 administrative review of the antidumping duty order on ball bearings and parts from the United Kingdom.",
     "timeToResolutionMonths": "Not specified",
     "settlementAmount": "Not specified",
     "defenseCostEstimate": "Not specified",
     "expectedBrandImpact": {
       "impact": "Medium",
-      "explanation": "The case involves a financial dispute over a promissory note, which could affect Autovest's reputation in the financial services sector, especially if the appeal leads to a negative outcome."
+      "explanation": "The case involves significant legal arguments regarding the application of the TPEA, which could affect BMW's operations and compliance. Depending on the outcome, it may influence public perception and trust in BMW's adherence to regulatory standards."
     },
-    "affectedCar": "2009 BMW 3 Series",
-    "affectedPart": "Not specified",
+    "affectedCar": "BMW",
+    "affectedPart": "Ball bearings and parts thereof",
     "brandImpactEstimate": {
       "impact": "Medium",
-      "explanation": "The ruling may lead to a perception of Autovest as a strong enforcer of contracts, which could enhance its reputation in the financial sector, but the nature of the case may also raise concerns about consumer debt enforcement."
+      "explanation": "Given the nature of the case, which involves regulatory compliance and potential penalties, there is a reasonable likelihood that the brand's reputation could be impacted, especially if the case garners public attention."
     },
     "caseWinLikelihood": {
       "likelihood": "Medium",
-      "explanation": "The likelihood of the defendant winning the case appears medium due to the failure of the appellant to respond to requests for admissions, which may lead to automatic admissions of the facts, strengthening the plaintiff's position."
+      "explanation": "While BMW presents arguments for a lower AFA rate, the court has upheld the AFA rate based on substantial evidence. This suggests that while there is a chance for BMW to win, the likelihood is not strong given the current judicial support for Commerce's decision."
     },
     "reputationImpactCase": {
       "impact": "Medium",
-      "explanation": "The outcome reinforces Autovest's position in debt enforcement, which could positively influence its reputation, but the nature of the case may also lead to scrutiny regarding consumer rights."
+      "explanation": "If the case results in a high AFA rate, it could negatively affect BMW's reputation, particularly regarding compliance and transparency."
     },
     "reputationImpactMedia": {
-      "impact": "Low",
-      "explanation": "There is no indication of significant media coverage surrounding this case, suggesting a low impact from media on the brand's reputation."
+      "impact": "Medium",
+      "explanation": "The case may attract media attention due to its implications for BMW's financial practices and compliance with trade regulations, potentially affecting public perception."
     }
   }
 }
