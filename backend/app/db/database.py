@@ -352,5 +352,32 @@ def get_status_stats():
         for status, count in status_counts.items()
     ]
 
+def add_new_case(case_id: str, case_data: Dict) -> bool:
+    """Add a new case to the database
+    
+    Args:
+        case_id: The ID of the new case
+        case_data: The case data to add
+        
+    Returns:
+        bool: True if successful, False otherwise
+    """
+    try:
+        # Load the current cases
+        with open(CASES_DB_PATH, "r") as f:
+            cases = json.load(f)
+        
+        # Add the new case
+        cases[case_id] = case_data
+        
+        # Save the updated cases
+        with open(CASES_DB_PATH, "w") as f:
+            json.dump(cases, f, indent=2)
+            
+        return True
+    except Exception as e:
+        print(f"Error adding new case: {e}")
+        return False
+
 # Initialize the database on module import
 init_db()

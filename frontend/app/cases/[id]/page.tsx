@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -41,6 +41,10 @@ const getStatusIcon = (status: CaseStatus) => {
 };
 
 export default function CaseDetailPage({ params }: { params: { id: string } }) {
+    // Unwrap params using React.use()
+    const unwrappedParams = React.use(params);
+    const caseId = unwrappedParams.id;
+
     const [caseData, setCaseData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -49,7 +53,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
         async function loadCase() {
             setLoading(true);
             try {
-                const data = await fetchCaseById(params.id);
+                const data = await fetchCaseById(caseId);
                 if (data) {
                     setCaseData(data);
                 } else {
@@ -64,7 +68,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
         }
 
         loadCase();
-    }, [params.id]);
+    }, [caseId]);
 
     if (loading) {
         return (

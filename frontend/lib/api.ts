@@ -95,3 +95,21 @@ export async function fetchStatusStats() {
         return [];
     }
 }
+
+export async function createCase(formData) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/cases/`, {
+            method: 'POST',
+            body: formData, // Send FormData directly (no Content-Type header needed)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error creating case:', error);
+        throw error;
+    }
+}

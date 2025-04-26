@@ -53,3 +53,17 @@ class PartStats(BaseModel):
 class StatusStats(BaseModel):
     status: str
     count: int
+    
+class CreateCaseRequest(BaseModel):
+    title: str
+    status: Literal["won", "lost", "in progress"]
+    jurisdiction: str
+    caseType: str
+    date: str
+    relevantLaws: Optional[List[str]] = []
+    timeline: Optional[List[TimelineEvent]] = []
+    suggestions: Optional[List[str]] = []
+    documentContent: Optional[str] = None
+    
+class CaseResponse(BaseModel):
+    id: str

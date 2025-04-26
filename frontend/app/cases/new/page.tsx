@@ -3,16 +3,20 @@
 import type React from 'react';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, Upload } from 'lucide-react';
+import { ArrowLeft, Upload, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { TopNavigation } from '@/components/top-navigation';
+import { createCase } from '@/lib/api';
 
 export default function NewCasePage() {
+    const router = useRouter();
     const [files, setFiles] = useState<File[]>([]);
     const [isDragging, setIsDragging] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
@@ -40,11 +44,29 @@ export default function NewCasePage() {
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Mock submission - would normally send to backend
-        alert('Case created successfully!');
-        setFiles([]);
+        setIsSubmitting(true);
+
+        try {
+            // Create a FormData object to send files
+            const formData = new FormData();
+
+            // Append each file to the form data - FastAPI expects "files" as the field name
+            files.forEach((file) => {
+                formData.append('files', file);
+            });
+
+            // Send the form data to the backend
+            const response = await createCase(formData);
+
+            // Redirect to the new case page
+            router.push(`/cases/${response.id}`);
+        } catch (error) {
+            console.error('Error creating case:', error);
+            alert('Failed to create case. Please try again.');
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -94,6 +116,7 @@ export default function NewCasePage() {
                                             multiple
                                             className='absolute inset-0 opacity-0 cursor-pointer'
                                             onChange={handleFileChange}
+                                            accept='.pdf,.doc,.docx,.txt'
                                         />
                                         <Button variant='outline' type='button'>
                                             Browse Files
@@ -123,7 +146,19 @@ export default function NewCasePage() {
                     </div>
 
                     <div className='flex justify-end'>
-                        <Button type='submit'>Create Case</Button>
+                        <Button
+                            type='submit'
+                            disabled={isSubmitting || files.length === 0}
+                        >
+                            {isSubmitting ? (
+                                <>
+                                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                                    Creating...
+                                </>
+                            ) : (
+                                'Create Case'
+                            )}
+                        </Button>
                     </div>
                 </form>
             </div>
