@@ -215,16 +215,15 @@ async def create_case(files: List[UploadFile] = File(None)):
         "id": case_id,
         "title": case_id,
         "status": "in progress",
-        "jurisdiction": jurisdiction,  # Mock jurisdiction
-        "caseType": case_type,  # Mock case type
+        "jurisdiction": jurisdiction,
+        "caseType": case_type,
+        "harmType": harm_type,
+        "cause": cause,
+        "description": description,
+        "secondaryTypes": secondary_types,
+        "possibleAlternatives": possible_alternatives,
         "date": filing_date,
         "relevantLaws": [],
-        "timeline": [{
-            "date": today,
-            "event": "Case created",
-            "description": "Initial case documents uploaded"
-        }],
-        "offenseArgumentation": plaintiff_argumentation,
         "timeline": [
             {
                 "date": today,
@@ -236,7 +235,6 @@ async def create_case(files: List[UploadFile] = File(None)):
         "defenseArgumentation": None,
         "suggestions": [],
         "outcomePrediction": None,
-        # Add the additional extracted information
         "defectType": defect_type,
         "numberOfClaimants": number_of_claimants,
         "mediaCoverageLevel": media_coverage_level,
@@ -245,6 +243,11 @@ async def create_case(files: List[UploadFile] = File(None)):
         "settlementAmount": settlement_amount,
         "defenseCostEstimate": defense_cost_estimate,
         "expectedBrandImpact": expected_brand_impact,
+        "affectedCar": affected_car,
+        "affectedPart": affected_part,
+        "brandImpactEstimate": brand_impact_estimate,
+        "caseWinLikelihood": case_win_likelihood,
+        "plaintiffArgumentation": plaintiff_argumentation,
     }
 
     # Add the case to the database
