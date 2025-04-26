@@ -9,10 +9,14 @@ from pydantic import BaseModel, Field
 from datetime import datetime  # Added import
 
 load_dotenv()
+
+
 class CaseInformation(BaseModel):
     Case_ID: Optional[str] = None
     Filing_Date: Optional[str] = None
-    Jurisdiction: Optional[Dict[str, str]] = None  # Changed to dictionary with state and court jurisdiction
+    Jurisdiction: Optional[Dict[str, str]] = (
+        None  # Changed to dictionary with state and court jurisdiction
+    )
     Defect_Type: Optional[List[str]] = None
     Number_of_Claimants: Optional[str] = None
     Media_Coverage_Level: Optional[Dict[str, str]] = None
@@ -30,7 +34,10 @@ class CaseInformation(BaseModel):
     Plaintiff_Argumentation: Optional[List[str]] = None
     Timeline_of_Events: Optional[List[str]] = None  # New field
     Relevant_Laws: Optional[List[str]] = None  # New field
-    Reputation_Impact: Optional[Dict[str, Dict[str, str]]] = None  # New field for separated reputation impact
+    Reputation_Impact: Optional[Dict[str, Dict[str, str]]] = (
+        None  # New field for separated reputation impact
+    )
+
 
 def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
     """
@@ -49,13 +56,15 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
     endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
     deployment_name = os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME", "gpt-4o")
     api_version = os.environ.get("AZURE_OPENAI_API_VERSION", "2023-12-01-preview")
-    
+
     if not api_key or not endpoint:
-        raise ValueError("Azure OpenAI API key and endpoint must be set as environment variables")
-    
+        raise ValueError(
+            "Azure OpenAI API key and endpoint must be set as environment variables"
+        )
+
     prompt = (
         "Extract the following information from the legal case text provided. "
-        "All fields are optional - include information that is explicitly mentioned in the text. "
+        "All fields (except for Filing_Date) are optional - include information that is explicitly mentioned in the text. "
         "For certain fields like Expected_Brand_Impact, Brand_Impact_Estimate, Media_Coverage_Level, and Case_Win_Likelihood, make a reasonable inference based on the context and provide a detailed explanation for your assessment. "
         "If a piece of information appears multiple times, include all instances in a list. "
         "If information is not found for a field, use the exact string 'Not specified' as the value. "
@@ -95,47 +104,51 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
 
     try:
         # Prepare the API request
-        headers = {
-            "Content-Type": "application/json",
-            "api-key": api_key
-        }
-        
+        headers = {"Content-Type": "application/json", "api-key": api_key}
+
         # Azure OpenAI API request body
         request_body = {
             "messages": [
-                {"role": "system", "content": "You are a legal information extraction assistant that provides structured JSON responses."},
-                {"role": "user", "content": prompt}
+                {
+                    "role": "system",
+                    "content": "You are a legal information extraction assistant that provides structured JSON responses.",
+                },
+                {"role": "user", "content": prompt},
             ],
             "temperature": 0,
-            "response_format": {"type": "json_object"}
+            "response_format": {"type": "json_object"},
         }
-        
+
         # Make the API request to Azure OpenAI
         response = requests.post(
             f"{endpoint}",
             headers=headers,
             json=request_body,
-            timeout=60  # Add timeout to prevent hanging
+            timeout=60,  # Add timeout to prevent hanging
         )
-        
+
         response.raise_for_status()
         result = response.json()
-        
+
         # Extract the generated content from Azure OpenAI response
         response_text = result["choices"][0]["message"]["content"]
 
         # Print the raw response for debugging problematic chunks
         if chunk_number == 1:
-            print(f"Raw API response for chunk 1 (size {chunk_size}): {response_text[:200]}...")
+            print(
+                f"Raw API response for chunk 1 (size {chunk_size}): {response_text[:200]}..."
+            )
 
         # Try to parse the JSON response
         try:
             # First try direct parsing
             response_json = json.loads(response_text)
-            
+
             # If response_json is a list, handle it appropriately
             if isinstance(response_json, list):
-                print(f"API returned a list for chunk {chunk_number} (size {chunk_size}) instead of a dictionary")
+                print(
+                    f"API returned a list for chunk {chunk_number} (size {chunk_size}) instead of a dictionary"
+                )
                 # Try to extract a dictionary from the list if possible
                 dict_items = [item for item in response_json if isinstance(item, dict)]
                 if dict_items:
@@ -143,11 +156,12 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
                 else:
                     # Create an empty dictionary if no dictionaries found
                     response_json = {}
-                    
+
         except json.JSONDecodeError:
             # If direct parsing fails, try to extract JSON from the text
             import re
-            json_match = re.search(r'(\{.*\})', response_text, re.DOTALL)
+
+            json_match = re.search(r"(\{.*\})", response_text, re.DOTALL)
             if json_match:
                 try:
                     response_json = json.loads(json_match.group(1))
@@ -164,21 +178,29 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
         # Process each field in the response
         for key, value in response_json.items():
             # Handle list of single characters
-            if isinstance(value, list) and all(isinstance(item, str) and len(item) == 1 for item in value):
-                fixed_response[key] = [''.join(value)]
+            if isinstance(value, list) and all(
+                isinstance(item, str) and len(item) == 1 for item in value
+            ):
+                fixed_response[key] = ["".join(value)]
             # Handle dictionary fields
-            elif key in ['Media_Coverage_Level', 'Expected_Brand_Impact', 'Brand_Impact_Estimate', 'Case_Win_Likelihood', 'Reputation_Impact']:
+            elif key in [
+                "Media_Coverage_Level",
+                "Expected_Brand_Impact",
+                "Brand_Impact_Estimate",
+                "Case_Win_Likelihood",
+                "Reputation_Impact",
+            ]:
                 if isinstance(value, str):
-                    if key == 'Case_Win_Likelihood':
+                    if key == "Case_Win_Likelihood":
                         level_key = "likelihood"
-                    elif key in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                    elif key in ["Expected_Brand_Impact", "Brand_Impact_Estimate"]:
                         level_key = "impact"
                     else:
                         level_key = "level"
-                    
+
                     fixed_response[key] = {
                         level_key: value,
-                        "explanation": f"No detailed explanation provided for the {level_key}."
+                        "explanation": f"No detailed explanation provided for the {level_key}.",
                     }
                 else:
                     fixed_response[key] = value
@@ -190,9 +212,12 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
         return fixed_response
 
     except Exception as e:
-        print(f"An error occurred while calling Azure OpenAI for chunk {chunk_number} (size {chunk_size}): {e}")
+        print(
+            f"An error occurred while calling Azure OpenAI for chunk {chunk_number} (size {chunk_size}): {e}"
+        )
         # Return a valid empty response
         return {}
+
 
 def split_text_into_chunks(text, chunk_size=2000):
     """
@@ -205,7 +230,8 @@ def split_text_into_chunks(text, chunk_size=2000):
     Returns:
         list: A list of text chunks.
     """
-    return [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
+    return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
+
 
 def merge_case_information(info_list):
     """
@@ -218,22 +244,44 @@ def merge_case_information(info_list):
         dict: A merged dictionary with all case information.
     """
     merged_info = {}
-    print(f"DEBUG: Starting merge_case_information with {len(info_list)} chunks.") # DEBUG log added
+    print(
+        f"DEBUG: Starting merge_case_information with {len(info_list)} chunks."
+    )  # DEBUG log added
 
     # Fields that should be lists of unique items
-    list_fields = ['Defect_Type', 'Plaintiff_Argumentation', 'Timeline_of_Events', 'Relevant_Laws']
+    list_fields = [
+        "Defect_Type",
+        "Plaintiff_Argumentation",
+        "Timeline_of_Events",
+        "Relevant_Laws",
+    ]
 
     # Fields that are dictionaries with explanations
-    dict_fields = ['Media_Coverage_Level', 'Expected_Brand_Impact', 'Brand_Impact_Estimate', 'Case_Win_Likelihood', 'Reputation_Impact']
+    dict_fields = [
+        "Media_Coverage_Level",
+        "Expected_Brand_Impact",
+        "Brand_Impact_Estimate",
+        "Case_Win_Likelihood",
+        "Reputation_Impact",
+    ]
 
     # Fields that should take the first non-empty value
     single_value_fields = [
-        'Case_ID', 'Filing_Date', 'Number_of_Claimants', 'Outcome', 'Status', 'Case_Summary',
-        'Time_to_Resolution_Months', 'Settlement_Amount', 'Defense_Cost_Estimate', 'Affected_Car', 'Affected_Part'
+        "Case_ID",
+        "Filing_Date",
+        "Number_of_Claimants",
+        "Outcome",
+        "Status",
+        "Case_Summary",
+        "Time_to_Resolution_Months",
+        "Settlement_Amount",
+        "Defense_Cost_Estimate",
+        "Affected_Car",
+        "Affected_Part",
     ]
-    
+
     # Handle Jurisdiction separately as it's now a dictionary
-    jurisdiction_field = 'Jurisdiction'
+    jurisdiction_field = "Jurisdiction"
 
     chunk_index = 0
     for info in info_list:
@@ -243,9 +291,11 @@ def merge_case_information(info_list):
             continue
 
         # DEBUG log added for Filing_Date specifically
-        chunk_filing_date = info.get('Filing_Date', 'Not Present')
-        merged_filing_date_before = merged_info.get('Filing_Date', 'Not Present')
-        print(f"DEBUG: Chunk {chunk_index} - Filing_Date: '{chunk_filing_date}'. Merged Filing_Date before processing this chunk: '{merged_filing_date_before}'")
+        chunk_filing_date = info.get("Filing_Date", "Not Present")
+        merged_filing_date_before = merged_info.get("Filing_Date", "Not Present")
+        print(
+            f"DEBUG: Chunk {chunk_index} - Filing_Date: '{chunk_filing_date}'. Merged Filing_Date before processing this chunk: '{merged_filing_date_before}'"
+        )
 
         # Process list fields
         for field in list_fields:
@@ -263,47 +313,73 @@ def merge_case_information(info_list):
             if field in info and info[field]:
                 # If the field is a string, convert it to a dictionary
                 if isinstance(info[field], str):
-                    if field == 'Case_Win_Likelihood':
+                    if field == "Case_Win_Likelihood":
                         level_key = "likelihood"
-                    elif field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                    elif field in ["Expected_Brand_Impact", "Brand_Impact_Estimate"]:
                         level_key = "impact"
                     else:
                         level_key = "level"
-                        
+
                     info[field] = {
                         level_key: info[field],
-                        "explanation": f"No detailed explanation provided for the {level_key}."
+                        "explanation": f"No detailed explanation provided for the {level_key}.",
                     }
 
                 # Special handling for Reputation_Impact which has nested dictionaries
-                if field == 'Reputation_Impact':
+                if field == "Reputation_Impact":
                     if field not in merged_info:
                         merged_info[field] = {
-                            'case_outcome': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'},
-                            'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
+                            "case_outcome": {
+                                "impact": "Not specified",
+                                "explanation": "Insufficient information to determine",
+                            },
+                            "media_coverage": {
+                                "impact": "Not specified",
+                                "explanation": "Insufficient information to determine",
+                            },
                         }
-                    
+
                     # Update case_outcome if it has better information
-                    if 'case_outcome' in info[field] and (
-                        info[field]['case_outcome'].get('impact') != 'Not specified' or
-                        len(info[field]['case_outcome'].get('explanation', '')) > len(merged_info[field]['case_outcome'].get('explanation', ''))
+                    if "case_outcome" in info[field] and (
+                        info[field]["case_outcome"].get("impact") != "Not specified"
+                        or len(info[field]["case_outcome"].get("explanation", ""))
+                        > len(merged_info[field]["case_outcome"].get("explanation", ""))
                     ):
-                        merged_info[field]['case_outcome'] = info[field]['case_outcome']
-                    
+                        merged_info[field]["case_outcome"] = info[field]["case_outcome"]
+
                     # Update media_coverage if it has better information
-                    if 'media_coverage' in info[field] and (
-                        info[field]['media_coverage'].get('impact') != 'Not specified' or
-                        len(info[field]['media_coverage'].get('explanation', '')) > len(merged_info[field]['media_coverage'].get('explanation', ''))
+                    if "media_coverage" in info[field] and (
+                        info[field]["media_coverage"].get("impact") != "Not specified"
+                        or len(info[field]["media_coverage"].get("explanation", ""))
+                        > len(
+                            merged_info[field]["media_coverage"].get("explanation", "")
+                        )
                     ):
-                        merged_info[field]['media_coverage'] = info[field]['media_coverage']
+                        merged_info[field]["media_coverage"] = info[field][
+                            "media_coverage"
+                        ]
                 else:
                     # Handle other dictionary fields
-                    level_key = "likelihood" if field == 'Case_Win_Likelihood' else "impact" if field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate'] else "level"
-                    
-                    if (field not in merged_info or
-                        isinstance(merged_info[field], str) or
-                        merged_info[field].get(level_key) == 'Not specified' or
-                        (len(info[field].get('explanation', '')) > len(merged_info[field].get('explanation', '')))):
+                    level_key = (
+                        "likelihood"
+                        if field == "Case_Win_Likelihood"
+                        else (
+                            "impact"
+                            if field
+                            in ["Expected_Brand_Impact", "Brand_Impact_Estimate"]
+                            else "level"
+                        )
+                    )
+
+                    if (
+                        field not in merged_info
+                        or isinstance(merged_info[field], str)
+                        or merged_info[field].get(level_key) == "Not specified"
+                        or (
+                            len(info[field].get("explanation", ""))
+                            > len(merged_info[field].get("explanation", ""))
+                        )
+                    ):
                         merged_info[field] = info[field]
 
         # Process single value fields
@@ -312,41 +388,68 @@ def merge_case_information(info_list):
                 if field not in merged_info or merged_info[field] == "Not specified":
                     merged_info[field] = info[field]
                     # DEBUG log added when Filing_Date is updated
-                    if field == 'Filing_Date':
-                        print(f"DEBUG: Chunk {chunk_index} - Updated merged Filing_Date to: '{merged_info[field]}'")
+                    if field == "Filing_Date":
+                        print(
+                            f"DEBUG: Chunk {chunk_index} - Updated merged Filing_Date to: '{merged_info[field]}'"
+                        )
                 # DEBUG log added if Filing_Date is present but not updated
-                elif field == 'Filing_Date':
-                     print(f"DEBUG: Chunk {chunk_index} - Filing_Date '{info[field]}' present but not updating merged value '{merged_info[field]}'")
+                elif field == "Filing_Date":
+                    print(
+                        f"DEBUG: Chunk {chunk_index} - Filing_Date '{info[field]}' present but not updating merged value '{merged_info[field]}'"
+                    )
             # DEBUG log added if Filing_Date is not present or 'Not specified' in chunk
-            elif field == 'Filing_Date':
-                 chunk_val = info.get(field, 'Not Present')
-                 print(f"DEBUG: Chunk {chunk_index} - Filing_Date '{chunk_val}' not valid for update.")
+            elif field == "Filing_Date":
+                chunk_val = info.get(field, "Not Present")
+                print(
+                    f"DEBUG: Chunk {chunk_index} - Filing_Date '{chunk_val}' not valid for update."
+                )
 
         # Process Jurisdiction field (now a dictionary)
         if jurisdiction_field in info and info[jurisdiction_field]:
             if jurisdiction_field not in merged_info:
                 merged_info[jurisdiction_field] = {
-                    'state_jurisdiction': 'Not specified',
-                    'court_jurisdiction': 'Not specified'
+                    "state_jurisdiction": "Not specified",
+                    "court_jurisdiction": "Not specified",
                 }
-            
+
             # Handle if Jurisdiction is still a string in some chunks
-            if isinstance(info[jurisdiction_field], str) and info[jurisdiction_field] != "Not specified":
+            if (
+                isinstance(info[jurisdiction_field], str)
+                and info[jurisdiction_field] != "Not specified"
+            ):
                 # Try to intelligently split into state and court
                 if "federal" in info[jurisdiction_field].lower():
-                    merged_info[jurisdiction_field]['state_jurisdiction'] = "Federal"
-                    merged_info[jurisdiction_field]['court_jurisdiction'] = info[jurisdiction_field]
+                    merged_info[jurisdiction_field]["state_jurisdiction"] = "Federal"
+                    merged_info[jurisdiction_field]["court_jurisdiction"] = info[
+                        jurisdiction_field
+                    ]
                 else:
-                    merged_info[jurisdiction_field]['state_jurisdiction'] = info[jurisdiction_field]
-                    merged_info[jurisdiction_field]['court_jurisdiction'] = 'Not specified'
+                    merged_info[jurisdiction_field]["state_jurisdiction"] = info[
+                        jurisdiction_field
+                    ]
+                    merged_info[jurisdiction_field][
+                        "court_jurisdiction"
+                    ] = "Not specified"
             elif isinstance(info[jurisdiction_field], dict):
                 # Update state_jurisdiction if better info available
-                if 'state_jurisdiction' in info[jurisdiction_field] and info[jurisdiction_field]['state_jurisdiction'] != "Not specified":
-                    merged_info[jurisdiction_field]['state_jurisdiction'] = info[jurisdiction_field]['state_jurisdiction']
-                
+                if (
+                    "state_jurisdiction" in info[jurisdiction_field]
+                    and info[jurisdiction_field]["state_jurisdiction"]
+                    != "Not specified"
+                ):
+                    merged_info[jurisdiction_field]["state_jurisdiction"] = info[
+                        jurisdiction_field
+                    ]["state_jurisdiction"]
+
                 # Update court_jurisdiction if better info available
-                if 'court_jurisdiction' in info[jurisdiction_field] and info[jurisdiction_field]['court_jurisdiction'] != "Not specified":
-                    merged_info[jurisdiction_field]['court_jurisdiction'] = info[jurisdiction_field]['court_jurisdiction']
+                if (
+                    "court_jurisdiction" in info[jurisdiction_field]
+                    and info[jurisdiction_field]["court_jurisdiction"]
+                    != "Not specified"
+                ):
+                    merged_info[jurisdiction_field]["court_jurisdiction"] = info[
+                        jurisdiction_field
+                    ]["court_jurisdiction"]
 
     # Add "Not specified" for any missing fields
     all_fields = list_fields + single_value_fields
@@ -360,47 +463,58 @@ def merge_case_information(info_list):
     # Add default dictionaries for missing dict fields
     for field in dict_fields:
         if field not in merged_info:
-            if field == 'Reputation_Impact':
+            if field == "Reputation_Impact":
                 merged_info[field] = {
-                    'case_outcome': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'},
-                    'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
+                    "case_outcome": {
+                        "impact": "Not specified",
+                        "explanation": "Insufficient information to determine",
+                    },
+                    "media_coverage": {
+                        "impact": "Not specified",
+                        "explanation": "Insufficient information to determine",
+                    },
                 }
             else:
-                if field == 'Case_Win_Likelihood':
+                if field == "Case_Win_Likelihood":
                     level_key = "likelihood"
-                elif field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                elif field in ["Expected_Brand_Impact", "Brand_Impact_Estimate"]:
                     level_key = "impact"
                 else:
                     level_key = "level"
-                    
+
                 merged_info[field] = {
                     level_key: "Not specified",
-                    "explanation": "Insufficient information to determine"
+                    "explanation": "Insufficient information to determine",
                 }
-        elif isinstance(merged_info[field], str) and field != 'Reputation_Impact':
-            if field == 'Case_Win_Likelihood':
+        elif isinstance(merged_info[field], str) and field != "Reputation_Impact":
+            if field == "Case_Win_Likelihood":
                 level_key = "likelihood"
-            elif field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+            elif field in ["Expected_Brand_Impact", "Brand_Impact_Estimate"]:
                 level_key = "impact"
             else:
                 level_key = "level"
-                
+
             merged_info[field] = {
                 level_key: merged_info[field],
-                "explanation": f"No detailed explanation provided for the {level_key}."
+                "explanation": f"No detailed explanation provided for the {level_key}.",
             }
-    
+
     # Ensure Jurisdiction is properly formatted
     if jurisdiction_field not in merged_info:
         merged_info[jurisdiction_field] = {
-            'state_jurisdiction': 'Not specified',
-            'court_jurisdiction': 'Not specified'
+            "state_jurisdiction": "Not specified",
+            "court_jurisdiction": "Not specified",
         }
 
-    final_merged_filing_date = merged_info.get('Filing_Date', 'Not Present') # DEBUG log added
-    print(f"DEBUG: Finished merge. Final merged Filing_Date: '{final_merged_filing_date}'") # DEBUG log added
+    final_merged_filing_date = merged_info.get(
+        "Filing_Date", "Not Present"
+    )  # DEBUG log added
+    print(
+        f"DEBUG: Finished merge. Final merged Filing_Date: '{final_merged_filing_date}'"
+    )  # DEBUG log added
 
     return merged_info
+
 
 def clean_response(response_dict):
     """
@@ -413,7 +527,9 @@ def clean_response(response_dict):
         dict: The cleaned dictionary.
     """
     # Convert any string values that look like numbers to actual numbers
-    if "Number_of_Claimants" in response_dict and isinstance(response_dict["Number_of_Claimants"], str):
+    if "Number_of_Claimants" in response_dict and isinstance(
+        response_dict["Number_of_Claimants"], str
+    ):
         try:
             if response_dict["Number_of_Claimants"].isdigit():
                 pass  # Keep as string as per model definition
@@ -423,90 +539,150 @@ def clean_response(response_dict):
     # Format Filing_Date
     if "Filing_Date" in response_dict:
         original_date_str = response_dict["Filing_Date"]
-        print(f"DEBUG: Initial Filing_Date from merge/LLM: '{original_date_str}' (type: {type(original_date_str)})") # DEBUG log added
+        print(
+            f"DEBUG: Initial Filing_Date from merge/LLM: '{original_date_str}' (type: {type(original_date_str)})"
+        )  # DEBUG log added
 
         if isinstance(original_date_str, str) and original_date_str != "Not specified":
             # Attempt to parse common date formats
             possible_formats = [
-                "%Y-%m-%d", "%m/%d/%Y", "%d-%b-%Y", "%B %d, %Y", "%d %B %Y",
-                "%Y/%m/%d", "%d.%m.%Y", "%m-%d-%Y", "%b %d, %Y"
+                "%Y-%m-%d",
+                "%m/%d/%Y",
+                "%d-%b-%Y",
+                "%B %d, %Y",
+                "%d %B %Y",
+                "%Y/%m/%d",
+                "%d.%m.%Y",
+                "%m-%d-%Y",
+                "%b %d, %Y",
             ]
             parsed_date = None
             for fmt in possible_formats:
                 try:
                     parsed_date = datetime.strptime(original_date_str, fmt)
-                    print(f"DEBUG: Successfully parsed Filing_Date '{original_date_str}' with format '{fmt}'") # DEBUG log added
-                    break # Stop if parsing is successful
+                    print(
+                        f"DEBUG: Successfully parsed Filing_Date '{original_date_str}' with format '{fmt}'"
+                    )  # DEBUG log added
+                    break  # Stop if parsing is successful
                 except ValueError:
-                    continue # Try the next format
+                    continue  # Try the next format
 
             if parsed_date:
                 response_dict["Filing_Date"] = parsed_date.strftime("%Y-%m-%d")
-                print(f"DEBUG: Formatted Filing_Date to: '{response_dict['Filing_Date']}'") # DEBUG log added
+                print(
+                    f"DEBUG: Formatted Filing_Date to: '{response_dict['Filing_Date']}'"
+                )  # DEBUG log added
             else:
-                # If parsing fails with all formats, keep original or mark as unspecified?
-                # For now, keep the original string if unparseable, but log a warning?
-                print(f"Warning: Could not parse Filing_Date '{original_date_str}' into YYYY-MM-DD format. Keeping original.") # Changed log message slightly
-                # Optionally set back to "Not specified" if strict formatting is required
-                # response_dict["Filing_Date"] = "Not specified"
-        elif original_date_str is None or original_date_str == "": # Handle None or empty string explicitly
-             print("DEBUG: Filing_Date is None or empty string, setting to 'Not specified'")
-             response_dict["Filing_Date"] = "Not specified"
+                # If parsing fails with all formats, keep the original string returned by the LLM
+                print(
+                    f"Warning: Could not parse Filing_Date '{original_date_str}' into YYYY-MM-DD format. Keeping original as returned by LLM."
+                )
+                response_dict["Filing_Date"] = original_date_str
+        elif (
+            original_date_str is None or original_date_str == ""
+        ):  # Handle None or empty string explicitly
+            print(
+                "DEBUG: Filing_Date is None or empty string, setting to 'Not specified'"
+            )
+            response_dict["Filing_Date"] = "Not specified"
         elif original_date_str == "Not specified":
-             print("DEBUG: Filing_Date was already 'Not specified'")
+            print("DEBUG: Filing_Date was already 'Not specified'")
         else:
-             print(f"DEBUG: Filing_Date is not a string or 'Not specified': '{original_date_str}'. Setting to 'Not specified'.")
-             response_dict["Filing_Date"] = "Not specified" # Ensure it's set if type is wrong
+            print(
+                f"DEBUG: Filing_Date is not a string or 'Not specified': '{original_date_str}'. Setting to 'Not specified'."
+            )
+            response_dict["Filing_Date"] = (
+                "Not specified"  # Ensure it's set if type is wrong
+            )
 
     else:
-        print("DEBUG: Filing_Date key not found in response_dict, setting to 'Not specified'") # DEBUG log added
-        response_dict["Filing_Date"] = "Not specified" # Ensure field exists
+        print(
+            "DEBUG: Filing_Date key not found in response_dict, setting to 'Not specified'"
+        )  # DEBUG log added
+        response_dict["Filing_Date"] = "Not specified"  # Ensure field exists
 
     # Ensure dictionary fields have the correct structure
-    dict_fields = ['Media_Coverage_Level', 'Expected_Brand_Impact', 'Brand_Impact_Estimate', 'Case_Win_Likelihood']
+    dict_fields = [
+        "Media_Coverage_Level",
+        "Expected_Brand_Impact",
+        "Brand_Impact_Estimate",
+        "Case_Win_Likelihood",
+    ]
     for field in dict_fields:
         if field in response_dict:
             if isinstance(response_dict[field], str):
-                if field == 'Case_Win_Likelihood':
+                if field == "Case_Win_Likelihood":
                     level_key = "likelihood"
-                elif field in ['Expected_Brand_Impact', 'Brand_Impact_Estimate']:
+                elif field in ["Expected_Brand_Impact", "Brand_Impact_Estimate"]:
                     level_key = "impact"
                 else:
                     level_key = "level"
 
                 response_dict[field] = {
                     level_key: response_dict[field],
-                    "explanation": f"No detailed explanation provided for the {level_key}."
+                    "explanation": f"No detailed explanation provided for the {level_key}.",
                 }
 
     # Ensure Reputation_Impact has the correct structure (Refactored)
     final_reputation_impact = {
-        'case_outcome': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'},
-        'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
+        "case_outcome": {
+            "impact": "Not specified",
+            "explanation": "Insufficient information to determine",
+        },
+        "media_coverage": {
+            "impact": "Not specified",
+            "explanation": "Insufficient information to determine",
+        },
     }
 
-    if 'Reputation_Impact' in response_dict:
-        current_reputation = response_dict['Reputation_Impact']
-        if isinstance(current_reputation, str) and current_reputation != 'Not specified':
+    if "Reputation_Impact" in response_dict:
+        current_reputation = response_dict["Reputation_Impact"]
+        if (
+            isinstance(current_reputation, str)
+            and current_reputation != "Not specified"
+        ):
             # If Reputation_Impact is a non-default string, use it for case_outcome
-            final_reputation_impact['case_outcome'] = {'impact': current_reputation, 'explanation': 'No detailed explanation provided.'}
+            final_reputation_impact["case_outcome"] = {
+                "impact": current_reputation,
+                "explanation": "No detailed explanation provided.",
+            }
         elif isinstance(current_reputation, dict):
             # Check if it has the correct nested structure
-            if 'case_outcome' in current_reputation and 'media_coverage' in current_reputation and isinstance(current_reputation['case_outcome'], dict) and isinstance(current_reputation['media_coverage'], dict):
+            if (
+                "case_outcome" in current_reputation
+                and "media_coverage" in current_reputation
+                and isinstance(current_reputation["case_outcome"], dict)
+                and isinstance(current_reputation["media_coverage"], dict)
+            ):
                 # Assume it's correctly structured, use it directly
                 final_reputation_impact = current_reputation
             else:
                 # If it's a dict but not nested correctly, try to salvage top-level info
-                temp_impact = current_reputation.get('impact', 'Not specified')
-                temp_explanation = current_reputation.get('explanation', 'No detailed explanation provided.')
-                if temp_impact != 'Not specified' or temp_explanation != 'No detailed explanation provided.':
-                     final_reputation_impact['case_outcome'] = {'impact': temp_impact, 'explanation': temp_explanation}
+                temp_impact = current_reputation.get("impact", "Not specified")
+                temp_explanation = current_reputation.get(
+                    "explanation", "No detailed explanation provided."
+                )
+                if (
+                    temp_impact != "Not specified"
+                    or temp_explanation != "No detailed explanation provided."
+                ):
+                    final_reputation_impact["case_outcome"] = {
+                        "impact": temp_impact,
+                        "explanation": temp_explanation,
+                    }
                 # Keep media_coverage as default
 
-    response_dict['Reputation_Impact'] = final_reputation_impact # Assign the processed structure
+    response_dict["Reputation_Impact"] = (
+        final_reputation_impact  # Assign the processed structure
+    )
 
     # Ensure list fields have the correct structure
-    list_fields = ['Defect_Type', 'Plaintiff_Argumentation', 'Timeline_of_Events', 'Relevant_Laws']
+    list_fields = [
+        "Defect_Type",
+        "Plaintiff_Argumentation",
+        "Timeline_of_Events",
+        "Relevant_Laws",
+    ]
     for field in list_fields:
         if field in response_dict:
             if not isinstance(response_dict[field], list):
@@ -518,20 +694,31 @@ def clean_response(response_dict):
                 response_dict[field] = ["Not specified"]
         else:
             response_dict[field] = ["Not specified"]
-    
+
     # Ensure Status field has a valid value
-    valid_statuses = ["In favour of defendant", "In favour of plaintiff", "Settled", "In Progress first instance", "Dismissed", "In Progress appeal", "In Progress Supreme Court"]
-    
+    valid_statuses = [
+        "In favour of defendant",
+        "In favour of plaintiff",
+        "Settled",
+        "In Progress first instance",
+        "Dismissed",
+        "In Progress appeal",
+        "In Progress Supreme Court",
+    ]
+
     if "Status" in response_dict:
-        if response_dict["Status"] not in valid_statuses and response_dict["Status"] != "Not specified":
+        if (
+            response_dict["Status"] not in valid_statuses
+            and response_dict["Status"] != "Not specified"
+        ):
             # Map old status values to new valid statuses
             status_mapping = {
                 "Won": "In favour of defendant",
                 "Lost": "In favour of plaintiff",
                 "Settled": "Settled",
-                "In Progress": "In Progress first instance"
+                "In Progress": "In Progress first instance",
             }
-            
+
             # Try to map the status to a valid one
             if response_dict["Status"] in status_mapping:
                 response_dict["Status"] = status_mapping[response_dict["Status"]]
@@ -568,7 +755,9 @@ def clean_response(response_dict):
     # Ensure Case_Summary is present
     if "Case_Summary" not in response_dict or not response_dict["Case_Summary"]:
         # Try to create a summary from other fields if possible
-        if "Defect_Type" in response_dict and response_dict["Defect_Type"] != ["Not specified"]:
+        if "Defect_Type" in response_dict and response_dict["Defect_Type"] != [
+            "Not specified"
+        ]:
             defect_types = ", ".join(response_dict["Defect_Type"])
             affected_car = response_dict.get("Affected_Car", "unspecified vehicle")
             if affected_car == "Not specified":
@@ -576,33 +765,39 @@ def clean_response(response_dict):
             affected_part = response_dict.get("Affected_Part", "unspecified part")
             if affected_part == "Not specified":
                 affected_part = "unspecified part"
-            
-            response_dict["Case_Summary"] = f"This case involves allegations of {defect_types} related to {affected_part} in {affected_car}."
+
+            response_dict["Case_Summary"] = (
+                f"This case involves allegations of {defect_types} related to {affected_part} in {affected_car}."
+            )
         else:
             response_dict["Case_Summary"] = "Not specified"
-    
+
     # Ensure Jurisdiction is properly formatted
     if "Jurisdiction" not in response_dict:
         response_dict["Jurisdiction"] = {
-            'state_jurisdiction': 'Not specified',
-            'court_jurisdiction': 'Not specified'
+            "state_jurisdiction": "Not specified",
+            "court_jurisdiction": "Not specified",
         }
-    elif isinstance(response_dict["Jurisdiction"], str) and response_dict["Jurisdiction"] != "Not specified":
+    elif (
+        isinstance(response_dict["Jurisdiction"], str)
+        and response_dict["Jurisdiction"] != "Not specified"
+    ):
         # Convert string to dictionary format
         jurisdiction_text = response_dict["Jurisdiction"]
         response_dict["Jurisdiction"] = {
-            'state_jurisdiction': 'Not specified',
-            'court_jurisdiction': 'Not specified'
+            "state_jurisdiction": "Not specified",
+            "court_jurisdiction": "Not specified",
         }
-        
+
         # Try to intelligently split into state and court
         if "federal" in jurisdiction_text.lower():
-            response_dict["Jurisdiction"]['state_jurisdiction'] = "Federal"
-            response_dict["Jurisdiction"]['court_jurisdiction'] = jurisdiction_text
+            response_dict["Jurisdiction"]["state_jurisdiction"] = "Federal"
+            response_dict["Jurisdiction"]["court_jurisdiction"] = jurisdiction_text
         else:
-            response_dict["Jurisdiction"]['state_jurisdiction'] = jurisdiction_text
-    
+            response_dict["Jurisdiction"]["state_jurisdiction"] = jurisdiction_text
+
     return response_dict
+
 
 def process_chunk(args):
     """
@@ -621,8 +816,11 @@ def process_chunk(args):
             time.sleep(1)
         return call_azure_openai_flashlight(chunk, chunk_number, chunk_size)
     except Exception as e:
-        print(f"Error in process_chunk for chunk {chunk_number} (size {chunk_size}): {e}")
+        print(
+            f"Error in process_chunk for chunk {chunk_number} (size {chunk_size}): {e}"
+        )
         return {}
+
 
 def process_with_chunk_size(text, chunk_size, max_workers=2):
     """
@@ -638,16 +836,20 @@ def process_with_chunk_size(text, chunk_size, max_workers=2):
         dict: The merged case information from all chunks.
     """
     chunks = split_text_into_chunks(text, chunk_size)
-    print(f"Processing {len(chunks)} chunks of size {chunk_size} in parallel (max {max_workers} workers)...")
+    print(
+        f"Processing {len(chunks)} chunks of size {chunk_size} in parallel (max {max_workers} workers)..."
+    )
 
     # Prepare arguments for parallel processing
-    chunk_args = [(chunk, i+1, chunk_size) for i, chunk in enumerate(chunks)]
+    chunk_args = [(chunk, i + 1, chunk_size) for i, chunk in enumerate(chunks)]
 
     # Process chunks in parallel
     all_chunk_info = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Submit all tasks
-        future_to_chunk = {executor.submit(process_chunk, arg): arg[1] for arg in chunk_args}
+        future_to_chunk = {
+            executor.submit(process_chunk, arg): arg[1] for arg in chunk_args
+        }
 
         # Collect results as they complete
         for future in concurrent.futures.as_completed(future_to_chunk):
@@ -655,14 +857,19 @@ def process_with_chunk_size(text, chunk_size, max_workers=2):
             try:
                 chunk_info = future.result()
                 all_chunk_info.append(chunk_info)
-                print(f"Completed chunk {chunk_number}/{len(chunks)} (size {chunk_size})")
+                print(
+                    f"Completed chunk {chunk_number}/{len(chunks)} (size {chunk_size})"
+                )
             except Exception as e:
-                print(f"Exception processing chunk {chunk_number} (size {chunk_size}): {e}")
+                print(
+                    f"Exception processing chunk {chunk_number} (size {chunk_size}): {e}"
+                )
                 all_chunk_info.append({})
 
     # Merge information from all chunks
     merged_case_info = merge_case_information(all_chunk_info)
     return merged_case_info
+
 
 def extract_other_types(extracted_text: str) -> CaseInformation:
     """
@@ -677,7 +884,9 @@ def extract_other_types(extracted_text: str) -> CaseInformation:
     # Process the text with a specific chunk size
     chunk_size = 5000
     # Using fewer workers to avoid overwhelming the API
-    merged_case_info = process_with_chunk_size(extracted_text, chunk_size, max_workers=2)
+    merged_case_info = process_with_chunk_size(
+        extracted_text, chunk_size, max_workers=2
+    )
 
     print("merged_case_info")
     # Clean the response

@@ -282,34 +282,47 @@ export function CaseTable({ searchQuery }: CaseTableProps) {
                                     {formatDate(caseItem.date)}
                                 </TableCell>
                                 <TableCell>
-                                    {caseItem.brandImpactEstimate && (
-                                        <Badge
-                                            className={getBrandImpactColor(
-                                                caseItem.brandImpactEstimate
-                                                    .impact
-                                            )}
-                                        >
-                                            {
-                                                caseItem.brandImpactEstimate
-                                                    .impact
-                                            }
-                                        </Badge>
-                                    )}
+                                    {caseItem.brandImpactEstimate &&
+                                        caseItem.brandImpactEstimate.impact !==
+                                            'Not specified' && (
+                                            <Badge
+                                                className={getBrandImpactColor(
+                                                    caseItem.brandImpactEstimate
+                                                        .impact
+                                                )}
+                                            >
+                                                {
+                                                    caseItem.brandImpactEstimate
+                                                        .impact
+                                                }
+                                            </Badge>
+                                        )}
                                 </TableCell>
                                 <TableCell>
-                                    {caseItem.caseWinLikelihood && (
-                                        <Badge
-                                            className={getRiskColor(
-                                                caseItem.caseWinLikelihood
-                                                    .likelihood
-                                            )}
-                                        >
-                                            {
-                                                caseItem.caseWinLikelihood
-                                                    .likelihood
-                                            }
-                                        </Badge>
-                                    )}
+                                    {caseItem.caseWinLikelihood &&
+                                        caseItem.status &&
+                                        caseItem.status
+                                            .toLowerCase()
+                                            .includes('in progress') && (
+                                            <Badge
+                                                className={
+                                                    parseFloat(
+                                                        caseItem
+                                                            .caseWinLikelihood
+                                                            .percentage
+                                                    ) < 50
+                                                        ? 'bg-yellow-500 hover:bg-yellow-600'
+                                                        : 'bg-green-500 hover:bg-green-600'
+                                                }
+                                            >
+                                                {parseFloat(
+                                                    caseItem.caseWinLikelihood
+                                                        .percentage
+                                                ) < 50
+                                                    ? 'Likely to loose'
+                                                    : 'Likely to win'}
+                                            </Badge>
+                                        )}
                                 </TableCell>
                             </TableRow>
                         ))

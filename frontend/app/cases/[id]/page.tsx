@@ -61,9 +61,12 @@ const getStatusIcon = (status: CaseStatus) => {
     }
 };
 
-export default function CaseDetailPage({ params }: { params: { id: string } }) {
-    // Access params directly
-    const caseId = params.id;
+export default function CaseDetailPage({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
+    const { id: caseId } = React.use(params);
 
     const [caseData, setCaseData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -95,9 +98,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
             <>
                 <TopNavigation />
                 <div className='container mx-auto p-6'>
-                    <div className='text-center py-12'>
-                        <h1 className='text-2xl font-bold mb-2'>Loading...</h1>
-                    </div>
+                    <div className='text-center py-12'></div>
                 </div>
             </>
         );
@@ -163,17 +164,19 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             {caseData.caseWinLikelihood && (
                                 <Badge
                                     className={
-                                        caseData.caseWinLikelihood
-                                            .likelihood === 'High'
-                                            ? 'bg-red-500 hover:bg-red-600'
-                                            : caseData.caseWinLikelihood
-                                                  .likelihood === 'Medium'
+                                        parseFloat(
+                                            caseData.caseWinLikelihood
+                                                .percentage
+                                        ) < 50
                                             ? 'bg-yellow-500 hover:bg-yellow-600'
                                             : 'bg-green-500 hover:bg-green-600'
                                     }
                                 >
-                                    Risk:{' '}
-                                    {caseData.caseWinLikelihood.likelihood}
+                                    {parseFloat(
+                                        caseData.caseWinLikelihood.percentage
+                                    ) < 50
+                                        ? 'Likely to loose'
+                                        : 'Likely to win'}
                                 </Badge>
                             )}
                             {caseData.brandImpactEstimate && (
@@ -619,6 +622,56 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                 }
                                 suggestions={caseData.suggestions}
                             />
+                        </CardContent>
+                    </Card>
+
+                    {/* Related Cases Section */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Related Cases</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            {caseData.relatedCases &&
+                            caseData.relatedCases.length > 0 ? (
+                                <ul className='list-disc pl-5 space-y-1'>
+                                    {caseData.relatedCases.map(
+                                        (related: any, idx: number) => (
+                                            <li key={idx} className='text-sm'>
+                                                {related.title ? (
+                                                    <Link
+                                                        href={`/cases/${related.id}`}
+                                                        className='text-blue-600 hover:underline'
+                                                    >
+                                                        {related.title}
+                                                    </Link>
+                                                ) : (
+                                                    related.id
+                                                )}
+                                            </li>
+                                        )
+                                    )}
+                                </ul>
+                            ) : (
+                                <p className='text-sm text-muted-foreground'>
+                                    No related cases found.
+                                </p>
+                            )}
+                        </CardContent>
+                    </Card>
+
+                    {/* Evidence Section */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Evidence</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            {caseData.evidence ? (
+                                <p className='text-sm'>{caseData.evidence}</p>
+                            ) : (
+                                <p className='text-sm text-muted-foreground'>
+                                    No evidence listed for this case.
+                                </p>
+                            )}
                         </CardContent>
                     </Card>
 

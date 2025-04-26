@@ -51,30 +51,41 @@ export default function NewCasePage() {
         setIsSubmitting(true);
         setProgress(0);
 
-        // Fake progress bar for 20 seconds
-        let elapsed = 0;
-        const interval = setInterval(() => {
-            elapsed += 100;
-            setProgress(Math.min(100, (elapsed / 20000) * 100));
-        }, 100);
+        let progressValue = 0;
+        let progressInterval: NodeJS.Timeout | null = null;
+        let requestFinished = false;
+
+        // Start progress bar animation
+        progressInterval = setInterval(() => {
+            progressValue += 5;
+            if (progressValue >= 100) {
+                progressValue = 100;
+                setProgress(progressValue);
+                if (progressInterval) clearInterval(progressInterval);
+                // If request already finished, redirect now
+                if (requestFinished) {
+                    // Do nothing, redirect will happen in request
+                }
+            } else {
+                setProgress(progressValue);
+            }
+        }, 80); // ~1.6s to reach 100%
 
         try {
-            // Create a FormData object to send files
             const formData = new FormData();
             files.forEach((file) => {
                 formData.append('files', file);
             });
-            // Simulate 20s upload/processing
-            await new Promise((resolve) => setTimeout(resolve, 20000));
-            clearInterval(interval);
-            setProgress(100);
-            // Send the form data to the backend
             const response = await createCase(formData);
+            requestFinished = true;
+            setProgress(100);
+            if (progressInterval) clearInterval(progressInterval);
+            // Redirect immediately when request is done
             router.push(`/cases/${response.id}`);
         } catch (error) {
-            clearInterval(interval);
             setIsSubmitting(false);
             setProgress(0);
+            if (progressInterval) clearInterval(progressInterval);
             console.error('Error creating case:', error);
             alert('Failed to create case. Please try again.');
         }
