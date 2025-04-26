@@ -233,5 +233,170 @@
       "reputationalLoss": "Low",
       "winProbability": "80%"
     }
+  },
+  "1b72ea0f": {
+    "id": "1b72ea0f",
+    "title": " \n    \nv.         ",
+    "status": "settled",
+    "jurisdiction": "Ohio - Franklin County Municipal Court",
+    "stateJurisdiction": "Ohio",
+    "courtJurisdiction": "Franklin County Municipal Court",
+    "caseType": "Breach of Contract",
+    "harmType": "Financial harm",
+    "cause": "Contract Breach",
+    "description": "In the case of Autovest, L.L.C. v. Ruff, the plaintiff, Autovest, alleges that the defendants, Gerry and Adrienne Ruff, defaulted on a promissory note executed on October 17, 2014, with an original sum of $20,488.81. The legal standard for breach of contract requires the plaintiff to demonstrate the existence of a valid contract, the defendant's breach of that contract, and resultant damages. Autovest has provided evidence of the promissory note and the default, which establishes the basis for its claim. The defendants' failure to fulfill the terms of the note constitutes a breach, thereby entitling Autovest to seek recovery of the owed amount, including interest. The burden of proof lies with Autovest to establish the breach and the amount due, while the defendants may raise defenses related to the enforceability of the note or any alleged agreements that may have modified the original terms.",
+    "secondaryTypes": [],
+    "possibleAlternatives": [],
+    "date": "December 15, 2021",
+    "relevantLaws": [
+      "Civ.R. 56 (Ohio Civil Rule for Summary Judgment)",
+      "Civ.R. 56(C) - Standard for summary judgment",
+      "Ohio case law regarding evidentiary standards in summary judgment",
+      "Civ.R. 36",
+      "Civ.R. 56",
+      "Ohio law regarding pro se litigants",
+      "Ohio Rules of Civil Procedure, Civ.R. 36"
+    ],
+    "timeline": [
+      {
+        "date": "2025-04-26",
+        "event": "Case created",
+        "description": "Initial case documents uploaded"
+      },
+      {
+        "date": "Unknown",
+        "event": "December 15, 2021: Autovest filed a complaint.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "February 1, 2022: Gerry Ruff filed a motion to dismiss.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "March 30, 2022: The trial court denied the motion to dismiss.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "April 21, 2022: Autovest served discovery requests.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "September 30, 2022: Autovest filed a motion for summary judgment.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "December 15, 2022: The trial court granted summary judgment.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "December 15, 2022 - Trial court granted summary judgment in favor of Autovest.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "January 18, 2023 - Appellant filed an appeal.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "April 21, 2022: Requests for admissions served to appellant.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "May 19, 2022: Deadline for appellant to respond to requests for admissions.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "November 1, 2022: Appellant filed an affidavit in trial court.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "April 10, 2023: Autovest filed its brief.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "April 20, 2023: Deadline for appellant's reply brief.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "May 16, 2023: Appellant filed 'Judicial Notice' regarding his affidavit.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "April 21, 2022 - Autovest served requests for admissions to the appellant.",
+        "description": ""
+      },
+      {
+        "date": "Unknown",
+        "event": "Judgment affirmed by the court",
+        "description": ""
+      }
+    ],
+    "plaintiffArgumentation": [
+      "Autovest alleged it had acquired rights to pursue the Note.",
+      "The Ruff defendants were in default under the terms of the Note.",
+      "Autovest provided evidence including the Note, general ledger, and correspondence from the original lender.",
+      "The trial court erred in granting summary judgment.",
+      "Autovest failed to provide sufficient evidentiary quality materials to establish ownership of the note.",
+      "The appellant received originals or accurate copies of each document attached to the Complaint.",
+      "Each document attached to the Complaint is a true and correct copy of a genuine original document.",
+      "The appellant contracted for and received credit from the plaintiff or plaintiff\u2019s predecessor.",
+      "The appellant signed the original of each document attached to the Complaint.",
+      "The appellant received everything expected in exchange for the credit extension.",
+      "The agreements have not been modified or superseded.",
+      "The appellant did not notify the plaintiff of any reasons for non-payment prior to the lawsuit.",
+      "The appellant has defaulted under the agreement by failing to make payments.",
+      "The balance sued for is due and owing by the appellant.",
+      "The appellant has no evidence of any credits or offsets.",
+      "The appellant received proper notice of the vehicle resale.",
+      "The resale of the vehicle was performed in a commercially reasonable manner."
+    ],
+    "defenseArgumentation": "",
+    "suggestions": [],
+    "outcomePrediction": null,
+    "numberOfClaimants": "2",
+    "mediaCoverageLevel": {
+      "level": "Not specified",
+      "explanation": "Insufficient information to determine the level of media coverage related to this case."
+    },
+    "outcome": "Affirmed the judgment of the trial court",
+    "caseSummary": "Autovest, L.L.C. filed a complaint against Gerry and Adrienne Ruff for defaulting on a promissory note. Autovest claimed it acquired rights to pursue the note and sought payment of the outstanding amount, which included principal, interest, and fees. The trial court granted summary judgment in favor of Autovest.",
+    "timeToResolutionMonths": "Not specified",
+    "settlementAmount": "Not specified",
+    "defenseCostEstimate": "Not specified",
+    "expectedBrandImpact": {
+      "impact": "Medium",
+      "explanation": "The case involves a financial dispute over a promissory note, which could affect Autovest's reputation in the financial services sector, especially if the appeal leads to a negative outcome."
+    },
+    "affectedCar": "2009 BMW 3 Series",
+    "affectedPart": "Not specified",
+    "brandImpactEstimate": {
+      "impact": "Medium",
+      "explanation": "The ruling may lead to a perception of Autovest as a strong enforcer of contracts, which could enhance its reputation in the financial sector, but the nature of the case may also raise concerns about consumer debt enforcement."
+    },
+    "caseWinLikelihood": {
+      "likelihood": "Medium",
+      "explanation": "The likelihood of the defendant winning the case appears medium due to the failure of the appellant to respond to requests for admissions, which may lead to automatic admissions of the facts, strengthening the plaintiff's position."
+    },
+    "reputationImpactCase": {
+      "impact": "Medium",
+      "explanation": "The outcome reinforces Autovest's position in debt enforcement, which could positively influence its reputation, but the nature of the case may also lead to scrutiny regarding consumer rights."
+    },
+    "reputationImpactMedia": {
+      "impact": "Low",
+      "explanation": "There is no indication of significant media coverage surrounding this case, suggesting a low impact from media on the brand's reputation."
+    }
   }
 }

@@ -65,7 +65,6 @@ async def get_case(case_id: str):
         raise HTTPException(status_code=404, detail="Case not found")
     return case
 
-
 @router.post("/", response_model=CaseResponse)
 async def create_case(files: List[UploadFile] = File(None)):
     """
@@ -138,24 +137,62 @@ async def create_case(files: List[UploadFile] = File(None)):
     possible_alternatives = extract_case_type_response.possible_alternatives or []
 
     # Parse the data from extract_other_types_response
-    case_id = extract_other_types_response.Case_ID
+    case_id_from_extract = extract_other_types_response.Case_ID
     filing_date = extract_other_types_response.Filing_Date
+    
+    # Handle the new jurisdiction format (now a dictionary)
     jurisdiction = extract_other_types_response.Jurisdiction
+    state_jurisdiction = jurisdiction.get('state_jurisdiction', 'Not specified') if isinstance(jurisdiction, dict) else 'Not specified'
+    court_jurisdiction = jurisdiction.get('court_jurisdiction', 'Not specified') if isinstance(jurisdiction, dict) else jurisdiction
+    
     defect_type = extract_other_types_response.Defect_Type or []
     number_of_claimants = str(extract_other_types_response.Number_of_Claimants)
     media_coverage_level = extract_other_types_response.Media_Coverage_Level
     outcome = extract_other_types_response.Outcome
+    
+    # Convert status to lowercase to match expected values
+    status_raw = extract_other_types_response.Status
+    if isinstance(status_raw, str):
+        if status_raw.lower() == "in progress":
+            status = "in progress"
+        elif status_raw.lower() == "won":
+            status = "won"
+        elif status_raw.lower() == "lost":
+            status = "lost"
+        elif status_raw.lower() == "settled":
+            status = "settled"
+        else:
+            status = "in progress"  # Default value
+    else:
+        status = "in progress"  # Default value
+    
+    case_summary = extract_other_types_response.Case_Summary
     time_to_resolution_months = extract_other_types_response.Time_to_Resolution_Months
     settlement_amount = extract_other_types_response.Settlement_Amount
     defense_cost_estimate = extract_other_types_response.Defense_Cost_Estimate
     expected_brand_impact = extract_other_types_response.Expected_Brand_Impact
 
-    # Parse the new information from extract_other_types_response
+    # Parse the new and updated information from extract_other_types_response
     affected_car = extract_other_types_response.Affected_Car
     affected_part = extract_other_types_response.Affected_Part
     brand_impact_estimate = extract_other_types_response.Brand_Impact_Estimate
     case_win_likelihood = extract_other_types_response.Case_Win_Likelihood
-    plaintiff_argumentation = ", ".join(extract_other_types_response.Plaintiff_Argumentation or [])
+    
+    # Get plaintiff argumentation as a list of key points
+    plaintiff_argumentation = extract_other_types_response.Plaintiff_Argumentation or []
+    
+    # Get the new fields
+    timeline_of_events = extract_other_types_response.Timeline_of_Events or []
+    relevant_laws = extract_other_types_response.Relevant_Laws or []
+    
+    # Get the separated reputation impact
+    reputation_impact = extract_other_types_response.Reputation_Impact or {
+        'case_outcome': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'},
+        'media_coverage': {'impact': 'Not specified', 'explanation': 'Insufficient information to determine'}
+    }
+    
+    reputation_impact_case = reputation_impact.get('case_outcome', {})
+    reputation_impact_media = reputation_impact.get('media_coverage', {})
 
     # Print parsed variables for debugging (optional)
     print("Parsed Case Type Response:")
@@ -167,25 +204,32 @@ async def create_case(files: List[UploadFile] = File(None)):
     print(f"Possible Alternatives: {possible_alternatives}")
 
     print("\nParsed Other Types Response:")
-    print(f"Case ID: {case_id}")
+    print(f"Case ID: {case_id_from_extract}")
     print(f"Filing Date: {filing_date}")
-    print(f"Jurisdiction: {jurisdiction}")
+    print(f"State Jurisdiction: {state_jurisdiction}")
+    print(f"Court Jurisdiction: {court_jurisdiction}")
     print(f"Defect Type: {defect_type}")
     print(f"Number of Claimants: {number_of_claimants}")
     print(f"Media Coverage Level: {media_coverage_level}")
     print(f"Outcome: {outcome}")
+    print(f"Status: {status}")
+    print(f"Case Summary: {case_summary}")
     print(f"Time to Resolution (Months): {time_to_resolution_months}")
     print(f"Settlement Amount: {settlement_amount}")
     print(f"Defense Cost Estimate: {defense_cost_estimate}")
     print(f"Expected Brand Impact: {expected_brand_impact}")
 
-    # Print the new information
-    print("\nNew Information:")
+    # Print the new and updated information
+    print("\nNew and Updated Information:")
     print(f"Affected Car: {affected_car}")
     print(f"Affected Part: {affected_part}")
     print(f"Brand Impact Estimate: {brand_impact_estimate}")
     print(f"Case Win Likelihood: {case_win_likelihood}")
     print(f"Plaintiff Argumentation: {plaintiff_argumentation}")
+    print(f"Timeline of Events: {timeline_of_events}")
+    print(f"Relevant Laws: {relevant_laws}")
+    print(f"Reputation Impact (Case Outcome): {reputation_impact_case}")
+    print(f"Reputation Impact (Media Coverage): {reputation_impact_media}")
 
     # Generate case metadata from extracted text
     today = datetime.now().strftime("%Y-%m-%d")
@@ -202,12 +246,14 @@ async def create_case(files: List[UploadFile] = File(None)):
         if match:
             title = match.group(0)
 
-    # Create a new case object
+    # Create a new case object with updated field names
     new_case = {
         "id": case_id,
         "title": title,
-        "status": "in progress",
-        "jurisdiction": jurisdiction,
+        "status": status,  # Now properly lowercase
+        "jurisdiction": f"{state_jurisdiction} - {court_jurisdiction}",  # Keep the jurisdiction field for backward compatibility
+        "stateJurisdiction": state_jurisdiction,
+        "courtJurisdiction": court_jurisdiction,
         "caseType": case_type,
         "harmType": harm_type,
         "cause": cause,
@@ -215,21 +261,22 @@ async def create_case(files: List[UploadFile] = File(None)):
         "secondaryTypes": secondary_types,
         "possibleAlternatives": possible_alternatives,
         "date": filing_date,
-        "relevantLaws": [],
+        "relevantLaws": relevant_laws if relevant_laws != ["Not specified"] else [],
         "timeline": [
             {
                 "date": today,
                 "event": "Case created",
                 "description": "Initial case documents uploaded",
             }
-        ],
-        "offenseArgumentation": plaintiff_argumentation,
-        "defenseArgumentation": None,
+        ] + [{"date": "Unknown", "event": event, "description": ""} for event in timeline_of_events if event != "Not specified"],
+        "plaintiffArgumentation": plaintiff_argumentation if plaintiff_argumentation != ["Not specified"] else [],
+        "defenseArgumentation": "",
         "suggestions": [],
         "outcomePrediction": None,
         "numberOfClaimants": number_of_claimants,
         "mediaCoverageLevel": media_coverage_level,
         "outcome": outcome,
+        "caseSummary": case_summary,
         "timeToResolutionMonths": time_to_resolution_months,
         "settlementAmount": settlement_amount,
         "defenseCostEstimate": defense_cost_estimate,
@@ -238,6 +285,8 @@ async def create_case(files: List[UploadFile] = File(None)):
         "affectedPart": affected_part,
         "brandImpactEstimate": brand_impact_estimate,
         "caseWinLikelihood": case_win_likelihood,
+        "reputationImpactCase": reputation_impact_case,
+        "reputationImpactMedia": reputation_impact_media,
     }
 
     # Add the case to the database
