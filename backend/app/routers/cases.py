@@ -178,11 +178,11 @@ async def create_case(
     # Create a new case object
     new_case = {
         "id": case_id,
-        "title": title,
+        "title": case_id,
         "status": "in progress",
-        "jurisdiction": "California",  # Mock jurisdiction
-        "caseType": "Liability",       # Mock case type
-        "date": today,
+        "jurisdiction": jurisdiction,  # Mock jurisdiction
+        "caseType": case_type,       # Mock case type
+        "date": filing_date,
         "relevantLaws": [],
         "timeline": [{
             "date": today,
