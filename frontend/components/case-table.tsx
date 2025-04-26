@@ -15,7 +15,14 @@ import { ArrowDown, ArrowUp } from 'lucide-react';
 import { fetchCases } from '@/lib/api';
 
 type CaseStatus = 'won' | 'lost' | 'in progress';
-type SortField = 'title' | 'status' | 'jurisdiction' | 'caseType' | 'date';
+type SortField =
+    | 'title'
+    | 'status'
+    | 'jurisdiction'
+    | 'caseType'
+    | 'date'
+    | 'brandImpact'
+    | 'risk';
 type SortDirection = 'asc' | 'desc';
 
 interface CaseTableProps {
@@ -33,6 +40,7 @@ export function CaseTable({ searchQuery }: CaseTableProps) {
         async function loadCases() {
             setLoading(true);
             const casesData = await fetchCases(searchQuery);
+            console.log('Fetched cases:', casesData);
             setCases(casesData);
             setLoading(false);
         }
@@ -56,6 +64,24 @@ export function CaseTable({ searchQuery }: CaseTableProps) {
             return sortDirection === 'asc' ? aDate - bDate : bDate - aDate;
         }
 
+        if (sortField === 'brandImpact') {
+            const impactOrder = { High: 0, Medium: 1, Low: 2 };
+            const aImpact = a.brandImpactEstimate?.impact || 'Low';
+            const bImpact = b.brandImpactEstimate?.impact || 'Low';
+            const aValue = impactOrder[aImpact as keyof typeof impactOrder];
+            const bValue = impactOrder[bImpact as keyof typeof impactOrder];
+            return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
+        }
+
+        if (sortField === 'risk') {
+            const riskOrder = { High: 0, Medium: 1, Low: 2 };
+            const aRisk = a.caseWinLikelihood?.likelihood || 'Low';
+            const bRisk = b.caseWinLikelihood?.likelihood || 'Low';
+            const aValue = riskOrder[aRisk as keyof typeof riskOrder];
+            const bValue = riskOrder[bRisk as keyof typeof riskOrder];
+            return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
+        }
+
         const aValue = a[sortField];
         const bValue = b[sortField];
 
@@ -72,6 +98,32 @@ export function CaseTable({ searchQuery }: CaseTableProps) {
                 return 'bg-red-500 hover:bg-red-600';
             case 'in progress':
                 return 'bg-blue-500 hover:bg-blue-600';
+            default:
+                return '';
+        }
+    };
+
+    const getBrandImpactColor = (impact: string) => {
+        switch (impact) {
+            case 'High':
+                return 'bg-red-500 hover:bg-red-600';
+            case 'Medium':
+                return 'bg-yellow-500 hover:bg-yellow-600';
+            case 'Low':
+                return 'bg-green-500 hover:bg-green-600';
+            default:
+                return '';
+        }
+    };
+
+    const getRiskColor = (likelihood: string) => {
+        switch (likelihood) {
+            case 'High':
+                return 'bg-red-500 hover:bg-red-600';
+            case 'Medium':
+                return 'bg-yellow-500 hover:bg-yellow-600';
+            case 'Low':
+                return 'bg-green-500 hover:bg-green-600';
             default:
                 return '';
         }
@@ -158,13 +210,31 @@ export function CaseTable({ searchQuery }: CaseTableProps) {
                                 Date <SortIcon field='date' />
                             </Button>
                         </TableHead>
+                        <TableHead>
+                            <Button
+                                variant='ghost'
+                                className='p-0 font-medium'
+                                onClick={() => handleSort('brandImpact')}
+                            >
+                                Brand Impact <SortIcon field='brandImpact' />
+                            </Button>
+                        </TableHead>
+                        <TableHead>
+                            <Button
+                                variant='ghost'
+                                className='p-0 font-medium'
+                                onClick={() => handleSort('risk')}
+                            >
+                                Risk <SortIcon field='risk' />
+                            </Button>
+                        </TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {loading ? (
                         <TableRow>
                             <TableCell
-                                colSpan={5}
+                                colSpan={7}
                                 className='text-center py-6 text-muted-foreground'
                             >
                                 Loading cases...
@@ -197,12 +267,42 @@ export function CaseTable({ searchQuery }: CaseTableProps) {
                                 <TableCell>
                                     {formatDate(caseItem.date)}
                                 </TableCell>
+                                <TableCell>
+                                    {caseItem.brandImpactEstimate && (
+                                        <Badge
+                                            className={getBrandImpactColor(
+                                                caseItem.brandImpactEstimate
+                                                    .impact
+                                            )}
+                                        >
+                                            {
+                                                caseItem.brandImpactEstimate
+                                                    .impact
+                                            }
+                                        </Badge>
+                                    )}
+                                </TableCell>
+                                <TableCell>
+                                    {caseItem.caseWinLikelihood && (
+                                        <Badge
+                                            className={getRiskColor(
+                                                caseItem.caseWinLikelihood
+                                                    .likelihood
+                                            )}
+                                        >
+                                            {
+                                                caseItem.caseWinLikelihood
+                                                    .likelihood
+                                            }
+                                        </Badge>
+                                    )}
+                                </TableCell>
                             </TableRow>
                         ))
                     ) : (
                         <TableRow>
                             <TableCell
-                                colSpan={5}
+                                colSpan={7}
                                 className='text-center py-6 text-muted-foreground'
                             >
                                 No cases found matching your search.

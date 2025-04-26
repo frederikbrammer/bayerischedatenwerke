@@ -138,14 +138,47 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                             Filed on {formatDate(caseData.date)}
                         </p>
                     </div>
-                    <Badge
-                        className={getStatusColor(
-                            caseData.status as CaseStatus
+                    <div className='flex gap-2'>
+                        {caseData.caseWinLikelihood && (
+                            <Badge
+                                className={
+                                    caseData.caseWinLikelihood.likelihood ===
+                                    'High'
+                                        ? 'bg-red-500 hover:bg-red-600'
+                                        : caseData.caseWinLikelihood
+                                              .likelihood === 'Medium'
+                                        ? 'bg-yellow-500 hover:bg-yellow-600'
+                                        : 'bg-green-500 hover:bg-green-600'
+                                }
+                            >
+                                Risk: {caseData.caseWinLikelihood.likelihood}
+                            </Badge>
                         )}
-                    >
-                        {caseData.status.charAt(0).toUpperCase() +
-                            caseData.status.slice(1)}
-                    </Badge>
+                        {caseData.brandImpactEstimate && (
+                            <Badge
+                                className={
+                                    caseData.brandImpactEstimate.impact ===
+                                    'High'
+                                        ? 'bg-red-500 hover:bg-red-600'
+                                        : caseData.brandImpactEstimate
+                                              .impact === 'Medium'
+                                        ? 'bg-yellow-500 hover:bg-yellow-600'
+                                        : 'bg-green-500 hover:bg-green-600'
+                                }
+                            >
+                                Brand Impact:{' '}
+                                {caseData.brandImpactEstimate.impact}
+                            </Badge>
+                        )}
+                        <Badge
+                            className={getStatusColor(
+                                caseData.status as CaseStatus
+                            )}
+                        >
+                            {caseData.status.charAt(0).toUpperCase() +
+                                caseData.status.slice(1)}
+                        </Badge>
+                    </div>
                 </div>
 
                 <div className='space-y-8'>
@@ -211,28 +244,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                     Case Summary:
                                 </h3>
                                 <p className='text-sm text-muted-foreground'>
-                                    This case involves allegations related to
-                                    the{' '}
-                                    {caseData.title
-                                        .toLowerCase()
-                                        .includes('braking')
-                                        ? 'braking system'
-                                        : caseData.title
-                                              .toLowerCase()
-                                              .includes('engine')
-                                        ? 'engine'
-                                        : caseData.title
-                                              .toLowerCase()
-                                              .includes('suspension')
-                                        ? 'suspension system'
-                                        : caseData.title
-                                              .toLowerCase()
-                                              .includes('electrical')
-                                        ? 'electrical system'
-                                        : 'transmission'}{' '}
-                                    in Bayersche vehicles. The plaintiff has
-                                    filed a {caseData.caseType.toLowerCase()}{' '}
-                                    claim in {caseData.jurisdiction}.
+                                    {caseData.summary}
                                 </p>
                             </div>
                         </CardContent>
@@ -373,18 +385,18 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                             Level:
                                                         </span>
                                                         <Badge
-                                                            variant={
+                                                            className={
                                                                 caseData
                                                                     .mediaCoverageLevel
                                                                     .level ===
                                                                 'High'
-                                                                    ? 'destructive'
+                                                                    ? 'bg-red-500 hover:bg-red-600'
                                                                     : caseData
                                                                           .mediaCoverageLevel
                                                                           .level ===
                                                                       'Medium'
-                                                                    ? 'warning'
-                                                                    : 'outline'
+                                                                    ? 'bg-yellow-500 hover:bg-yellow-600'
+                                                                    : 'bg-green-500 hover:bg-green-600'
                                                             }
                                                         >
                                                             {
@@ -421,18 +433,18 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                             Impact:
                                                         </span>
                                                         <Badge
-                                                            variant={
+                                                            className={
                                                                 caseData
                                                                     .expectedBrandImpact
                                                                     .impact ===
                                                                 'High'
-                                                                    ? 'destructive'
+                                                                    ? 'bg-red-500 hover:bg-red-600'
                                                                     : caseData
                                                                           .expectedBrandImpact
                                                                           .impact ===
                                                                       'Medium'
-                                                                    ? 'warning'
-                                                                    : 'outline'
+                                                                    ? 'bg-yellow-500 hover:bg-yellow-600'
+                                                                    : 'bg-green-500 hover:bg-green-600'
                                                             }
                                                         >
                                                             {
@@ -469,18 +481,18 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                             Impact:
                                                         </span>
                                                         <Badge
-                                                            variant={
+                                                            className={
                                                                 caseData
                                                                     .brandImpactEstimate
                                                                     .impact ===
                                                                 'High'
-                                                                    ? 'destructive'
+                                                                    ? 'bg-red-500 hover:bg-red-600'
                                                                     : caseData
                                                                           .brandImpactEstimate
                                                                           .impact ===
                                                                       'Medium'
-                                                                    ? 'warning'
-                                                                    : 'outline'
+                                                                    ? 'bg-yellow-500 hover:bg-yellow-600'
+                                                                    : 'bg-green-500 hover:bg-green-600'
                                                             }
                                                         >
                                                             {
@@ -518,18 +530,18 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                                                             Likelihood:
                                                         </span>
                                                         <Badge
-                                                            variant={
+                                                            className={
                                                                 caseData
                                                                     .caseWinLikelihood
                                                                     .likelihood ===
                                                                 'High'
-                                                                    ? 'default'
+                                                                    ? 'bg-red-500 hover:bg-red-600'
                                                                     : caseData
                                                                           .caseWinLikelihood
                                                                           .likelihood ===
                                                                       'Medium'
-                                                                    ? 'secondary'
-                                                                    : 'outline'
+                                                                    ? 'bg-yellow-500 hover:bg-yellow-600'
+                                                                    : 'bg-green-500 hover:bg-green-600'
                                                             }
                                                         >
                                                             {

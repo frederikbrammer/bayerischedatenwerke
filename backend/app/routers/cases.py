@@ -25,7 +25,7 @@ from app.db.database import (
     get_case_by_id,
     add_new_case,
 )
-from app.models.models import Case, CaseSummary, CreateCaseRequest, CaseResponse
+from app.models.models import Case, CreateCaseRequest, CaseResponse
 
 router = APIRouter(
     prefix="/cases",
@@ -34,7 +34,7 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=List[CaseSummary])
+@router.get("/")
 async def get_cases(
     search: Optional[str] = Query(
         None, description="Search query for case title or jurisdiction"
@@ -52,6 +52,7 @@ async def get_cases(
             for case in cases
             if search in case["title"].lower() or search in case["jurisdiction"].lower()
         ]
+
     return cases
 
 
@@ -155,7 +156,9 @@ async def create_case(files: List[UploadFile] = File(None)):
     affected_part = extract_other_types_response.Affected_Part
     brand_impact_estimate = extract_other_types_response.Brand_Impact_Estimate
     case_win_likelihood = extract_other_types_response.Case_Win_Likelihood
-    plaintiff_argumentation = ", ".join(extract_other_types_response.Plaintiff_Argumentation or [])
+    plaintiff_argumentation = ", ".join(
+        extract_other_types_response.Plaintiff_Argumentation or []
+    )
 
     # Print parsed variables for debugging (optional)
     print("Parsed Case Type Response:")
@@ -190,22 +193,10 @@ async def create_case(files: List[UploadFile] = File(None)):
     # Generate case metadata from extracted text
     today = datetime.now().strftime("%Y-%m-%d")
 
-    # Mock extraction of title from text
-    title = "New Case"
-    if "Bayerische vs" in extracted_text:
-        title = "Bayerische vs. Johnson"
-    elif "v." in extracted_text:
-        # Look for patterns like "Smith v. Jones"
-        import re
-
-        match = re.search(r"([A-Za-z\s]+)\s+v\.\s+([A-Za-z\s]+)", extracted_text)
-        if match:
-            title = match.group(0)
-
     # Create a new case object
     new_case = {
         "id": case_id,
-        "title": title,
+        "title": case_id,
         "status": "in progress",
         "jurisdiction": jurisdiction,
         "caseType": case_type,

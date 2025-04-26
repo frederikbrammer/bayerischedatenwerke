@@ -1,29 +1,35 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import type React from 'react';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "BayerscheDatenWerke",
-  description: "Litigation Management Tool",
-    generator: 'v0.dev'
-}
+    title: 'BayerischeDatenWerke',
+    description: 'Litigation Management Tool',
+};
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <main className="h-screen overflow-auto">{children}</main>
-        </ThemeProvider>
-      </body>
-    </html>
-  )
+    return (
+        <html lang='en'>
+            <body className={inter.className}>
+                <ThemeProvider
+                    attribute='class'
+                    defaultTheme='light'
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <main className='h-screen overflow-auto pt-16'>
+                        {children}
+                    </main>
+                </ThemeProvider>
+            </body>
+        </html>
+    );
 }
