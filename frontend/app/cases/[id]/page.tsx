@@ -248,6 +248,194 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                         </CardContent>
                     </Card>
 
+                    {/* Case Analysis Section - New Section for Additional Data */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Case Analysis</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                                <div>
+                                    <h3 className='font-medium mb-3'>
+                                        Case Details
+                                    </h3>
+                                    <dl className='grid grid-cols-2 gap-3'>
+                                        {caseData.defectType && (
+                                            <>
+                                                <dt className='font-medium'>
+                                                    Defect Type:
+                                                </dt>
+                                                <dd>
+                                                    {Array.isArray(
+                                                        caseData.defectType
+                                                    )
+                                                        ? caseData.defectType.join(
+                                                              ', '
+                                                          )
+                                                        : caseData.defectType}
+                                                </dd>
+                                            </>
+                                        )}
+
+                                        {caseData.numberOfClaimants && (
+                                            <>
+                                                <dt className='font-medium'>
+                                                    Number of Claimants:
+                                                </dt>
+                                                <dd>
+                                                    {caseData.numberOfClaimants}
+                                                </dd>
+                                            </>
+                                        )}
+
+                                        {caseData.timeToResolutionMonths && (
+                                            <>
+                                                <dt className='font-medium'>
+                                                    Time to Resolution:
+                                                </dt>
+                                                <dd>
+                                                    {
+                                                        caseData.timeToResolutionMonths
+                                                    }{' '}
+                                                    months
+                                                </dd>
+                                            </>
+                                        )}
+
+                                        {caseData.settlementAmount &&
+                                            caseData.settlementAmount !==
+                                                'Not specified' && (
+                                                <>
+                                                    <dt className='font-medium'>
+                                                        Settlement Amount:
+                                                    </dt>
+                                                    <dd>
+                                                        {
+                                                            caseData.settlementAmount
+                                                        }
+                                                    </dd>
+                                                </>
+                                            )}
+
+                                        {caseData.defenseCostEstimate &&
+                                            caseData.defenseCostEstimate !==
+                                                'Not specified' && (
+                                                <>
+                                                    <dt className='font-medium'>
+                                                        Defense Cost Estimate:
+                                                    </dt>
+                                                    <dd>
+                                                        {
+                                                            caseData.defenseCostEstimate
+                                                        }
+                                                    </dd>
+                                                </>
+                                            )}
+                                    </dl>
+                                </div>
+
+                                <div>
+                                    {caseData.mediaCoverageLevel &&
+                                        typeof caseData.mediaCoverageLevel ===
+                                            'object' && (
+                                            <div className='mb-4'>
+                                                <h3 className='font-medium mb-2'>
+                                                    Media Coverage Assessment
+                                                </h3>
+                                                <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
+                                                    <div className='flex items-center gap-2 mb-2'>
+                                                        <span className='font-medium'>
+                                                            Level:
+                                                        </span>
+                                                        <Badge
+                                                            variant={
+                                                                caseData
+                                                                    .mediaCoverageLevel
+                                                                    .level ===
+                                                                'High'
+                                                                    ? 'destructive'
+                                                                    : caseData
+                                                                          .mediaCoverageLevel
+                                                                          .level ===
+                                                                      'Medium'
+                                                                    ? 'warning'
+                                                                    : 'outline'
+                                                            }
+                                                        >
+                                                            {
+                                                                caseData
+                                                                    .mediaCoverageLevel
+                                                                    .level
+                                                            }
+                                                        </Badge>
+                                                    </div>
+                                                    {caseData.mediaCoverageLevel
+                                                        .explanation && (
+                                                        <p className='text-sm text-muted-foreground'>
+                                                            {
+                                                                caseData
+                                                                    .mediaCoverageLevel
+                                                                    .explanation
+                                                            }
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                    {caseData.expectedBrandImpact &&
+                                        typeof caseData.expectedBrandImpact ===
+                                            'object' && (
+                                            <div>
+                                                <h3 className='font-medium mb-2'>
+                                                    Expected Brand Impact
+                                                </h3>
+                                                <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
+                                                    <div className='flex items-center gap-2 mb-2'>
+                                                        <span className='font-medium'>
+                                                            Impact:
+                                                        </span>
+                                                        <Badge
+                                                            variant={
+                                                                caseData
+                                                                    .expectedBrandImpact
+                                                                    .impact ===
+                                                                'High'
+                                                                    ? 'destructive'
+                                                                    : caseData
+                                                                          .expectedBrandImpact
+                                                                          .impact ===
+                                                                      'Medium'
+                                                                    ? 'warning'
+                                                                    : 'outline'
+                                                            }
+                                                        >
+                                                            {
+                                                                caseData
+                                                                    .expectedBrandImpact
+                                                                    .impact
+                                                            }
+                                                        </Badge>
+                                                    </div>
+                                                    {caseData
+                                                        .expectedBrandImpact
+                                                        .explanation && (
+                                                        <p className='text-sm text-muted-foreground'>
+                                                            {
+                                                                caseData
+                                                                    .expectedBrandImpact
+                                                                    .explanation
+                                                            }
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
                     {/* Argumentation Section */}
                     <Card>
                         <CardHeader>
