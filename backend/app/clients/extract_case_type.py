@@ -165,10 +165,12 @@ def extract_case_type(extracted_text: str) -> CaseAnalysisResponse:
         result = call_gemini_analyzer(chunks[0])
         results.append(result)
 
+    parsed_results = [json.loads(result) for result in results]
+    print(parsed_results)
     # Combine results into a single response
     combined_response = {
-        "primary_analysis": results[0]["primary_analysis"],
-        "possible_alternatives": [result["primary_analysis"] for result in results[1:]]
+        "primary_analysis": parsed_results[0]["primary_analysis"],
+        "possible_alternatives": [result["primary_analysis"] for result in parsed_results[1:]]
     }
 
     return CaseAnalysisResponse(**combined_response)

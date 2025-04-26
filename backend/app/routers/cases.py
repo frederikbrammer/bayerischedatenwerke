@@ -110,6 +110,11 @@ async def create_case(
     extract_case_type_response = extract_case_type(extracted_text)
     extract_other_types_response = extract_other_types(extracted_text)
     
+    print(extract_case_type_response)
+    print(extract_other_types_response)
+    
+    print("Extracted Case Type Response:")
+    
     # Parse the data from extract_case_type_response
     case_type = extract_case_type_response.primary_analysis.case_type
     harm_type = extract_case_type_response.primary_analysis.harm_type
@@ -121,17 +126,17 @@ async def create_case(
     possible_alternatives = extract_case_type_response.possible_alternatives or []
     
     # Parse the data from extract_other_types_response
-    case_id = extract_other_types_response.Case_ID
-    filing_date = extract_other_types_response.Filing_Date
-    jurisdiction = extract_other_types_response.Jurisdiction
-    defect_type = extract_other_types_response.Defect_Type or []
-    number_of_claimants = extract_other_types_response.Number_of_Claimants
-    media_coverage_level = extract_other_types_response.Media_Coverage_Level
-    outcome = extract_other_types_response.Outcome
-    time_to_resolution_months = extract_other_types_response.Time_to_Resolution_Months
-    settlement_amount = extract_other_types_response.Settlement_Amount
-    defense_cost_estimate = extract_other_types_response.Defense_Cost_Estimate
-    expected_brand_impact = extract_other_types_response.Expected_Brand_Impact
+    case_id = extract_other_types_response.get("Case_ID")
+    filing_date = extract_other_types_response.get("Filing_Date")
+    jurisdiction = extract_other_types_response.get("Jurisdiction")
+    defect_type = extract_other_types_response.get("Defect_Type") or []
+    number_of_claimants = extract_other_types_response.get("Number_of_Claimants")
+    media_coverage_level = extract_other_types_response.get("Media_Coverage_Level")
+    outcome = extract_other_types_response.get("Outcome")
+    time_to_resolution_months = extract_other_types_response.get("Time_to_Resolution_Months")
+    settlement_amount = extract_other_types_response.get("Settlement_Amount")
+    defense_cost_estimate = extract_other_types_response.get("Defense_Cost_Estimate")
+    expected_brand_impact = extract_other_types_response.get("Expected_Brand_Impact")
     
     # Print parsed variables for debugging (optional)
     print("Parsed Case Type Response:")
