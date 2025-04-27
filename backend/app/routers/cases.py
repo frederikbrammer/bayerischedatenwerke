@@ -52,7 +52,7 @@ async def get_cases(
     return cases
 
 
-@router.get("/{case_id}", response_model=Case)
+@router.get("/{case_id}")
 async def get_case(case_id: str):
     """
     Get detailed information for a specific case
@@ -61,6 +61,7 @@ async def get_case(case_id: str):
     if case is None:
         raise HTTPException(status_code=404, detail="Case not found")
     return case
+
 
 @router.post("/", response_model=CaseResponse)
 async def create_case(files: List[UploadFile] = File(None)):
@@ -129,16 +130,16 @@ async def create_case(files: List[UploadFile] = File(None)):
     cause = extract_case_type_response.primary_analysis.cause
     description = extract_case_type_response.primary_analysis.description
     secondary_types = extract_case_type_response.primary_analysis.secondary_types or []
-    
+
     # Extract evidence from the primary analysis
     evidence = extract_case_type_response.primary_analysis.evidence or []
 
     # Parse possible alternatives from extract_case_type_response
     possible_alternatives = extract_case_type_response.possible_alternatives or []
-    
+
     # Extract evidence from possible alternatives if available
     for alt in possible_alternatives:
-        if hasattr(alt, 'evidence') and alt.evidence:
+        if hasattr(alt, "evidence") and alt.evidence:
             # Add evidence from alternatives to a separate field if needed
             alt_evidence = alt.evidence
         else:
@@ -353,11 +354,23 @@ async def create_case(files: List[UploadFile] = File(None)):
     processed_evidence = []
     if evidence:
         for item in evidence:
-            processed_evidence.append({
-                "text": item.text if hasattr(item, 'text') else item.get('text', ''),
-                "relevance": item.relevance if hasattr(item, 'relevance') else item.get('relevance', ''),
-                "strength": item.strength if hasattr(item, 'strength') else item.get('strength', '')
-            })
+            processed_evidence.append(
+                {
+                    "text": (
+                        item.text if hasattr(item, "text") else item.get("text", "")
+                    ),
+                    "relevance": (
+                        item.relevance
+                        if hasattr(item, "relevance")
+                        else item.get("relevance", "")
+                    ),
+                    "strength": (
+                        item.strength
+                        if hasattr(item, "strength")
+                        else item.get("strength", "")
+                    ),
+                }
+            )
 
     # Create a new case object with updated field names
     new_case = {
@@ -398,12 +411,10 @@ async def create_case(files: List[UploadFile] = File(None)):
         "caseWinLikelihood": case_win_likelihood,
         "reputationImpactCase": reputation_impact_case,
         "reputationImpactMedia": reputation_impact_media,
-        
     }
-    
+
     new_case = embed(new_case)
     new_case = find_similar(new_case, threshold=0.5, top_k=5)
-    
 
     new_case = add_win_likelihood_to_case(new_case)
 

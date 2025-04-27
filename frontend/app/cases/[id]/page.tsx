@@ -161,24 +161,28 @@ export default function CaseDetailPage({
                     </div>
                     <div className='flex items-center justify-between pt-2 w-full'>
                         <div className='flex gap-2'>
-                            {caseData.caseWinLikelihood && (
-                                <Badge
-                                    className={
-                                        parseFloat(
+                            {caseData.caseWinLikelihood &&
+                                caseData.status
+                                    .toLowerCase()
+                                    .includes('in progress') && (
+                                    <Badge
+                                        className={
+                                            parseFloat(
+                                                caseData.caseWinLikelihood
+                                                    .percentage
+                                            ) < 50
+                                                ? 'bg-yellow-500 hover:bg-yellow-600'
+                                                : 'bg-green-500 hover:bg-green-600'
+                                        }
+                                    >
+                                        {parseFloat(
                                             caseData.caseWinLikelihood
                                                 .percentage
                                         ) < 50
-                                            ? 'bg-yellow-500 hover:bg-yellow-600'
-                                            : 'bg-green-500 hover:bg-green-600'
-                                    }
-                                >
-                                    {parseFloat(
-                                        caseData.caseWinLikelihood.percentage
-                                    ) < 50
-                                        ? 'Likely to loose'
-                                        : 'Likely to win'}
-                                </Badge>
-                            )}
+                                            ? 'Likely to loose'
+                                            : 'Likely to win'}
+                                    </Badge>
+                                )}
                             {caseData.brandImpactEstimate && (
                                 <Badge
                                     className={
@@ -267,6 +271,12 @@ export default function CaseDetailPage({
                                             Filed Date:
                                         </dt>
                                         <dd>{formatDate(caseData.date)}</dd>
+                                        <dt className='font-medium'>
+                                            Harm type:
+                                        </dt>
+                                        <dd>{caseData.harmType}</dd>
+                                        <dt className='font-medium'>Cause:</dt>
+                                        <dd>{caseData.cause}</dd>
                                     </dl>
                                 </div>
 
@@ -287,15 +297,6 @@ export default function CaseDetailPage({
                                         )}
                                     </ul>
                                 </div>
-                            </div>
-
-                            <div className='mt-6'>
-                                <h3 className='font-medium mb-2'>
-                                    Case Summary:
-                                </h3>
-                                <p className='text-sm text-muted-foreground'>
-                                    {caseData.summary}
-                                </p>
                             </div>
                         </CardContent>
                     </Card>
@@ -512,96 +513,6 @@ export default function CaseDetailPage({
                                                 </div>
                                             </div>
                                         )}
-                                    {caseData.brandImpactEstimate &&
-                                        typeof caseData.brandImpactEstimate ===
-                                            'object' && (
-                                            <div className='mt-4'>
-                                                <h3 className='font-medium mb-2'>
-                                                    Brand Impact Estimate
-                                                </h3>
-                                                <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
-                                                    <div className='flex items-center gap-2 mb-2'>
-                                                        <Badge
-                                                            className={
-                                                                caseData
-                                                                    .brandImpactEstimate
-                                                                    .impact ===
-                                                                'High'
-                                                                    ? 'bg-red-500 hover:bg-red-600'
-                                                                    : caseData
-                                                                          .brandImpactEstimate
-                                                                          .impact ===
-                                                                      'Medium'
-                                                                    ? 'bg-yellow-500 hover:bg-yellow-600'
-                                                                    : 'bg-green-500 hover:bg-green-600'
-                                                            }
-                                                        >
-                                                            {
-                                                                caseData
-                                                                    .brandImpactEstimate
-                                                                    .impact
-                                                            }
-                                                        </Badge>
-                                                    </div>
-                                                    {caseData
-                                                        .brandImpactEstimate
-                                                        .explanation && (
-                                                        <p className='text-sm text-muted-foreground'>
-                                                            {
-                                                                caseData
-                                                                    .brandImpactEstimate
-                                                                    .explanation
-                                                            }
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        )}
-
-                                    {caseData.caseWinLikelihood &&
-                                        typeof caseData.caseWinLikelihood ===
-                                            'object' && (
-                                            <div className='mt-4'>
-                                                <h3 className='font-medium mb-2'>
-                                                    Case Win Likelihood
-                                                </h3>
-                                                <div className='bg-gray-50 dark:bg-gray-800 p-3 rounded-lg'>
-                                                    <div className='flex items-center gap-2 mb-2'>
-                                                        <Badge
-                                                            className={
-                                                                caseData
-                                                                    .caseWinLikelihood
-                                                                    .likelihood ===
-                                                                'High'
-                                                                    ? 'bg-red-500 hover:bg-red-600'
-                                                                    : caseData
-                                                                          .caseWinLikelihood
-                                                                          .likelihood ===
-                                                                      'Medium'
-                                                                    ? 'bg-yellow-500 hover:bg-yellow-600'
-                                                                    : 'bg-green-500 hover:bg-green-600'
-                                                            }
-                                                        >
-                                                            {
-                                                                caseData
-                                                                    .caseWinLikelihood
-                                                                    .likelihood
-                                                            }
-                                                        </Badge>
-                                                    </div>
-                                                    {caseData.caseWinLikelihood
-                                                        .explanation && (
-                                                        <p className='text-sm text-muted-foreground'>
-                                                            {
-                                                                caseData
-                                                                    .caseWinLikelihood
-                                                                    .explanation
-                                                            }
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        )}
                                 </div>
                             </div>
                         </CardContent>
@@ -625,67 +536,78 @@ export default function CaseDetailPage({
                         </CardContent>
                     </Card>
 
-                    {/* Related Cases Section */}
+                    {/* Case Law Section */}
                     <Card>
                         <CardHeader>
-                            <CardTitle>Related Cases</CardTitle>
+                            <CardTitle>Case Law</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            {caseData.relatedCases &&
-                            caseData.relatedCases.length > 0 ? (
+                            {caseData.similarCases &&
+                            caseData.similarCases.length > 0 ? (
                                 <ul className='list-disc pl-5 space-y-1'>
-                                    {caseData.relatedCases.map(
+                                    {caseData.similarCases.map(
                                         (related: any, idx: number) => (
                                             <li key={idx} className='text-sm'>
-                                                {related.title ? (
-                                                    <Link
-                                                        href={`/cases/${related.id}`}
-                                                        className='text-blue-600 hover:underline'
-                                                    >
-                                                        {related.title}
-                                                    </Link>
-                                                ) : (
-                                                    related.id
-                                                )}
+                                                <Link
+                                                    href={`/cases/${related}`}
+                                                    className='text-blue-600 hover:underline'
+                                                >
+                                                    {related}
+                                                </Link>
                                             </li>
                                         )
                                     )}
                                 </ul>
                             ) : (
                                 <p className='text-sm text-muted-foreground'>
-                                    No related cases found.
+                                    No case law found for this case.
                                 </p>
                             )}
                         </CardContent>
                     </Card>
 
                     {/* Evidence Section */}
-                    <Card>
+                    {/* <Card>
                         <CardHeader>
                             <CardTitle>Evidence</CardTitle>
                         </CardHeader>
                         <CardContent>
                             {caseData.evidence ? (
-                                <p className='text-sm'>{caseData.evidence}</p>
+                                <>
+                                    <p className='text-sm'>
+                                        {caseData.evidence.text}
+                                    </p>
+                                    <p className='text-sm'>
+                                        {caseData.evidence.relevance}
+                                    </p>
+                                    <p className='text-sm'>
+                                        {caseData.evidence.strength}
+                                    </p>
+                                </>
                             ) : (
                                 <p className='text-sm text-muted-foreground'>
                                     No evidence listed for this case.
                                 </p>
                             )}
                         </CardContent>
-                    </Card>
+                    </Card> */}
 
                     {/* Outcome Prediction Section */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Outcome Prediction</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <OutcomePrediction
-                                prediction={caseData.outcomePrediction}
-                            />
-                        </CardContent>
-                    </Card>
+                    {caseData.status &&
+                        caseData.status
+                            .toLowerCase()
+                            .includes('in progress') && (
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Outcome Prediction</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <OutcomePrediction
+                                        prediction={caseData.caseWinLikelihood}
+                                    />
+                                </CardContent>
+                            </Card>
+                        )}
                 </div>
             </div>
         </>
