@@ -57,19 +57,25 @@ export default function NewCasePage() {
 
         // Start progress bar animation
         progressInterval = setInterval(() => {
-            progressValue += 5;
-            if (progressValue >= 100) {
-                progressValue = 100;
+            // Increase by 4 every 1000ms (1 second)
+            // This will take ~25 seconds to reach 100%
+            progressValue += 4;
+
+            if (progressValue >= 95) {
+                // Cap at 95% until the request is complete
+                progressValue = 95;
                 setProgress(progressValue);
-                if (progressInterval) clearInterval(progressInterval);
-                // If request already finished, redirect now
+
+                // If request already finished, jump to 100%
                 if (requestFinished) {
-                    // Do nothing, redirect will happen in request
+                    progressValue = 100;
+                    setProgress(100);
+                    if (progressInterval) clearInterval(progressInterval);
                 }
             } else {
                 setProgress(progressValue);
             }
-        }, 80); // ~1.6s to reach 100%
+        }, 1000); // 1 second interval
 
         try {
             const formData = new FormData();
@@ -80,7 +86,6 @@ export default function NewCasePage() {
             requestFinished = true;
             setProgress(100);
             if (progressInterval) clearInterval(progressInterval);
-            // Redirect immediately when request is done
             router.push(`/cases/${response.id}`);
         } catch (error) {
             setIsSubmitting(false);

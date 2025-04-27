@@ -30,9 +30,12 @@ export function Timeline({ events }: TimelineProps) {
                     {events.map((event, index) => (
                         <div key={index} className='mb-8 relative'>
                             <div className='absolute -left-[32.5px] mt-1.5 h-4 w-4 rounded-full border border-muted bg-gray-400'></div>
-                            <time className='mb-1 text-sm font-normal leading-none text-muted-foreground'>
-                                {formatDate(event.date)}
-                            </time>
+                            {formatDate(event.date) !== 'Invalid Date' && (
+                                <time className='mb-1 text-sm font-normal leading-none text-muted-foreground'>
+                                    {formatDate(event.date)}
+                                </time>
+                            )}
+
                             <h3 className='text-lg font-semibold'>
                                 {event.event}
                             </h3>
