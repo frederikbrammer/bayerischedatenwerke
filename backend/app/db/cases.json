@@ -8662,7 +8662,7 @@
       "explanation": "The case involves a significant monetary offer from BMW, which indicates a serious issue with the vehicle. While there are no fatalities mentioned, the nature of the defect and the legal proceedings could lead to moderate brand scrutiny."
     },
     "affectedCar": "BMW (specific model not mentioned)",
-    "affectedPart": "engine",
+    "affectedPart": "Engine",
     "brandImpactEstimate": {
       "impact": "Medium",
       "explanation": "The case's resolution through a settlement may indicate potential issues with BMW's warranty practices, which could affect brand reputation among consumers, especially those considering purchasing a BMW."
@@ -9844,7 +9844,7 @@
       "explanation": "The case involves serious criminal charges, including murder, which can significantly impact public perception and trust in the involved parties, especially if the defendant is associated with a gang."
     },
     "affectedCar": "BMW",
-    "affectedPart": "Not specified",
+    "affectedPart": "Software",
     "brandImpactEstimate": {
       "impact": "High",
       "explanation": "Given the nature of the charges and the involvement of a vehicle in a violent crime, there is a high likelihood that the brand associated with the vehicle (BMW) could suffer reputational damage."
@@ -20487,7 +20487,7 @@
       "impact": "Medium",
       "explanation": "The case involves allegations of mechanical defects and fraudulent inducement, which could affect consumer trust in Hyundai. While no deaths are mentioned, the nature of the claims suggests a potential for moderate brand impact."
     },
-    "affectedCar": "2012 Hyundai Tucson",
+    "affectedCar": "",
     "affectedPart": "Engine",
     "brandImpactEstimate": {
       "impact": "Medium",
@@ -36394,7 +36394,7 @@
       "The defect was present at the time of manufacture and distribution.",
       "Defendant BMW had knowledge of the defect prior to the sale."
     ],
-    "defenseArgumentation": "### Defense Argument 1: Challenge Causation by Presenting Alternative Explanations for the Harm\n\nLegal Reasoning: The defense can argue that the plaintiff's injuries were not solely caused by the alleged brake failure but could have resulted from other factors, such as driver error, road conditions, or maintenance neglect. By introducing alternative explanations, the defense can create reasonable doubt about the direct link between the defect and the plaintiff's harm.\n\nCounters Plaintiff Claim: This argument counters the plaintiff's claim that the brake failure directly caused their injuries.\n\n---\n\n### Defense Argument 2: Argue Contributory Negligence Based on Plaintiff's Actions\n\nLegal Reasoning: The defense may assert that the plaintiff's own actions contributed to the incident, such as failing to maintain the vehicle properly or driving recklessly. If the plaintiff is found to have acted negligently, it could reduce or eliminate their recovery under contributory negligence principles.\n\nCounters Plaintiff Claim: This argument counters the plaintiff's assertion that the defect was the sole cause of their injuries, suggesting that their own negligence played a role.\n\n---\n\n### Defense Argument 3: Question the Admissibility of Key Evidence Due to Chain of Custody Issues\n\nLegal Reasoning: The defense can challenge the admissibility of evidence related to the alleged defect by arguing that there are gaps or inconsistencies in the chain of custody, which raises doubts about the integrity and reliability of the evidence presented. If the evidence is deemed inadmissible, it weakens the plaintiff's case significantly.\n\nCounters Plaintiff Claim: This argument counters the plaintiff's claim that the brake system was defective at the time of manufacture and distribution by undermining the evidence that supports this assertion.",
+    "defenseArgumentation": " Defense Argument 1: Challenge Causation by Presenting Alternative Explanations for the Harm\n\nLegal Reasoning: The defense can argue that the plaintiff's injuries were not solely caused by the alleged brake failure but could have resulted from other factors, such as driver error, road conditions, or maintenance neglect. By introducing alternative explanations, the defense can create reasonable doubt about the direct link between the defect and the plaintiff's harm.\n\nCounters Plaintiff Claim: This argument counters the plaintiff's claim that the brake failure directly caused their injuries.\n\n\n\n Defense Argument 2: Argue Contributory Negligence Based on Plaintiff's Actions\n\nLegal Reasoning: The defense may assert that the plaintiff's own actions contributed to the incident, such as failing to maintain the vehicle properly or driving recklessly. If the plaintiff is found to have acted negligently, it could reduce or eliminate their recovery under contributory negligence principles.\n\nCounters Plaintiff Claim: This argument counters the plaintiff's assertion that the defect was the sole cause of their injuries, suggesting that their own negligence played a role.\n\n\n\n Defense Argument 3: Question the Admissibility of Key Evidence Due to Chain of Custody Issues\n\nLegal Reasoning: The defense can challenge the admissibility of evidence related to the alleged defect by arguing that there are gaps or inconsistencies in the chain of custody, which raises doubts about the integrity and reliability of the evidence presented. If the evidence is deemed inadmissible, it weakens the plaintiff's case significantly.\n\nCounters Plaintiff Claim: This argument counters the plaintiff's claim that the brake system was defective at the time of manufacture and distribution by undermining the evidence that supports this assertion.",
     "suggestions": [],
     "numberOfClaimants": "1",
     "mediaCoverageLevel": {
