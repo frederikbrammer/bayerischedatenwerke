@@ -88,7 +88,7 @@ def call_azure_openai_analyzer(chunk):
         "- Identify 3-5 key pieces of evidence from the text that support your analysis\n"
         "- For each piece of evidence, extract the exact text, explain its relevance, and assess its strength\n"
         "- Evidence strength should be categorized as 'strong', 'moderate', or 'weak'\n"
-        "- Focus on facts, dates, statements, or descriptions that directly support the case classification\n\n"
+        "- Focus on facts, dates, statements, or descriptions that directly support the case classification Evidence is any information, data, or material that can support, prove, or disprove a claim, assertion, or hypothesis. It is not just a description of what happened (an event), but something that relates to a specific claim by making it more or less likely to be true.\n\n"
 
         "DECISION FLOW:\n"
         "1. First identify the type of harm (physical, financial, privacy, environmental, employment)\n"
