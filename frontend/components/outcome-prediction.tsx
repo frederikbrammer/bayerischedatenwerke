@@ -64,6 +64,16 @@ export function OutcomePrediction({ prediction }: OutcomePredictionProps) {
                             </span>
                         </div>
                     </div>
+
+                    {/* Explanation Section */}
+                    {prediction.explanation && (
+                        <div className='mt-4'>
+                            <p className='text-sm text-muted-foreground'>
+                                {prediction.explanation}
+                            </p>
+                        </div>
+                    )}
+
                     {/* Key Factors Section */}
                     {Array.isArray(prediction.keyFactors) &&
                         prediction.keyFactors.length > 0 && (
