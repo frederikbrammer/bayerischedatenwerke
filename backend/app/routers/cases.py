@@ -360,6 +360,13 @@ async def create_case(files: List[UploadFile] = File(None)):
             })
 
     # Create a new case object with updated field names
+    
+    if filing_date == "Not specified":
+        for event in processed_timeline:
+            if event["date"] != "Unknown":
+                filing_date = event["date"]
+                break
+    
     new_case = {
         "id": case_id,
         "title": case_id,
