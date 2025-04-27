@@ -208,30 +208,69 @@ export default function CaseDetailPage({
                                     caseData.status.slice(1)}
                             </Badge>
                         </div>
-                        <Button
-                            variant='default'
-                            size='sm'
-                            className='bg-black hover:bg-black text-white'
-                        >
-                            <span className='flex items-center gap-1'>
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    width='16'
-                                    height='16'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                >
-                                    <path
-                                        stroke='currentColor'
-                                        strokeWidth='2'
-                                        strokeLinecap='round'
-                                        strokeLinejoin='round'
-                                        d='M12 5v14m7-7H5'
-                                    />
-                                </svg>
-                                Upload document
-                            </span>
-                        </Button>
+                        <div className='flex gap-2'>
+                            <Button
+                                variant='default'
+                                size='sm'
+                                className='bg-black hover:bg-black text-white'
+                            >
+                                <span className='flex items-center gap-1'>
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='16'
+                                        height='16'
+                                        fill='none'
+                                        viewBox='0 0 24 24'
+                                    >
+                                        <path
+                                            stroke='currentColor'
+                                            strokeWidth='2'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                            d='M12 5v14m7-7H5'
+                                        />
+                                    </svg>
+                                    Upload document
+                                </span>
+                            </Button>
+                            <Button
+                                variant='secondary'
+                                size='sm'
+                                className='text-black dark:text-white border border-gray-300 dark:border-gray-700'
+                            >
+                                <span className='flex items-center gap-1'>
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='16'
+                                        height='16'
+                                        fill='none'
+                                        viewBox='0 0 24 24'
+                                    >
+                                        <path
+                                            d='M12 17h.01'
+                                            stroke='currentColor'
+                                            strokeWidth='2'
+                                            strokeLinecap='round'
+                                        />
+                                        <path
+                                            d='M12 13a3 3 0 1 0-3-3'
+                                            stroke='currentColor'
+                                            strokeWidth='2'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                        />
+                                        <circle
+                                            cx='12'
+                                            cy='12'
+                                            r='10'
+                                            stroke='currentColor'
+                                            strokeWidth='2'
+                                        />
+                                    </svg>
+                                    Ask Question
+                                </span>
+                            </Button>
+                        </div>
                     </div>
                 </div>
 
@@ -277,6 +316,10 @@ export default function CaseDetailPage({
                                         <dd>{caseData.harmType}</dd>
                                         <dt className='font-medium'>Cause:</dt>
                                         <dd>{caseData.cause}</dd>
+                                        <dt className='font-medium'>
+                                            Case Summary:
+                                        </dt>
+                                        <dd>{caseData.caseSummary}</dd>
                                     </dl>
                                 </div>
 
@@ -302,26 +345,16 @@ export default function CaseDetailPage({
                     </Card>
 
                     {/* Timeline Section */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Timeline</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <Timeline events={caseData.timeline} />
-                        </CardContent>
-                    </Card>
+                    <Timeline events={caseData.timeline} />
 
                     {/* Case Analysis Section - New Section for Additional Data */}
                     <Card>
                         <CardHeader>
-                            <CardTitle>Case Analysis</CardTitle>
+                            <CardTitle>Case Details</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                                 <div>
-                                    <h3 className='font-medium mb-3'>
-                                        Case Details
-                                    </h3>
                                     <dl className='grid grid-cols-2 gap-3'>
                                         {caseData.defectType && (
                                             <>
@@ -357,10 +390,10 @@ export default function CaseDetailPage({
                                                     Time to Resolution:
                                                 </dt>
                                                 <dd>
-                                                    {
-                                                        caseData.timeToResolutionMonths
-                                                    }{' '}
-                                                    months
+                                                    {caseData.timeToResolutionMonths ===
+                                                    'Not specified'
+                                                        ? 'Unknown'
+                                                        : `${caseData.timeToResolutionMonths} months`}
                                                 </dd>
                                             </>
                                         )}
@@ -531,8 +564,69 @@ export default function CaseDetailPage({
                                 defenseArgumentation={
                                     caseData.defenseArgumentation
                                 }
-                                suggestions={caseData.suggestions}
                             />
+                        </CardContent>
+                    </Card>
+
+                    {/* Evidence Section */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Evidence</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            {Array.isArray(caseData.evidence) &&
+                            caseData.evidence.length > 0 ? (
+                                <ul className='space-y-3'>
+                                    {caseData.evidence.map(
+                                        (ev: any, idx: number) => (
+                                            <li
+                                                key={idx}
+                                                className='border rounded p-3 bg-gray-50 dark:bg-gray-800'
+                                            >
+                                                <p className='text-sm mb-1'>
+                                                    <span className='font-medium'>
+                                                        Text:
+                                                    </span>{' '}
+                                                    {ev.text}
+                                                </p>
+                                                <p className='text-sm mb-1'>
+                                                    <span className='font-medium'>
+                                                        Relevance:
+                                                    </span>{' '}
+                                                    {ev.relevance}
+                                                </p>
+                                                <div className='flex items-center gap-2'>
+                                                    <span className='font-medium'>
+                                                        Strength:
+                                                    </span>
+                                                    <Badge
+                                                        className={
+                                                            ev.strength ===
+                                                            'strong'
+                                                                ? 'bg-primary text-primary-foreground'
+                                                                : ev.strength ===
+                                                                  'moderate'
+                                                                ? 'bg-secondary text-secondary-foreground'
+                                                                : 'border border-input bg-background text-foreground'
+                                                        }
+                                                    >
+                                                        {ev.strength
+                                                            .charAt(0)
+                                                            .toUpperCase() +
+                                                            ev.strength.slice(
+                                                                1
+                                                            )}
+                                                    </Badge>
+                                                </div>
+                                            </li>
+                                        )
+                                    )}
+                                </ul>
+                            ) : (
+                                <p className='text-sm text-muted-foreground'>
+                                    No evidence listed for this case.
+                                </p>
+                            )}
                         </CardContent>
                     </Card>
 
@@ -565,32 +659,6 @@ export default function CaseDetailPage({
                             )}
                         </CardContent>
                     </Card>
-
-                    {/* Evidence Section */}
-                    {/* <Card>
-                        <CardHeader>
-                            <CardTitle>Evidence</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            {caseData.evidence ? (
-                                <>
-                                    <p className='text-sm'>
-                                        {caseData.evidence.text}
-                                    </p>
-                                    <p className='text-sm'>
-                                        {caseData.evidence.relevance}
-                                    </p>
-                                    <p className='text-sm'>
-                                        {caseData.evidence.strength}
-                                    </p>
-                                </>
-                            ) : (
-                                <p className='text-sm text-muted-foreground'>
-                                    No evidence listed for this case.
-                                </p>
-                            )}
-                        </CardContent>
-                    </Card> */}
 
                     {/* Outcome Prediction Section */}
                     {caseData.status &&
