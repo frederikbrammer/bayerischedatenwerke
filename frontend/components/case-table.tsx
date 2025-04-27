@@ -239,7 +239,7 @@ export function CaseTable({ searchQuery }: CaseTableProps) {
                                 className='p-0 font-medium'
                                 onClick={() => handleSort('risk')}
                             >
-                                Risk <SortIcon field='risk' />
+                                Predicted outcome <SortIcon field='risk' />
                             </Button>
                         </TableHead>
                     </TableRow>
