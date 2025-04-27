@@ -98,6 +98,7 @@ def predict_case_win_likelihood(
     3. Three key factors that influenced your assessment (positive and negative)
     4. Three specific lines of argument against the plaintiff's case (focus on weaknesses in their evidence and arguments)
 
+    THE DEFENCE ARGUMENTS MUST BE PLAIN TEXT NOT MARKDOWN
     Consider:
     - Weaknesses in the plaintiff's evidence
     - Potential alternative causes for the harm

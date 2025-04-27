@@ -92,7 +92,7 @@ def call_azure_openai_flashlight(chunk, chunk_number, chunk_size):
         "  'Case_Win_Likelihood': {'likelihood': 'Low/Medium/High', 'explanation': 'Assessment of how likely the defendant will win the case based on available information'},\n"
         "  'Plaintiff_Argumentation': ['Key arguments made by the plaintiff in support of their case, in exhaustive key points'],\n"
         "  'Timeline_of_Events': ['Chronological list of key events related to the case'],\n"
-        "  'Relevant_Laws': ['Laws, statutes, regulations, or legal precedents relevant to the case'],\n"
+        "  'Relevant_Laws': ['Laws, statutes, regulations, relevant to the case only mention actual laws here never just words like negligence if not sure just keep empty'],\n"
         "  'Reputation_Impact': {'case_outcome': {'impact': 'Low/Medium/High', 'explanation': 'Impact on reputation based on the case outcome'}, 'media_coverage': {'impact': 'Low/Medium/High', 'explanation': 'Impact on reputation from media coverage regardless of case outcome'}}\n"
         "}\n\n"
         "Important: For any field where information is not available in the text, use the exact string 'Not specified'. "
