@@ -589,35 +589,39 @@ export default function CaseDetailPage({
                                                     </span>{' '}
                                                     {ev.text}
                                                 </p>
-                                                <p className='text-sm mb-1'>
-                                                    <span className='font-medium'>
-                                                        Relevance:
-                                                    </span>{' '}
-                                                    {ev.relevance}
-                                                </p>
-                                                <div className='flex items-center gap-2'>
-                                                    <span className='font-medium'>
-                                                        Strength:
-                                                    </span>
-                                                    <Badge
-                                                        className={
-                                                            ev.strength ===
-                                                            'strong'
-                                                                ? 'bg-primary text-primary-foreground'
-                                                                : ev.strength ===
-                                                                  'moderate'
-                                                                ? 'bg-secondary text-secondary-foreground'
-                                                                : 'border border-input bg-background text-foreground'
-                                                        }
-                                                    >
-                                                        {ev.strength
-                                                            .charAt(0)
-                                                            .toUpperCase() +
-                                                            ev.strength.slice(
-                                                                1
-                                                            )}
-                                                    </Badge>
-                                                </div>
+                                                {ev.relevance && (
+                                                    <p className='text-sm mb-1'>
+                                                        <span className='font-medium'>
+                                                            Relevance:
+                                                        </span>{' '}
+                                                        {ev.relevance}
+                                                    </p>
+                                                )}
+                                                {ev.strength && (
+                                                    <div className='flex items-center gap-2'>
+                                                        <span className='font-medium'>
+                                                            Strength:
+                                                        </span>
+                                                        <Badge
+                                                            className={
+                                                                ev.strength ===
+                                                                'strong'
+                                                                    ? 'bg-primary text-primary-foreground'
+                                                                    : ev.strength ===
+                                                                      'moderate'
+                                                                    ? 'bg-secondary text-secondary-foreground'
+                                                                    : 'border border-input bg-background text-foreground'
+                                                            }
+                                                        >
+                                                            {ev.strength
+                                                                .charAt(0)
+                                                                .toUpperCase() +
+                                                                ev.strength.slice(
+                                                                    1
+                                                                )}
+                                                        </Badge>
+                                                    </div>
+                                                )}
                                             </li>
                                         )
                                     )}
